@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { blogPosts } from "./data";
+import { blogPosts } from "../data";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
