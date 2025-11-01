@@ -9,7 +9,16 @@ import {
   TrendingUp,
   MessageSquare,
   CheckCircle,
-  ArrowRight
+  ArrowRight,
+  Instagram,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Youtube,
+  Calendar,
+  ImageIcon,
+  Megaphone,
+  Sparkles
 } from "lucide-react";
 
 export default function SMMPage() {
@@ -17,22 +26,22 @@ export default function SMMPage() {
     {
       icon: Users,
       title: "Audience Growth",
-      description: "Build a genuine and engaged following across all social platforms"
+      description: "Build a genuine and engaged following across all social platforms with proven growth strategies"
     },
     {
       icon: MessageSquare,
       title: "Content Creation",
-      description: "Professional content that resonates with your target audience"
+      description: "Professional content that resonates with your target audience and drives engagement"
     },
     {
       icon: TrendingUp,
       title: "Performance Tracking",
-      description: "Detailed analytics and insights to measure campaign success"
+      description: "Detailed analytics and insights to measure campaign success and optimize strategies"
     },
     {
       icon: BarChart3,
       title: "ROI Optimization",
-      description: "Data-driven strategies to maximize your social media ROI"
+      description: "Data-driven strategies to maximize your social media ROI and conversion rates"
     }
   ];
 
@@ -42,7 +51,114 @@ export default function SMMPage() {
     "Consistent posting schedule across platforms",
     "Professional content creation and curation",
     "Detailed monthly performance reports",
-    "Dedicated social media manager"
+    "Dedicated social media manager",
+    "Crisis management and reputation protection",
+    "24/7 community monitoring and response"
+  ];
+
+  const platforms = [
+    { icon: Instagram, name: "Instagram", color: "text-pink-500" },
+    { icon: Facebook, name: "Facebook", color: "text-blue-500" },
+    { icon: Twitter, name: "Twitter", color: "text-sky-500" },
+    { icon: Linkedin, name: "LinkedIn", color: "text-blue-600" },
+    { icon: Youtube, name: "YouTube", color: "text-red-500" },
+    { icon: MessageSquare, name: "TikTok", color: "text-black dark:text-white" }
+  ];
+
+  const services = [
+    {
+      icon: Calendar,
+      title: "Content Strategy & Planning",
+      items: [
+        "Custom content calendar aligned with your brand",
+        "Trend research and hashtag optimization",
+        "Content mix strategy (60/20/20 rule)",
+        "Brand voice development and consistency"
+      ]
+    },
+    {
+      icon: ImageIcon,
+      title: "Creative Content Creation",
+      items: [
+        "High-quality graphics and visuals",
+        "Video production and editing",
+        "Copywriting and caption optimization",
+        "Story design and highlights"
+      ]
+    },
+    {
+      icon: Megaphone,
+      title: "Community Management",
+      items: [
+        "Real-time engagement and responses",
+        "Comment moderation and filtering",
+        "DM management and customer support",
+        "Influencer outreach and partnerships"
+      ]
+    },
+    {
+      icon: BarChart3,
+      title: "Analytics & Reporting",
+      items: [
+        "Monthly performance reports",
+        "Growth metrics and KPIs tracking",
+        "Competitor analysis",
+        "ROI measurement and optimization"
+      ]
+    }
+  ];
+
+  const packages = [
+    {
+      name: "Starter",
+      price: "$499",
+      period: "/month",
+      description: "Perfect for small businesses just getting started",
+      features: [
+        "3 social media platforms",
+        "15 posts per month",
+        "Basic content creation",
+        "Community management (5 days/week)",
+        "Monthly analytics report",
+        "Email support"
+      ],
+      popular: false
+    },
+    {
+      name: "Professional",
+      price: "$999",
+      period: "/month",
+      description: "Ideal for growing businesses looking to scale",
+      features: [
+        "5 social media platforms",
+        "30 posts per month",
+        "Premium content creation",
+        "Community management (7 days/week)",
+        "Weekly analytics report",
+        "Priority support",
+        "Hashtag research & strategy",
+        "1 ad campaign setup"
+      ],
+      popular: true
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      period: "",
+      description: "Tailored solutions for large organizations",
+      features: [
+        "Unlimited platforms",
+        "Unlimited posts",
+        "Dedicated account manager",
+        "24/7 community management",
+        "Real-time analytics dashboard",
+        "Dedicated support line",
+        "Custom strategy development",
+        "Multi-location management",
+        "White-label reporting"
+      ],
+      popular: false
+    }
   ];
 
   return (
@@ -50,37 +166,102 @@ export default function SMMPage() {
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-secondary">
         <div className="max-w-7xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent mb-8">
+            <Sparkles className="w-4 h-4" />
+            <span className="text-sm font-medium">Professional SMM Services</span>
+          </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight gradient-text mb-6">
             Transform Your Social Media Presence
           </h1>
           <p className="mt-3 max-w-2xl mx-auto text-xl text-muted-foreground">
-            Professional social media management services to grow your brand, engage your audience, and drive results.
+            Professional social media management services to grow your brand, engage your audience, and drive measurable results. Trusted by 500+ businesses worldwide.
           </p>
-          <div className="mt-10 flex justify-center gap-4">
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-              Get Started
+          <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+              <Link href="/contact">Get Started Today</Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/contact">Contact Sales</Link>
+              <Link href="#packages">View Packages</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Platforms Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Comprehensive Social Media Management
-          </h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Platforms We Manage</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              We handle all major social media platforms to maximize your brand's reach and engagement
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {platforms.map((platform, index) => {
+              const Icon = platform.icon;
+              return (
+                <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow">
+                  <Icon className={`h-10 w-10 ${platform.color} mx-auto mb-3`} />
+                  <p className="font-medium">{platform.name}</p>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Comprehensive Social Media Management</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              End-to-end social media solutions tailored to your business needs
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="p-6">
+                <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
                   <Icon className="h-12 w-12 text-accent mb-4" />
                   <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                   <p className="text-muted-foreground">{feature.description}</p>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">What We Do for You</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              A complete breakdown of our service offerings
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 bg-accent/10 rounded-lg">
+                      <Icon className="h-8 w-8 text-accent" />
+                    </div>
+                    <h3 className="text-2xl font-bold">{service.title}</h3>
+                  </div>
+                  <ul className="space-y-3">
+                    {service.items.map((item, itemIndex) => (
+                      <li key={itemIndex} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </Card>
               );
             })}
@@ -121,16 +302,76 @@ export default function SMMPage() {
         </div>
       </section>
 
+      {/* Pricing Packages Section */}
+      <section id="packages" className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Choose Your Plan</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Flexible pricing plans designed to scale with your business needs
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {packages.map((pkg, index) => (
+              <Card 
+                key={index} 
+                className={`p-8 relative ${pkg.popular ? 'border-2 border-accent shadow-lg scale-105' : ''}`}
+              >
+                {pkg.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-semibold">
+                      Most Popular
+                    </span>
+                  </div>
+                )}
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
+                  <div className="flex items-baseline justify-center gap-2">
+                    <span className="text-4xl font-bold">{pkg.price}</span>
+                    {pkg.period && <span className="text-muted-foreground">{pkg.period}</span>}
+                  </div>
+                  <p className="text-muted-foreground mt-2">{pkg.description}</p>
+                </div>
+                <ul className="space-y-4 mb-8">
+                  {pkg.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                      <span className="text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button 
+                  className="w-full" 
+                  variant={pkg.popular ? "default" : "outline"}
+                  size="lg"
+                  asChild
+                >
+                  <Link href="/contact">
+                    Get Started
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Link>
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-accent/10">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to Grow Your Social Media Presence?</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Let our team of experts handle your social media while you focus on running your business.
+            Let our team of experts handle your social media while you focus on running your business. Get a free consultation today!
           </p>
-          <Button size="lg" asChild>
-            <Link href="/contact">Get Started Today</Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+              <Link href="/contact">Get Started Today</Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link href="/about">Learn More About Us</Link>
+            </Button>
+          </div>
         </div>
       </section>
     </>

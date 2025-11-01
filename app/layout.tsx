@@ -10,12 +10,15 @@ import { Toaster } from '@/components/ui/sonner';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'InsightHub.ink - Business Insights & Productivity Trends',
-  description: 'Discover the latest insights, business trends, and productivity tips to elevate your professional success.',
-  keywords: 'business insights, productivity, trends, professional development, digital products',
+  title: 'InsightHub.ink - Professional Social Media Management & Business Insights',
+  description: 'Professional social media management services to grow your brand, engage your audience, and drive results. Trusted SMM agency offering content creation, community management, and analytics. Access business insights and productivity trends.',
+  keywords: 'social media management, SMM services, social media marketing, content creation, community management, business insights, productivity trends, digital marketing agency, Instagram management, Facebook marketing, LinkedIn management',
+  authors: [{ name: 'InsightHub.ink' }],
+  creator: 'InsightHub.ink',
+  publisher: 'InsightHub.ink',
   openGraph: {
-    title: 'InsightHub.ink - Business Insights & Productivity Trends',
-    description: 'Discover the latest insights, business trends, and productivity tips to elevate your professional success.',
+    title: 'InsightHub.ink - Professional Social Media Management & Business Insights',
+    description: 'Professional social media management services to grow your brand, engage your audience, and drive results. Trusted by 500+ businesses worldwide.',
     url: 'https://insighthub.ink',
     siteName: 'InsightHub.ink',
     images: [
@@ -23,6 +26,7 @@ export const metadata: Metadata = {
         url: 'https://insighthub.ink/og-image.jpg',
         width: 1200,
         height: 630,
+        alt: 'InsightHub - Professional Social Media Management',
       },
     ],
     locale: 'en_US',
@@ -30,9 +34,21 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'InsightHub.ink - Business Insights & Productivity Trends',
-    description: 'Discover the latest insights, business trends, and productivity tips to elevate your professional success.',
+    title: 'InsightHub.ink - Professional Social Media Management',
+    description: 'Professional SMM services to grow your brand and drive results. Trusted by 500+ businesses worldwide.',
     images: ['https://insighthub.ink/og-image.jpg'],
+    creator: '@insighthub',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 

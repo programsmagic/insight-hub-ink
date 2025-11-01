@@ -27,6 +27,14 @@ export function Navbar() {
               Blog
             </Link>
             <Link
+              href="/smm"
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                pathname === "/smm" ? "text-foreground" : "text-foreground/60"
+              }`}
+            >
+              SMM Services
+            </Link>
+            <Link
               href="/shop"
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 pathname === "/shop" ? "text-foreground" : "text-foreground/60"
