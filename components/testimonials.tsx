@@ -5,21 +5,21 @@ export function Testimonials() {
   const testimonials = [
     {
       name: "Sarah Johnson",
-      role: "CEO, TechStart Inc.",
+      role: "YouTube Content Creator",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150",
-      content: "InsightHub has transformed how we approach business strategy. The insights and tools provided are invaluable.",
+      content: "InsightHub delivered exactly what they promised. My YouTube channel gained 10K subscribers with premium quality service. The delivery was fast and the support team was excellent!",
     },
     {
       name: "Michael Chen",
-      role: "Marketing Director, GrowthLabs",
+      role: "Instagram Business Owner",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150",
-      content: "The quality of content and analysis has helped us make better decisions and achieve remarkable growth.",
+      content: "I've tried many SMM services, but InsightHub stands out for quality. Bought likes and views for my Instagram posts and saw real engagement. Highly recommended!",
     },
     {
       name: "Emily Rodriguez",
-      role: "Founder, Digital Solutions",
+      role: "TikTok Influencer",
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150",
-      content: "Outstanding platform for business insights. The strategies we've implemented have shown real results.",
+      content: "Fast delivery, premium quality, and secure payments. InsightHub helped boost my TikTok presence significantly. The platform is easy to use and trustworthy.",
     },
   ];
 
@@ -27,9 +27,9 @@ export function Testimonials() {
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-secondary/30">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">What Our Users Say</h2>
+          <h2 className="text-3xl font-bold mb-4">What Our Clients Say</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Hear from business leaders who have transformed their operations with InsightHub.
+            Real testimonials from satisfied customers who trusted us with their social media growth.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">

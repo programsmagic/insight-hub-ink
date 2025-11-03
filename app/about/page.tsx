@@ -61,7 +61,7 @@ export default function AboutPage() {
           About InsightHub
         </h1>
         <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          We're a leading digital marketing agency specializing in social media management, helping businesses transform their online presence and achieve remarkable growth.
+          We're a trusted provider of premium social media growth services, helping content creators, influencers, and businesses achieve their social media goals with high-quality, instant-delivery services.
         </p>
       </section>
 
@@ -71,16 +71,16 @@ export default function AboutPage() {
           <div>
             <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
             <p className="text-lg text-muted-foreground mb-4">
-              At InsightHub, we empower businesses to unlock their full potential through strategic social media marketing. Our mission is to help brands build authentic connections, engage meaningfully with their audiences, and drive sustainable growth in the digital landscape.
+              At InsightHub, we empower creators and businesses to unlock their social media potential through premium-quality growth services. Our mission is to provide instant, reliable, and high-quality social media services that help our clients achieve their growth goals safely and effectively.
             </p>
             <p className="text-lg text-muted-foreground">
-              We believe that every business, regardless of size, deserves access to professional-grade social media management. That's why we've crafted our services to be scalable, results-oriented, and transparent.
+              We believe in transparency, quality, and customer satisfaction above all. That's why every service we offer comes with quality guarantees, secure payment processing, and 24/7 customer support. Your success is our commitment.
             </p>
           </div>
           <Card className="p-8 bg-secondary">
             <h2 className="text-3xl font-bold mb-6">Our Vision</h2>
             <p className="text-lg text-muted-foreground mb-4">
-              To become the most trusted social media management partner for businesses worldwide, known for our innovative strategies, exceptional service, and unwavering commitment to client success.
+              To become the most trusted and reliable platform for social media growth services worldwide, recognized for our premium quality, instant delivery, and unwavering commitment to customer satisfaction and account safety.
             </p>
             <div className="flex items-center gap-2 text-accent mt-6">
               <TrendingUp className="w-5 h-5" />
@@ -138,23 +138,23 @@ export default function AboutPage() {
               <div className="p-3 bg-accent/10 rounded-lg">
                 <Users className="w-8 h-8 text-accent" />
               </div>
-              <h3 className="text-2xl font-bold">Social Media Management</h3>
+              <h3 className="text-2xl font-bold">Premium SMM Services</h3>
             </div>
             <p className="text-muted-foreground mb-4">
-              Complete management of your social media accounts including content creation, posting schedules, community engagement, and brand voice consistency across all platforms.
+              We offer premium-quality social media growth services including views, subscribers, likes, comments, and watch hours across all major platforms with instant delivery.
             </p>
             <ul className="space-y-2">
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-accent" />
-                <span>Content strategy & planning</span>
+                <span>Views & Watch Hours</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-accent" />
-                <span>Daily posting & engagement</span>
+                <span>Subscribers & Followers</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-accent" />
-                <span>Community management</span>
+                <span>Likes & Comments</span>
               </li>
             </ul>
           </Card>
@@ -164,23 +164,23 @@ export default function AboutPage() {
               <div className="p-3 bg-accent/10 rounded-lg">
                 <Award className="w-8 h-8 text-accent" />
               </div>
-              <h3 className="text-2xl font-bold">Growth & Analytics</h3>
+              <h3 className="text-2xl font-bold">Quality & Security</h3>
             </div>
             <p className="text-muted-foreground mb-4">
-              Data-driven strategies to grow your following, increase engagement rates, and optimize your social media ROI with detailed analytics and performance reports.
+              Every service comes with premium quality guarantees, secure payment processing, instant delivery, and 100% satisfaction guarantee. Your account safety is our top priority.
             </p>
             <ul className="space-y-2">
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-accent" />
-                <span>Follower growth strategies</span>
+                <span>Premium quality guaranteed</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-accent" />
-                <span>Performance analytics</span>
+                <span>Secure payment processing</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-accent" />
-                <span>ROI optimization</span>
+                <span>Account safety guarantee</span>
               </li>
             </ul>
           </Card>

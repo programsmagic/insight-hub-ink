@@ -5,23 +5,23 @@ export function Stats() {
   const stats = [
     {
       icon: Users2,
-      value: "50K+",
-      label: "Active Users",
+      value: "500+",
+      label: "Happy Clients",
     },
     {
       icon: BarChart2,
-      value: "89%",
-      label: "Growth Rate",
+      value: "1M+",
+      label: "Services Delivered",
     },
     {
       icon: Award,
-      value: "200+",
-      label: "Expert Articles",
+      value: "99.9%",
+      label: "Quality Rate",
     },
     {
       icon: Globe2,
       value: "24/7",
-      label: "Global Support",
+      label: "Customer Support",
     },
   ];
 

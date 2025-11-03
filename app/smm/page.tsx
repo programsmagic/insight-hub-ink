@@ -18,7 +18,13 @@ import {
   Calendar,
   ImageIcon,
   Megaphone,
-  Sparkles
+  Sparkles,
+  Eye,
+  ThumbsUp,
+  Clock,
+  Shield,
+  Zap,
+  Award
 } from "lucide-react";
 
 export default function SMMPage() {
@@ -121,7 +127,7 @@ export default function SMMPage() {
             Transform Your Social Media Presence
           </h1>
           <p className="mt-3 max-w-2xl mx-auto text-xl text-muted-foreground">
-            Professional social media management services to grow your brand, engage your audience, and drive measurable results. Trusted by 500+ businesses worldwide.
+            Boost your social media presence with premium-quality services. Buy views, subscribers, likes, comments, and watch hours from trusted providers. Premium quality, instant delivery, and 100% satisfaction guaranteed. Trusted by 500+ businesses worldwide.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
             <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
@@ -138,13 +144,137 @@ export default function SMMPage() {
         </div>
       </section>
 
+      {/* Services We Offer Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Premium Social Media Growth Services</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Get instant, premium-quality growth for your social media accounts. All services come with quality guarantees and instant delivery.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <Eye className="h-12 w-12 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Views</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Boost your video views across YouTube, TikTok, Instagram, and more
+              </p>
+              <Button variant="outline" size="sm" asChild>
+                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer">
+                  Buy Views
+                </Link>
+              </Button>
+            </Card>
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <Users className="h-12 w-12 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Subscribers</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Grow your subscriber count with real, engaged followers
+              </p>
+              <Button variant="outline" size="sm" asChild>
+                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer">
+                  Buy Subscribers
+                </Link>
+              </Button>
+            </Card>
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <ThumbsUp className="h-12 w-12 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Likes</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Increase engagement with high-quality likes on all platforms
+              </p>
+              <Button variant="outline" size="sm" asChild>
+                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer">
+                  Buy Likes
+                </Link>
+              </Button>
+            </Card>
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <MessageSquare className="h-12 w-12 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Comments</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Get authentic comments to boost your post engagement
+              </p>
+              <Button variant="outline" size="sm" asChild>
+                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer">
+                  Buy Comments
+                </Link>
+              </Button>
+            </Card>
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <Clock className="h-12 w-12 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Watch Hours</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Increase YouTube watch hours to meet monetization requirements
+              </p>
+              <Button variant="outline" size="sm" asChild>
+                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer">
+                  Buy Watch Hours
+                </Link>
+              </Button>
+            </Card>
+          </div>
+          <div className="text-center mt-10">
+            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+              <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer">
+                View All Services on Our Platform
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Quality Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Why Trust InsightHub for Your Social Media Growth?</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              We deliver premium-quality services with guarantees you can trust
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+              <Award className="h-10 w-10 text-accent mx-auto mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Premium Quality</h3>
+              <p className="text-sm text-muted-foreground">
+                High-quality, authentic engagement from real accounts - no bots or fake profiles
+              </p>
+            </Card>
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+              <Zap className="h-10 w-10 text-accent mx-auto mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Instant Delivery</h3>
+              <p className="text-sm text-muted-foreground">
+                Fast delivery times - see results within hours, not days
+              </p>
+            </Card>
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+              <Shield className="h-10 w-10 text-accent mx-auto mb-4" />
+              <h3 className="text-lg font-semibold mb-2">100% Safe & Secure</h3>
+              <p className="text-sm text-muted-foreground">
+                Secure payment processing and guaranteed account safety
+              </p>
+            </Card>
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+              <CheckCircle className="h-10 w-10 text-accent mx-auto mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Satisfaction Guaranteed</h3>
+              <p className="text-sm text-muted-foreground">
+                Money-back guarantee if you're not satisfied with our service
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Platforms Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Platforms We Manage</h2>
+            <h2 className="text-3xl font-bold mb-4">All Major Platforms Supported</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We handle all major social media platforms to maximize your brand's reach and engagement
+              We provide services for all major social media platforms
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -254,16 +384,21 @@ export default function SMMPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-accent/10">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Grow Your Social Media Presence?</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Let our team of experts handle your social media while you focus on running your business. Get started on our platform today!
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-accent/10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:40px_40px]" />
+        <div className="max-w-3xl mx-auto text-center relative">
+          <h2 className="text-3xl font-bold mb-6">Ready to Boost Your Social Media Growth?</h2>
+          <p className="text-lg text-muted-foreground mb-4">
+            Visit our secure platform to purchase premium-quality social media services instantly. Get views, subscribers, likes, comments, and watch hours with the best quality guaranteed.
+          </p>
+          <p className="text-sm text-muted-foreground mb-8">
+            🛡️ Secure payments • ⚡ Instant delivery • ✨ Premium quality • 💯 Satisfaction guaranteed
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-              <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer">
-                Get Started Now
+            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 text-lg px-8" asChild>
+              <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                Visit smm.insighthub.ink to Buy Services
+                <ArrowRight className="w-5 h-5" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>

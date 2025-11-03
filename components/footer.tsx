@@ -45,7 +45,7 @@ export function Footer() {
               <span className="font-bold">InsightHub</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
-              Professional social media management services and business insights to help your brand grow and succeed in the digital world.
+              Premium social media growth services - Buy views, subscribers, likes, comments, and watch hours with instant delivery and quality guarantees. Trusted by 500+ clients worldwide.
             </p>
             <div className="mt-4 flex gap-4">
               {socialLinks.map((social, index) => {
@@ -104,23 +104,23 @@ export function Footer() {
             <h3 className="font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/smm" className="text-sm text-muted-foreground hover:text-foreground">
-                  Social Media Management
+                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
+                  Buy Views
                 </Link>
               </li>
               <li>
-                <Link href="/smm" className="text-sm text-muted-foreground hover:text-foreground">
-                  Content Creation
+                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
+                  Buy Subscribers
                 </Link>
               </li>
               <li>
-                <Link href="/smm" className="text-sm text-muted-foreground hover:text-foreground">
-                  Community Management
+                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
+                  Buy Likes & Comments
                 </Link>
               </li>
               <li>
-                <Link href="/smm" className="text-sm text-muted-foreground hover:text-foreground">
-                  Analytics & Reporting
+                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
+                  Buy Watch Hours
                 </Link>
               </li>
             </ul>
