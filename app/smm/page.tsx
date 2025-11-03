@@ -3,8 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
-import { StructuredData } from "@/lib/structured-data";
-import { smmServicesSchema } from "@/lib/structured-data";
 import {
   BarChart3,
   Users,
@@ -118,7 +116,6 @@ export default function SMMPage() {
 
   return (
     <>
-      <StructuredData data={smmServicesSchema} />
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-secondary">
         <div className="max-w-7xl mx-auto text-center">

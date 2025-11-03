@@ -6,8 +6,8 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { Toaster } from '@/components/ui/sonner';
-import { StructuredData } from '@/lib/structured-data';
 import { organizationSchema, websiteSchema } from '@/lib/structured-data';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -91,11 +91,22 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const orgSchemaString = JSON.stringify(organizationSchema);
+  const websiteSchemaString = JSON.stringify(websiteSchema);
+  
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`} suppressHydrationWarning>
-        <StructuredData data={organizationSchema} />
-        <StructuredData data={websiteSchema} />
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: orgSchemaString }}
+        />
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: websiteSchemaString }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
