@@ -89,6 +89,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
+                  Get Started
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">
                   Contact
                 </Link>

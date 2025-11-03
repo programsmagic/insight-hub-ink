@@ -62,7 +62,6 @@ export function Navbar() {
         </div>
         <div className="ml-auto flex items-center space-x-4">
           <ThemeToggle />
-          <Button>Subscribe</Button>
         </div>
       </div>
     </header>

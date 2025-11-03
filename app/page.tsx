@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { NewsletterSignup } from "@/components/newsletter-signup";
 import { FeaturedPosts } from "@/components/featured-posts";
 import { TrendingTopics } from "@/components/trending-topics";
 import { Stats } from "@/components/stats";
@@ -26,21 +25,25 @@ export default function Home() {
           <div className="text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent mb-8">
               <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">Transforming Business Insights</span>
+              <span className="text-sm font-medium">Professional SMM Services & World Knowledge</span>
             </div>
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight gradient-text mb-8 leading-[1.1]">
-              Unlock Business Insights &<br />Boost Productivity
+              Professional SMM Services &<br />World Knowledge Hub
             </h1>
             <p className="mt-3 max-w-2xl mx-auto text-xl text-muted-foreground sm:mt-4">
-              Your trusted source for cutting-edge business trends, actionable insights, and productivity enhancement strategies.
+              Transform your social media presence with expert SMM services and stay ahead with our curated world knowledge content.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-                Explore Insights
+              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+                <a href="/smm" rel="noopener noreferrer">
+                  Explore SMM Services
+                </a>
               </Button>
-              <Button size="lg" variant="outline" className="group">
-                View Products
-                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <Button size="lg" variant="outline" className="group" asChild>
+                <a href="/blog" rel="noopener noreferrer" className="flex items-center">
+                  Browse Knowledge Hub
+                  <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </a>
               </Button>
             </div>
           </div>
@@ -56,29 +59,29 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Why Choose InsightHub</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Discover how our platform can help you make better business decisions and improve productivity.
+              Professional SMM services to grow your brand and a knowledge hub to expand your world understanding.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card className="p-8 hover:shadow-lg transition-all duration-300 group">
               <LightbulbIcon className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-semibold mb-3">Expert Insights</h3>
+              <h3 className="text-xl font-semibold mb-3">Professional SMM Services</h3>
               <p className="text-muted-foreground">
-                Access in-depth analysis and expert perspectives on business trends.
+                Transform your social media presence with expert management, content creation, and growth strategies.
               </p>
             </Card>
             <Card className="p-8 hover:shadow-lg transition-all duration-300 group">
               <TrendingUpIcon className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-semibold mb-3">Growth Strategies</h3>
+              <h3 className="text-xl font-semibold mb-3">Social Media Growth</h3>
               <p className="text-muted-foreground">
-                Learn proven methods to scale your business and increase productivity.
+                Boost engagement, grow your audience, and drive measurable results across all major platforms.
               </p>
             </Card>
             <Card className="p-8 hover:shadow-lg transition-all duration-300 group">
               <BookOpenIcon className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-semibold mb-3">Digital Resources</h3>
+              <h3 className="text-xl font-semibold mb-3">World Knowledge Hub</h3>
               <p className="text-muted-foreground">
-                Shop our curated collection of digital products and templates.
+                Access curated content, insights, and knowledge to expand your understanding of the world.
               </p>
             </Card>
           </div>
@@ -89,9 +92,9 @@ export default function Home() {
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-secondary/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Featured Insights</h2>
+            <h2 className="text-3xl font-bold mb-4">Featured Knowledge</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Stay ahead with our latest business insights and industry analysis.
+              Explore our latest articles and insights covering world knowledge and global perspectives.
             </p>
           </div>
           <FeaturedPosts />
@@ -107,22 +110,34 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Trending Topics</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Explore the most discussed business topics and stay informed.
+              Discover trending topics and insights from around the world.
             </p>
           </div>
           <TrendingTopics />
         </div>
       </section>
 
-      {/* Newsletter Section with Enhanced Design */}
+      {/* CTA Section - SMM Services Focus */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-accent/10 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:40px_40px]" />
         <div className="max-w-3xl mx-auto text-center relative">
-          <h2 className="text-3xl font-bold mb-6">Stay Ahead of the Curve</h2>
+          <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Social Media?</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
-            Join our community of business leaders and receive weekly insights, trends, and exclusive content.
+            Get professional SMM services to grow your brand and engage your audience. Trusted by 500+ businesses worldwide.
           </p>
-          <NewsletterSignup />
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+              <a href="/smm" rel="noopener noreferrer">
+                Explore SMM Services
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <a href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                Get Started Now
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
     </>

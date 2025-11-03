@@ -216,13 +216,13 @@ export default function AboutPage() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button size="lg" asChild>
-              <Link href="/smm">
-                Explore Our Services
+              <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer">
+                Get Started on Platform
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/contact">Get in Touch</Link>
+              <Link href="/smm">Explore Our Services</Link>
             </Button>
           </div>
         </Card>

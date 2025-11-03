@@ -108,59 +108,6 @@ export default function SMMPage() {
     }
   ];
 
-  const packages = [
-    {
-      name: "Starter",
-      price: "$499",
-      period: "/month",
-      description: "Perfect for small businesses just getting started",
-      features: [
-        "3 social media platforms",
-        "15 posts per month",
-        "Basic content creation",
-        "Community management (5 days/week)",
-        "Monthly analytics report",
-        "Email support"
-      ],
-      popular: false
-    },
-    {
-      name: "Professional",
-      price: "$999",
-      period: "/month",
-      description: "Ideal for growing businesses looking to scale",
-      features: [
-        "5 social media platforms",
-        "30 posts per month",
-        "Premium content creation",
-        "Community management (7 days/week)",
-        "Weekly analytics report",
-        "Priority support",
-        "Hashtag research & strategy",
-        "1 ad campaign setup"
-      ],
-      popular: true
-    },
-    {
-      name: "Enterprise",
-      price: "Custom",
-      period: "",
-      description: "Tailored solutions for large organizations",
-      features: [
-        "Unlimited platforms",
-        "Unlimited posts",
-        "Dedicated account manager",
-        "24/7 community management",
-        "Real-time analytics dashboard",
-        "Dedicated support line",
-        "Custom strategy development",
-        "Multi-location management",
-        "White-label reporting"
-      ],
-      popular: false
-    }
-  ];
-
   return (
     <>
       {/* Hero Section */}
@@ -178,10 +125,14 @@ export default function SMMPage() {
           </p>
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
             <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-              <Link href="/contact">Get Started Today</Link>
+              <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer">
+                Get Started Now
+              </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="#packages">View Packages</Link>
+              <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer">
+                View All Plans & Services
+              </Link>
             </Button>
           </div>
         </div>
@@ -286,8 +237,8 @@ export default function SMMPage() {
                 ))}
               </div>
               <Button className="mt-8" asChild>
-                <Link href="/contact" className="flex items-center gap-2">
-                  Schedule a Consultation <ArrowRight className="w-4 h-4" />
+                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                  Get Started on Platform <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
             </div>
@@ -302,71 +253,18 @@ export default function SMMPage() {
         </div>
       </section>
 
-      {/* Pricing Packages Section */}
-      <section id="packages" className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Choose Your Plan</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Flexible pricing plans designed to scale with your business needs
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {packages.map((pkg, index) => (
-              <Card 
-                key={index} 
-                className={`p-8 relative ${pkg.popular ? 'border-2 border-accent shadow-lg scale-105' : ''}`}
-              >
-                {pkg.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-semibold">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
-                  <div className="flex items-baseline justify-center gap-2">
-                    <span className="text-4xl font-bold">{pkg.price}</span>
-                    {pkg.period && <span className="text-muted-foreground">{pkg.period}</span>}
-                  </div>
-                  <p className="text-muted-foreground mt-2">{pkg.description}</p>
-                </div>
-                <ul className="space-y-4 mb-8">
-                  {pkg.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button 
-                  className="w-full" 
-                  variant={pkg.popular ? "default" : "outline"}
-                  size="lg"
-                  asChild
-                >
-                  <Link href="/contact">
-                    Get Started
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
-                </Button>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-accent/10">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to Grow Your Social Media Presence?</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Let our team of experts handle your social media while you focus on running your business. Get a free consultation today!
+            Let our team of experts handle your social media while you focus on running your business. Get started on our platform today!
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-              <Link href="/contact">Get Started Today</Link>
+              <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer">
+                Get Started Now
+              </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
               <Link href="/about">Learn More About Us</Link>
