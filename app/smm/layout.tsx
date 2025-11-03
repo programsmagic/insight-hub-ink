@@ -1,21 +1,31 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Social Media Management Services - InsightHub.ink | Professional SMM Agency",
-  description: "Transform your social media presence with our comprehensive SMM services. We offer content creation, community management, analytics, and growth strategies across Instagram, Facebook, Twitter, LinkedIn, YouTube, and TikTok. Trusted by 500+ businesses worldwide.",
+  title: "Buy SMM Services - Views, Subscribers, Likes, Comments, Watch Hours | InsightHub.ink",
+  description: "Buy premium-quality social media services: YouTube views, subscribers, watch hours, Instagram likes and followers, TikTok views, Facebook likes. Instant delivery, premium quality, 100% satisfaction guaranteed. Visit smm.insighthub.ink to purchase. Trusted by 500+ clients worldwide.",
   keywords: [
-    "social media management",
+    "buy youtube views",
+    "buy youtube subscribers",
+    "buy youtube watch hours",
+    "buy instagram followers",
+    "buy instagram likes",
+    "buy tiktok views",
+    "buy facebook likes",
+    "buy social media services",
     "SMM services",
-    "social media marketing agency",
-    "content creation",
-    "community management",
-    "Instagram management",
-    "Facebook marketing",
-    "LinkedIn management",
-    "social media strategy",
-    "SMM packages",
-    "social media analytics"
+    "SMM panel",
+    "premium SMM",
+    "instant delivery SMM",
+    "buy social media engagement",
+    "social media growth services",
+    "best SMM panel",
+    "reliable SMM services",
+    "buy twitter followers",
+    "buy linkedin followers"
   ],
+  alternates: {
+    canonical: "https://insighthub.ink/smm",
+  },
   openGraph: {
     title: "Professional Social Media Management Services - InsightHub.ink",
     description: "Comprehensive social media management services to grow your brand, engage your audience, and drive measurable results. Starting at $499/month.",

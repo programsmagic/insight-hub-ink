@@ -4,6 +4,9 @@ import { FeaturedPosts } from "@/components/featured-posts";
 import { TrendingTopics } from "@/components/trending-topics";
 import { Stats } from "@/components/stats";
 import { Testimonials } from "@/components/testimonials";
+import { StructuredData } from "@/lib/structured-data";
+import { smmServicesSchema, faqSchema } from "@/lib/structured-data";
+import { Metadata } from "next";
 import { 
   LightbulbIcon, 
   TrendingUpIcon, 
@@ -12,25 +15,52 @@ import {
   Sparkles
 } from "lucide-react";
 
+export const metadata: Metadata = {
+  title: "Buy Premium SMM Services - Views, Subscribers, Likes, Watch Hours",
+  description: "Buy premium-quality social media services: YouTube views, subscribers, watch hours, Instagram likes, TikTok views with instant delivery. 100% satisfaction guaranteed. Trusted by 500+ clients. Visit smm.insighthub.ink.",
+  keywords: [
+    "buy youtube views",
+    "buy instagram followers",
+    "buy subscribers",
+    "buy likes",
+    "buy watch hours",
+    "SMM services",
+    "social media growth",
+    "premium SMM panel",
+    "instant delivery SMM"
+  ],
+  alternates: {
+    canonical: "https://insighthub.ink",
+  },
+  openGraph: {
+    title: "Buy Premium SMM Services - Instant Delivery | InsightHub.ink",
+    description: "Buy YouTube views, subscribers, watch hours, Instagram likes, TikTok views with premium quality and instant delivery. 100% satisfaction guaranteed.",
+    url: "https://insighthub.ink",
+    type: "website",
+  },
+};
+
 export default function Home() {
   return (
     <>
+      <StructuredData data={smmServicesSchema} />
+      <StructuredData data={faqSchema} />
       {/* Hero Section with Animated Background */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-secondary overflow-hidden">
+      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-secondary overflow-hidden" itemScope itemType="https://schema.org/WebPage">
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-full h-full bg-gradient-to-r from-accent/20 via-transparent to-primary/20 animate-pulse" style={{ filter: 'blur(100px)' }} />
         </div>
         <div className="max-w-7xl mx-auto relative">
-          <div className="text-center">
+          <header className="text-center" itemScope itemType="https://schema.org/WPHeader">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent mb-8">
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="w-4 h-4" aria-hidden="true" />
               <span className="text-sm font-medium">Professional SMM Services & World Knowledge</span>
             </div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight gradient-text mb-8 leading-[1.1]">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight gradient-text mb-8 leading-[1.1]" itemProp="headline">
               Premium SMM Services &<br />World Knowledge Hub
             </h1>
-            <p className="mt-3 max-w-2xl mx-auto text-xl text-muted-foreground sm:mt-4">
+            <p className="mt-3 max-w-2xl mx-auto text-xl text-muted-foreground sm:mt-4" itemProp="description">
               Buy premium-quality social media services (views, subscribers, likes, comments, watch hours) with instant delivery and 100% satisfaction guarantee. Plus, explore our curated world knowledge content.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">

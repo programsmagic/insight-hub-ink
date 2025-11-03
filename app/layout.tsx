@@ -6,19 +6,49 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { Toaster } from '@/components/ui/sonner';
+import { StructuredData } from '@/lib/structured-data';
+import { organizationSchema, websiteSchema } from '@/lib/structured-data';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'InsightHub.ink - Professional Social Media Management & Business Insights',
-  description: 'Professional social media management services to grow your brand, engage your audience, and drive results. Trusted SMM agency offering content creation, community management, and analytics. Access business insights and productivity trends.',
-  keywords: 'social media management, SMM services, social media marketing, content creation, community management, business insights, productivity trends, digital marketing agency, Instagram management, Facebook marketing, LinkedIn management',
+  title: {
+    default: 'Buy SMM Services - Views, Subscribers, Likes, Comments, Watch Hours | InsightHub.ink',
+    template: '%s | InsightHub.ink'
+  },
+  description: 'Buy premium-quality social media services: YouTube views, subscribers, watch hours, Instagram likes, TikTok views, and more. Instant delivery, 100% satisfaction guaranteed. Trusted by 500+ clients. Visit smm.insighthub.ink to purchase.',
+  keywords: [
+    'buy youtube views',
+    'buy instagram followers',
+    'buy tiktok views',
+    'buy subscribers',
+    'buy likes',
+    'buy comments',
+    'buy watch hours',
+    'SMM services',
+    'social media growth',
+    'premium SMM panel',
+    'buy social media engagement',
+    'YouTube growth service',
+    'Instagram growth service',
+    'TikTok growth service',
+    'social media marketing',
+    'instant delivery SMM',
+    'best SMM panel',
+    'reliable SMM services',
+    'buy facebook likes',
+    'buy twitter followers',
+    'social media management'
+  ],
   authors: [{ name: 'InsightHub.ink' }],
   creator: 'InsightHub.ink',
   publisher: 'InsightHub.ink',
+  alternates: {
+    canonical: 'https://insighthub.ink',
+  },
   openGraph: {
-    title: 'InsightHub.ink - Professional Social Media Management & Business Insights',
-    description: 'Professional social media management services to grow your brand, engage your audience, and drive results. Trusted by 500+ businesses worldwide.',
+    title: 'Buy Premium SMM Services - Views, Subscribers, Likes, Watch Hours | InsightHub.ink',
+    description: 'Buy premium-quality social media services with instant delivery. Get YouTube views, subscribers, watch hours, Instagram likes, TikTok views, and more. 100% satisfaction guaranteed. Trusted by 500+ clients worldwide.',
     url: 'https://insighthub.ink',
     siteName: 'InsightHub.ink',
     images: [
@@ -26,7 +56,7 @@ export const metadata: Metadata = {
         url: 'https://insighthub.ink/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'InsightHub - Professional Social Media Management',
+        alt: 'InsightHub - Premium SMM Services for Social Media Growth',
       },
     ],
     locale: 'en_US',
@@ -34,8 +64,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'InsightHub.ink - Professional Social Media Management',
-    description: 'Professional SMM services to grow your brand and drive results. Trusted by 500+ businesses worldwide.',
+    title: 'Buy Premium SMM Services - Instant Delivery | InsightHub.ink',
+    description: 'Buy YouTube views, subscribers, watch hours, Instagram likes, TikTok views with premium quality and instant delivery. 100% satisfaction guaranteed.',
     images: ['https://insighthub.ink/og-image.jpg'],
     creator: '@insighthub',
   },
@@ -50,6 +80,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    google: 'your-google-verification-code', // Replace with actual code
+  },
+  category: 'Social Media Services',
 };
 
 export default function RootLayout({
@@ -60,6 +94,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`} suppressHydrationWarning>
+        <StructuredData data={organizationSchema} />
+        <StructuredData data={websiteSchema} />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

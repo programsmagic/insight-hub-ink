@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
+import { StructuredData } from "@/lib/structured-data";
+import { smmServicesSchema } from "@/lib/structured-data";
 import {
   BarChart3,
   Users,
@@ -116,6 +118,7 @@ export default function SMMPage() {
 
   return (
     <>
+      <StructuredData data={smmServicesSchema} />
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-secondary">
         <div className="max-w-7xl mx-auto text-center">
@@ -375,8 +378,11 @@ export default function SMMPage() {
             <div className="relative aspect-video rounded-lg overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000"
-                alt="Social Media Management"
+                alt="Premium Social Media Growth Services - Buy views, subscribers, likes, comments, and watch hours with instant delivery"
                 className="object-cover w-full h-full"
+                loading="lazy"
+                width={800}
+                height={450}
               />
             </div>
           </div>
