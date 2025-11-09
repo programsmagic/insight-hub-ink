@@ -14,7 +14,6 @@ export const organizationSchema: Organization = {
   "description": "Premium social media growth services provider. Buy views, subscribers, likes, comments, and watch hours with instant delivery and quality guarantees.",
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+1-555-123-4567",
     "contactType": "Customer Service",
     "email": "contact@insighthub.ink",
     "availableLanguage": ["English"]

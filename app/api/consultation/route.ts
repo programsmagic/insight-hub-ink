@@ -1,21 +1,82 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { consultationSchema, sanitizeInput } from '@/lib/validation';
+import { logger } from '@/lib/logger';
+import { consultationRateLimiter, getClientIdentifier } from '@/lib/rate-limit';
 
 export const runtime = 'nodejs';
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    
-    // Validate required fields
-    const requiredFields = ['name', 'email', 'phone', 'preferredDate', 'preferredTime', 'serviceInterest', 'goals'];
-    const missingFields = requiredFields.filter(field => !body[field]);
-    
-    if (missingFields.length > 0) {
+    // Rate limiting
+    const clientId = getClientIdentifier(request);
+    const rateLimitResult = consultationRateLimiter.check(clientId);
+
+    if (!rateLimitResult.allowed) {
       return NextResponse.json(
-        { error: `Missing required fields: ${missingFields.join(', ')}` },
+        { 
+          error: 'Too many requests. Please try again later.',
+          retryAfter: Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000),
+        },
+        { 
+          status: 429,
+          headers: {
+            'Retry-After': Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000).toString(),
+            'X-RateLimit-Limit': '5',
+            'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+            'X-RateLimit-Reset': new Date(rateLimitResult.resetTime).toISOString(),
+          },
+        }
+      );
+    }
+
+    // Parse and validate request body
+    let body: unknown;
+    try {
+      body = await request.json();
+    } catch (parseError) {
+      logger.warn('Invalid JSON in consultation request', { error: parseError });
+      return NextResponse.json(
+        { error: 'Invalid request body. Expected JSON.' },
         { status: 400 }
       );
     }
+
+    // Validate input using Zod schema
+    const validationResult = consultationSchema.safeParse(body);
+    
+    if (!validationResult.success) {
+      const errors = validationResult.error.errors.map(err => ({
+        field: err.path.join('.'),
+        message: err.message,
+      }));
+      
+      logger.warn('Consultation validation failed', { errors });
+      
+      return NextResponse.json(
+        { 
+          error: 'Validation failed',
+          details: errors,
+        },
+        { status: 400 }
+      );
+    }
+
+    const validatedData = validationResult.data;
+
+    // Sanitize inputs
+    const sanitizedData = {
+      name: sanitizeInput(validatedData.name),
+      email: validatedData.email.toLowerCase().trim(),
+      phone: sanitizeInput(validatedData.phone),
+      company: validatedData.company ? sanitizeInput(validatedData.company) : undefined,
+      preferredDate: sanitizeInput(validatedData.preferredDate),
+      preferredTime: sanitizeInput(validatedData.preferredTime),
+      timezone: validatedData.timezone ? sanitizeInput(validatedData.timezone) : undefined,
+      serviceInterest: sanitizeInput(validatedData.serviceInterest),
+      currentPlatforms: validatedData.currentPlatforms ? sanitizeInput(validatedData.currentPlatforms) : undefined,
+      goals: sanitizeInput(validatedData.goals),
+      budget: validatedData.budget ? sanitizeInput(validatedData.budget) : undefined,
+    };
 
     // TODO: Integrate with your backend/database service
     // Options:
@@ -29,32 +90,34 @@ export async function POST(request: NextRequest) {
     // await resend.emails.send({
     //   from: 'consultation@insighthub.ink',
     //   to: 'admin@insighthub.ink',
-    //   subject: `New Consultation Request from ${body.name}`,
-    //   html: generateConsultationEmail(body),
+    //   subject: `New Consultation Request from ${sanitizedData.name}`,
+    //   html: generateConsultationEmail(sanitizedData),
     // });
 
     // Example: Save to database (using Supabase)
     // const { data, error } = await supabase
     //   .from('consultations')
     //   .insert([{
-    //     name: body.name,
-    //     email: body.email,
-    //     phone: body.phone,
-    //     company: body.company,
-    //     preferred_date: body.preferredDate,
-    //     preferred_time: body.preferredTime,
-    //     timezone: body.timezone,
-    //     service_interest: body.serviceInterest,
-    //     current_platforms: body.currentPlatforms,
-    //     goals: body.goals,
-    //     budget: body.budget,
+    //     name: sanitizedData.name,
+    //     email: sanitizedData.email,
+    //     phone: sanitizedData.phone,
+    //     company: sanitizedData.company,
+    //     preferred_date: sanitizedData.preferredDate,
+    //     preferred_time: sanitizedData.preferredTime,
+    //     timezone: sanitizedData.timezone,
+    //     service_interest: sanitizedData.serviceInterest,
+    //     current_platforms: sanitizedData.currentPlatforms,
+    //     goals: sanitizedData.goals,
+    //     budget: sanitizedData.budget,
     //     status: 'pending',
     //     created_at: new Date().toISOString(),
     //   }]);
 
-    // For now, log the consultation request
-    console.log('Consultation Request Received:', {
-      ...body,
+    // Log consultation request (without sensitive data)
+    logger.info('Consultation request received', {
+      name: sanitizedData.name,
+      email: sanitizedData.email,
+      serviceInterest: sanitizedData.serviceInterest,
       timestamp: new Date().toISOString(),
     });
 
@@ -64,14 +127,21 @@ export async function POST(request: NextRequest) {
         success: true,
         message: 'Consultation request received successfully',
         data: {
-          id: `consultation_${Date.now()}`, // Temporary ID
+          id: `consultation_${Date.now()}`,
           status: 'pending',
         }
       },
-      { status: 200 }
+      { 
+        status: 200,
+        headers: {
+          'X-RateLimit-Limit': '5',
+          'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+          'X-RateLimit-Reset': new Date(rateLimitResult.resetTime).toISOString(),
+        },
+      }
     );
   } catch (error) {
-    console.error('Consultation API error:', error);
+    logger.error('Consultation API error', error);
     return NextResponse.json(
       { error: 'Internal server error. Please try again later.' },
       { status: 500 }

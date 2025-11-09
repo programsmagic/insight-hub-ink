@@ -26,21 +26,31 @@ export function FeaturedPosts() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
       {posts.map((post, index) => (
-        <article key={index} className="group cursor-pointer">
+        <article 
+          key={index} 
+          className="group cursor-pointer"
+          role="article"
+          aria-labelledby={`post-title-${index}`}
+        >
           <div className="relative aspect-video overflow-hidden rounded-lg mb-4">
             <img
               src={post.image}
               alt={post.title}
               className="object-cover w-full h-full transition-transform group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-2 text-sm" aria-label={`Category: ${post.category}, Date: ${post.date}`}>
               <span className="text-accent">{post.category}</span>
-              <span className="text-muted-foreground">•</span>
-              <span className="text-muted-foreground">{post.date}</span>
+              <span className="text-muted-foreground" aria-hidden="true">•</span>
+              <time className="text-muted-foreground" dateTime={post.date}>{post.date}</time>
             </div>
-            <h3 className="text-lg sm:text-xl font-semibold group-hover:text-accent transition-colors">
+            <h3 
+              id={`post-title-${index}`}
+              className="text-lg sm:text-xl font-semibold group-hover:text-accent transition-colors"
+            >
               {post.title}
             </h3>
             <p className="text-sm sm:text-base text-muted-foreground">{post.excerpt}</p>

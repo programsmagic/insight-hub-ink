@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code', // Replace with actual code
+    google: process.env.GOOGLE_VERIFICATION_CODE || '',
   },
   category: 'Social Media Services',
 };
@@ -94,16 +94,20 @@ export default function RootLayout({
   const orgSchemaString = JSON.stringify(organizationSchema);
   const websiteSchemaString = JSON.stringify(websiteSchema);
   
+  const googleAdsenseId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID;
+  
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
-        {/* Google AdSense Script - ca-pub-6183908670694055 */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6183908670694055"
-          crossOrigin="anonymous"
-        />
+        {/* Google AdSense Script */}
+        {googleAdsenseId && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${googleAdsenseId}`}
+            crossOrigin="anonymous"
+          />
+        )}
       </head>
       <body className={`${inter.className} antialiased`} suppressHydrationWarning>
         <Script
