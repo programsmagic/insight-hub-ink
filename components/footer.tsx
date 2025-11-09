@@ -45,7 +45,7 @@ export function Footer() {
               <span className="font-bold">InsightHub</span>
             </Link>
             <p className="mt-4 text-xs sm:text-sm text-muted-foreground">
-              Premium social media growth services - Buy views, subscribers, likes, comments, and watch hours with instant delivery and quality guarantees. Trusted by 500+ clients worldwide.
+              Premium social media growth services and personal finance management. Buy SMM services or track your finances with FinTrack. Trusted by 500+ clients worldwide.
             </p>
             <div className="mt-4 flex gap-4">
               {socialLinks.map((social, index) => {
@@ -79,6 +79,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/fintrack" className="text-sm text-muted-foreground hover:text-foreground">
+                  FinTrack
+                </Link>
+              </li>
+              <li>
                 <Link href="/shop" className="text-sm text-muted-foreground hover:text-foreground">
                   Shop
                 </Link>
@@ -101,26 +106,31 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold mb-4">Services</h3>
+            <h3 className="font-semibold mb-4">Products</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
-                  Buy Views
+                  SMM Services
                 </Link>
               </li>
               <li>
-                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
-                  Buy Subscribers
+                <Link href="https://fintrack.insighthub.ink" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
+                  FinTrack - Finance Manager
                 </Link>
               </li>
               <li>
-                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
-                  Buy Likes & Comments
+                <Link href="/fintrack" className="text-sm text-muted-foreground hover:text-foreground">
+                  Track Expenses
                 </Link>
               </li>
               <li>
-                <Link href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
-                  Buy Watch Hours
+                <Link href="/fintrack" className="text-sm text-muted-foreground hover:text-foreground">
+                  Plan Goals
+                </Link>
+              </li>
+              <li>
+                <Link href="/fintrack" className="text-sm text-muted-foreground hover:text-foreground">
+                  AI Insights
                 </Link>
               </li>
             </ul>
@@ -144,6 +154,7 @@ export function Footer() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>contact@insighthub.ink</li>
                 <li>SMM.insighthub.ink</li>
+                <li>fintrack.insighthub.ink</li>
               </ul>
             </div>
           </div>

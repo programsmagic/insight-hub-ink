@@ -10,7 +10,12 @@ import {
   TrendingUpIcon, 
   BookOpenIcon, 
   ArrowRight,
-  Sparkles
+  Sparkles,
+  Wallet,
+  Target,
+  Brain,
+  FileSpreadsheet,
+  CheckCircle
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -172,6 +177,84 @@ export default function Home() {
                 Learn More
               </a>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* FinTrack Product Section */}
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 text-accent mb-4 sm:mb-6">
+              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
+              <span className="text-xs sm:text-sm font-medium">Personal Finance Management</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Meet FinTrack - Your Personal Finance Manager</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+              Track your spending, plan for financial goals, and get AI-powered insights to optimize your finances. Perfect for travel, marriage, house savings, and more.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group">
+              <Wallet className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">Easy Tracking</h3>
+              <p className="text-muted-foreground">
+                Record income and expenses in seconds with a simple, intuitive interface. Track every transaction individually.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group">
+              <Target className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">Goal Planning</h3>
+              <p className="text-muted-foreground">
+                Set and track multiple financial goals with automatic progress monitoring. Plan for travel, marriage, house, or any goal.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group">
+              <Brain className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">AI Insights</h3>
+              <p className="text-muted-foreground">
+                Get personalized recommendations based on your spending patterns. Predict savings and optimize your finances.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group">
+              <FileSpreadsheet className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">Excel Integration</h3>
+              <p className="text-muted-foreground">
+                Import historical data and export reports in Excel format. Complete data portability and backup functionality.
+              </p>
+            </Card>
+          </div>
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+              <a href="https://fintrack.insighthub.ink" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                Start Free with Google
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" className="group" asChild>
+              <a href="/fintrack" rel="noopener noreferrer" className="flex items-center">
+                Learn More About FinTrack
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </Button>
+          </div>
+          <div className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-4 text-xs sm:text-sm text-muted-foreground">
+            <span className="flex items-center gap-1">
+              <CheckCircle className="w-4 h-4 text-accent" />
+              100% Free to Start
+            </span>
+            <span className="flex items-center gap-1">
+              <CheckCircle className="w-4 h-4 text-accent" />
+              2 Min Setup
+            </span>
+            <span className="flex items-center gap-1">
+              <CheckCircle className="w-4 h-4 text-accent" />
+              No Credit Card Required
+            </span>
+            <span className="flex items-center gap-1">
+              <CheckCircle className="w-4 h-4 text-accent" />
+              Excel Export
+            </span>
           </div>
         </div>
       </section>
