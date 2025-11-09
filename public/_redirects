@@ -1,0 +1,6 @@
+# Redirects for static export
+# Used by Netlify. For other platforms, see PRODUCTION.md
+
+# Redirect trailing slashes (optional)
+/* /index.html 200
+

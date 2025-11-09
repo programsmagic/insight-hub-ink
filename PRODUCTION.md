@@ -11,11 +11,11 @@ This document outlines the production-ready improvements made to the codebase an
 - ✅ Build-time linting enabled (no longer ignored)
 
 ### 2. Security
-- ✅ Security headers configured (HSTS, X-Frame-Options, CSP, etc.)
+- ✅ Security headers configuration files (see below for hosting setup)
 - ✅ Input validation and sanitization using Zod
 - ✅ Rate limiting on API routes
-- ✅ XSS protection headers
-- ✅ Content-Type-Options: nosniff
+- ✅ XSS protection headers (configure at CDN/hosting level)
+- ✅ Content-Type-Options: nosniff (configure at CDN/hosting level)
 
 ### 3. Error Handling
 - ✅ Error boundary component for React error catching
@@ -81,7 +81,7 @@ npm start
 ```
 
 ### Security Review
-- [ ] Review security headers in `next.config.js`
+- [ ] Configure security headers at CDN/hosting level (see below)
 - [ ] Verify rate limiting thresholds are appropriate
 - [ ] Check that all API routes have proper validation
 - [ ] Ensure no sensitive data in client-side code
@@ -107,7 +107,8 @@ npm start
 1. Push code to GitHub/GitLab/Bitbucket
 2. Import project in Vercel
 3. Configure environment variables in Vercel dashboard
-4. Deploy
+4. Configure security headers in `vercel.json` (see below)
+5. Deploy
 
 ### Static Export (Current Setup)
 ```bash
@@ -117,10 +118,97 @@ npm run build
 ```
 
 ### Other Platforms
-- **Netlify**: Similar to Vercel, supports Next.js
-- **AWS Amplify**: Configure build settings
-- **GitHub Pages**: Use static export
+- **Netlify**: Uses `public/_headers` file automatically
+- **AWS Amplify**: Configure build settings and headers in console
+- **GitHub Pages**: Use static export (headers via `.htaccess` or CDN)
+- **Cloudflare Pages**: Configure headers in dashboard
 - **Custom Server**: Use `npm start` after build
+
+## 🔒 Security Headers Configuration
+
+Since this project uses static export (`output: 'export'`), security headers cannot be set in `next.config.js`. They must be configured at the CDN/hosting level.
+
+### Recommended Security Headers
+```
+X-DNS-Prefetch-Control: on
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Referrer-Policy: origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+```
+
+### Platform-Specific Configuration
+
+#### Vercel
+Create `vercel.json` in the root directory:
+```json
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "on"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Netlify
+The `public/_headers` file is already created and will be used automatically.
+
+#### Cloudflare Pages
+1. Go to Pages dashboard
+2. Navigate to Settings > Functions
+3. Add headers in the Functions tab or use Cloudflare Workers
+
+#### AWS CloudFront
+1. Go to CloudFront distribution
+2. Navigate to Behaviors
+3. Edit behavior and add custom headers in Response Headers Policy
+
+#### GitHub Pages (via .htaccess)
+If using Apache, create `.htaccess` in the `out` directory:
+```apache
+<IfModule mod_headers.c>
+  Header set X-DNS-Prefetch-Control "on"
+  Header set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+```
 
 ## 🔧 Post-Deployment
 

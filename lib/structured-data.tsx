@@ -3,7 +3,7 @@
  * These help search engines and AI agents understand the content better
  */
 
-import { Organization, WebSite, Service, AggregateRating, FAQPage } from './types';
+import { Organization, WebSite, Service, FAQPage } from './types';
 
 export const organizationSchema: Organization = {
   "@context": "https://schema.org",

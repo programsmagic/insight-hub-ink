@@ -6,11 +6,9 @@ import Link from "next/link";
 import {
   Wallet,
   Target,
-  TrendingUp,
   Brain,
   FileSpreadsheet,
   Smartphone,
-  BarChart3,
   CheckCircle,
   ArrowRight,
   Sparkles,
@@ -21,12 +19,6 @@ import {
   Plane,
   Home,
   Heart,
-  Calculator,
-  PieChart,
-  Clock,
-  Download,
-  Upload,
-  Eye,
   Users
 } from "lucide-react";
 
