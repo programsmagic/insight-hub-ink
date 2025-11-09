@@ -42,24 +42,24 @@ export default function Home() {
   return (
     <>
       {/* Hero Section with Animated Background */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-secondary overflow-hidden">
+      <section className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-secondary overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-full h-full bg-gradient-to-r from-accent/20 via-transparent to-primary/20 animate-pulse" style={{ filter: 'blur(100px)' }} />
         </div>
         <div className="max-w-7xl mx-auto relative">
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent mb-8">
-              <Sparkles className="w-4 h-4" aria-hidden="true" />
-              <span className="text-sm font-medium">Professional SMM Services & World Knowledge</span>
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 text-accent mb-6 sm:mb-8">
+              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
+              <span className="text-xs sm:text-sm font-medium">Professional SMM Services & World Knowledge</span>
             </div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight gradient-text mb-8 leading-[1.1]">
-              Premium SMM Services &<br />World Knowledge Hub
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight gradient-text mb-6 sm:mb-8 leading-[1.1] px-4">
+              Premium SMM Services &<br className="hidden sm:block" /> World Knowledge Hub
             </h1>
-            <p className="mt-3 max-w-2xl mx-auto text-xl text-muted-foreground sm:mt-4">
+            <p className="mt-3 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-muted-foreground sm:mt-4 px-4">
               Buy premium-quality social media services (views, subscribers, likes, comments, watch hours) with instant delivery and 100% satisfaction guarantee. Plus, explore our curated world knowledge content.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
               <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
                 <a href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="flex items-center">
                   Buy SMM Services Now
@@ -86,15 +86,15 @@ export default function Home() {
       <Stats />
 
       {/* Features Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Why Choose InsightHub</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Why Choose InsightHub</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Professional SMM services to grow your brand and a knowledge hub to expand your world understanding.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             <Card className="p-8 hover:shadow-lg transition-all duration-300 group">
               <LightbulbIcon className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
               <h3 className="text-xl font-semibold mb-3">Premium SMM Services</h3>
@@ -121,11 +121,11 @@ export default function Home() {
       </section>
 
       {/* Featured Posts with Enhanced Design */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-secondary/50">
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-secondary/50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Featured Knowledge</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Featured Knowledge</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Explore our latest articles and insights covering world knowledge and global perspectives.
             </p>
           </div>
@@ -137,11 +137,11 @@ export default function Home() {
       <Testimonials />
 
       {/* Trending Topics with Enhanced Design */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Trending Topics</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Trending Topics</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Discover trending topics and insights from around the world.
             </p>
           </div>
@@ -150,17 +150,17 @@ export default function Home() {
       </section>
 
       {/* CTA Section - SMM Services Focus */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-accent/10 relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-accent/10 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:40px_40px]" />
         <div className="max-w-3xl mx-auto text-center relative">
-          <h2 className="text-3xl font-bold mb-6">Ready to Boost Your Social Media?</h2>
-          <p className="text-lg text-muted-foreground mb-4 max-w-xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 px-4">Ready to Boost Your Social Media?</h2>
+          <p className="text-base sm:text-lg text-muted-foreground mb-3 sm:mb-4 max-w-xl mx-auto px-4">
             Visit our secure platform to buy premium-quality SMM services. Get views, subscribers, likes, comments, and watch hours with instant delivery.
           </p>
-          <p className="text-sm text-muted-foreground mb-8 max-w-xl mx-auto">
+          <p className="text-xs sm:text-sm text-muted-foreground mb-6 sm:mb-8 max-w-xl mx-auto px-4">
             🛡️ Secure payments • ⚡ Instant delivery • ✨ Premium quality • 💯 Satisfaction guaranteed • 🔒 Account safety
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
             <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
               <a href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="flex items-center">
                 Visit smm.insighthub.ink to Buy Services

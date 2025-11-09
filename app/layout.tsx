@@ -96,6 +96,14 @@ export default function RootLayout({
   
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Google AdSense Script - ca-pub-6183908670694055 */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6183908670694055"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={`${inter.className} antialiased`} suppressHydrationWarning>
         <Script
           id="organization-schema"
@@ -106,12 +114,6 @@ export default function RootLayout({
           id="website-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: websiteSchemaString }}
-        />
-        <Script
-          id="google-adsense"
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6183908670694055"
-          crossOrigin="anonymous"
         />
         <ThemeProvider
           attribute="class"
