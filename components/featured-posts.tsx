@@ -24,7 +24,7 @@ export function FeaturedPosts() {
   ]
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
       {posts.map((post, index) => (
         <article key={index} className="group cursor-pointer">
           <div className="relative aspect-video overflow-hidden rounded-lg mb-4">
@@ -40,10 +40,10 @@ export function FeaturedPosts() {
               <span className="text-muted-foreground">•</span>
               <span className="text-muted-foreground">{post.date}</span>
             </div>
-            <h3 className="text-xl font-semibold group-hover:text-accent transition-colors">
+            <h3 className="text-lg sm:text-xl font-semibold group-hover:text-accent transition-colors">
               {post.title}
             </h3>
-            <p className="text-muted-foreground">{post.excerpt}</p>
+            <p className="text-sm sm:text-base text-muted-foreground">{post.excerpt}</p>
           </div>
         </article>
       ))}

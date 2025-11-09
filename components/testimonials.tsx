@@ -24,32 +24,32 @@ export function Testimonials() {
   ];
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-secondary/30">
+    <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-secondary/30">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">What Our Clients Say</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">What Our Clients Say</h2>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Real testimonials from satisfied customers who trusted us with their social media growth.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="p-8 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center mb-6">
+            <Card key={index} className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4 sm:mb-6">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-accent text-accent" />
+                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-accent text-accent" />
                 ))}
               </div>
-              <p className="text-lg mb-6">{testimonial.content}</p>
-              <div className="flex items-center gap-4">
+              <p className="text-base sm:text-lg mb-4 sm:mb-6">{testimonial.content}</p>
+              <div className="flex items-center gap-3 sm:gap-4">
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover flex-shrink-0"
                 />
                 <div>
-                  <div className="font-semibold">{testimonial.name}</div>
-                  <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                  <div className="font-semibold text-sm sm:text-base">{testimonial.name}</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground">{testimonial.role}</div>
                 </div>
               </div>
             </Card>

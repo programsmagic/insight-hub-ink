@@ -37,14 +37,14 @@ export function Footer() {
 
   return (
     <footer className="border-t bg-background">
-      <div className="container py-12 m-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="container py-8 sm:py-12 px-4 sm:px-6 lg:px-8 m-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           <div>
             <Link href="/" className="flex items-center space-x-2">
               <BrainCircuitIcon className="h-6 w-6 text-accent" />
               <span className="font-bold">InsightHub</span>
             </Link>
-            <p className="mt-4 text-sm text-muted-foreground">
+            <p className="mt-4 text-xs sm:text-sm text-muted-foreground">
               Premium social media growth services - Buy views, subscribers, likes, comments, and watch hours with instant delivery and quality guarantees. Trusted by 500+ clients worldwide.
             </p>
             <div className="mt-4 flex gap-4">
@@ -148,7 +148,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
+        <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t text-center text-xs sm:text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} InsightHub.ink. All rights reserved.</p>
         </div>
       </div>

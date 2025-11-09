@@ -65,6 +65,10 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Mobile touch target optimization */
+  button, a, input, select, textarea {
+    touch-action: manipulation;
+  }
 }
 
 .gradient-text {
