@@ -13,12 +13,20 @@ function getRequiredEnvVar(name: string): string {
   return value;
 }
 
-function getOptionalEnvVar(name: string, defaultValue: string = ""): string {
-  return process.env[name] || defaultValue;
+function getRequiredEnvVarOr(name1: string, name2: string): string {
+  const value = process.env[name1] || process.env[name2];
+  if (!value) {
+    throw new Error(`Required environment variable ${name1} or ${name2} is not set`);
+  }
+  return value;
+}
+
+function getOptionalEnvVar(name: string): string | undefined {
+  return process.env[name];
 }
 
 export const cloudinaryConfig = {
-  cloudName: getRequiredEnvVar("NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME") || getRequiredEnvVar("CLOUDINARY_CLOUD_NAME"),
+  cloudName: getRequiredEnvVarOr("NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME", "CLOUDINARY_CLOUD_NAME"),
   apiKey: getRequiredEnvVar("CLOUDINARY_API_KEY"),
   apiSecret: getRequiredEnvVar("CLOUDINARY_API_SECRET"),
   url: getOptionalEnvVar("CLOUDINARY_URL"),
