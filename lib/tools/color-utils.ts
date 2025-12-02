@@ -106,9 +106,13 @@ export function hslToRgb(h: number, s: number, l: number): RGB {
 
 export function getContrastRatio(color1: RGB, color2: RGB): number {
   const getLuminance = (rgb: RGB): number => {
-    const [r, g, b] = [rgb.r / 255, rgb.g / 255, rgb.b / 255].map((val) => {
+    const values = [rgb.r / 255, rgb.g / 255, rgb.b / 255].map((val) => {
       return val <= 0.03928 ? val / 12.92 : Math.pow((val + 0.055) / 1.055, 2.4);
     });
+    // TypeScript doesn't know the array has exactly 3 elements, but we guarantee it
+    const r = values[0]!;
+    const g = values[1]!;
+    const b = values[2]!;
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   };
 
