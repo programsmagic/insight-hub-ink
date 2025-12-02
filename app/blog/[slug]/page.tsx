@@ -5,7 +5,6 @@ import Link from "next/link";
 
 
 export async function generateStaticParams() {
-  console.log("Generated Static Params:", blogPosts.map((post) => ({ slug: post.slug })));
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
 

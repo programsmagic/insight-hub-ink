@@ -121,10 +121,14 @@ export function extractHeadings(html: string): Array<{ level: number; text: stri
   let match;
 
   while ((match = headingRegex.exec(html)) !== null) {
-    headings.push({
-      level: parseInt(match[1], 10),
-      text: match[2].replace(/<[^>]*>/g, "").trim(),
-    });
+    const level = match[1];
+    const text = match[2];
+    if (level && text) {
+      headings.push({
+        level: parseInt(level, 10),
+        text: text.replace(/<[^>]*>/g, "").trim(),
+      });
+    }
   }
 
   return headings;

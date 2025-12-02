@@ -84,6 +84,7 @@ export function generateSoftwareApplicationSchema(
   options: ToolMetadataOptions
 ): SoftwareApplication {
   const { tool, features } = options;
+  // categoryName is available but not used in this schema
   const categoryMap: Record<string, string> = {
     json: "DeveloperApplication",
     text: "TextEditor",

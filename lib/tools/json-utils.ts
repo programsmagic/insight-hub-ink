@@ -173,8 +173,7 @@ function objectToYAML(obj: any, depth: number, indent: number): string {
     }
   } else if (obj !== null && typeof obj === "object") {
     const entries = Object.entries(obj);
-    for (let i = 0; i < entries.length; i++) {
-      const [key, value] = entries[i];
+    for (const [key, value] of entries) {
       if (typeof value === "object" && value !== null) {
         yaml += `${spaces}${key}:\n`;
         yaml += objectToYAML(value, depth + 1, indent);

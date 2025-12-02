@@ -210,7 +210,10 @@ export function generateLoremIpsum(words: number = 50): string {
 
   const result: string[] = [];
   for (let i = 0; i < words; i++) {
-    result.push(lorem[i % lorem.length]);
+    const word = lorem[i % lorem.length];
+    if (word) {
+      result.push(word);
+    }
   }
 
   return result.join(" ") + ".";
