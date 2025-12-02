@@ -55,9 +55,11 @@ export function decodeJWT(token: string): { header: any; payload: any; signature
       throw new Error("Invalid JWT format");
     }
 
-    const header = JSON.parse(atob(parts[0]));
-    const payload = JSON.parse(atob(parts[1]));
-    const signature = parts[2];
+    // TypeScript doesn't know that array elements exist after length check,
+    // but we've verified parts.length === 3, so these are guaranteed to exist
+    const header = JSON.parse(atob(parts[0]!));
+    const payload = JSON.parse(atob(parts[1]!));
+    const signature = parts[2]!;
 
     return { header, payload, signature };
   } catch (error) {
