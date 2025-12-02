@@ -23,7 +23,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="container py-12 min-h-screen flex items-center justify-center">
+    <div className="container mx-auto py-12 min-h-screen flex items-center justify-center">
       <Card className="p-8 sm:p-12 max-w-2xl mx-auto text-center">
         <AlertTriangle className="w-12 h-12 text-destructive mx-auto mb-4" />
         <h1 className="text-2xl sm:text-3xl font-bold mb-4">Something went wrong!</h1>

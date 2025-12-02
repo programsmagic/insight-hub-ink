@@ -166,3 +166,118 @@ export function generateMetaTags(metadata: {
   return meta.trim();
 }
 
+/**
+ * Basic HTML validation
+ */
+export function validateHTML(html: string): { valid: boolean; errors: string[]; warnings: string[] } {
+  const errors: string[] = [];
+  const warnings: string[] = [];
+
+  // Check for unclosed tags
+  const openTags: string[] = [];
+  const tagRegex = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+  let match;
+
+  while ((match = tagRegex.exec(html)) !== null) {
+    const tagName = match[1].toLowerCase();
+    const isClosing = match[0].startsWith("</");
+
+    if (isClosing) {
+      const lastOpen = openTags.lastIndexOf(tagName);
+      if (lastOpen === -1) {
+        errors.push(`Closing tag </${tagName}> found without opening tag`);
+      } else {
+        openTags.splice(lastOpen, 1);
+      }
+    } else if (!match[0].endsWith("/>")) {
+      // Self-closing tags are ignored
+      openTags.push(tagName);
+    }
+  }
+
+  // Check for unclosed tags
+  for (const tag of openTags) {
+    if (!["br", "hr", "img", "input", "meta", "link"].includes(tag)) {
+      errors.push(`Unclosed tag: <${tag}>`);
+    }
+  }
+
+  // Check for common issues
+  if (html.includes("<script") && !html.includes("</script>")) {
+    warnings.push("Script tag may not be properly closed");
+  }
+
+  if (html.includes("<style") && !html.includes("</style>")) {
+    warnings.push("Style tag may not be properly closed");
+  }
+
+  return {
+    valid: errors.length === 0,
+    errors,
+    warnings,
+  };
+}
+
+/**
+ * Generate HTML table from data
+ */
+export function generateHTMLTable(
+  data: string[][],
+  options: {
+    hasHeader?: boolean;
+    border?: boolean;
+    striped?: boolean;
+    className?: string;
+  } = {}
+): string {
+  const { hasHeader = true, border = true, striped = false, className = "" } = options;
+
+  let table = `<table${border ? ' border="1"' : ""}${className ? ` class="${className}"` : ""}${striped ? ' style="border-collapse: collapse;"' : ""}>\n`;
+
+  if (hasHeader && data.length > 0) {
+    table += "  <thead>\n    <tr>\n";
+    for (const cell of data[0]) {
+      table += `      <th>${encodeHTMLEntities(String(cell))}</th>\n`;
+    }
+    table += "    </tr>\n  </thead>\n";
+  }
+
+  table += "  <tbody>\n";
+  const startRow = hasHeader ? 1 : 0;
+  for (let i = startRow; i < data.length; i++) {
+    const rowClass = striped && i % 2 === 0 ? ' class="striped"' : "";
+    table += `    <tr${rowClass}>\n`;
+    for (const cell of data[i]) {
+      table += `      <td>${encodeHTMLEntities(String(cell))}</td>\n`;
+    }
+    table += "    </tr>\n";
+  }
+  table += "  </tbody>\n</table>";
+
+  return table;
+}
+
+/**
+ * Convert RGB to hex color
+ */
+export function rgbToHex(r: number, g: number, b: number): string {
+  return `#${[r, g, b].map((x) => {
+    const hex = x.toString(16);
+    return hex.length === 1 ? "0" + hex : hex;
+  }).join("")}`;
+}
+
+/**
+ * Convert hex to RGB
+ */
+export function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : null;
+}
+

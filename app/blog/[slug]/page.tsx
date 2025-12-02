@@ -17,7 +17,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <article className="container py-12">
+    <article className="container mx-auto py-12">
       <div className="max-w-3xl mx-auto">
         <Button asChild variant="outline" className="mb-8">
           <Link href="/blog">← Back to Blog</Link>

@@ -5,7 +5,7 @@ import { Home, Search } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="container py-12 min-h-screen flex items-center justify-center">
+    <div className="container mx-auto py-12 min-h-screen flex items-center justify-center">
       <Card className="p-8 sm:p-12 max-w-2xl mx-auto text-center">
         <div className="text-6xl sm:text-8xl font-bold mb-4 text-muted-foreground">
           404

@@ -20,7 +20,7 @@ export default function ConsultationPage() {
   }, [router]);
 
   return (
-    <div className="container py-12">
+    <div className="container mx-auto py-12">
       <div className="max-w-2xl mx-auto text-center">
         <Card className="p-12">
           <h1 className="text-3xl font-bold mb-4">Redirecting to Platform...</h1>

@@ -47,6 +47,16 @@ export function countLines(text: string): number {
   return text.split("\n").length;
 }
 
+export function countSentences(text: string): number {
+  const sentences = text.match(/[.!?]+/g);
+  return sentences ? sentences.length : 0;
+}
+
+export function countParagraphs(text: string): number {
+  const paragraphs = text.split(/\n\s*\n/).filter((p) => p.trim().length > 0);
+  return paragraphs.length;
+}
+
 export function reverseText(text: string, byWord: boolean = false): string {
   if (byWord) {
     return text.split(/\s+/).reverse().join(" ");

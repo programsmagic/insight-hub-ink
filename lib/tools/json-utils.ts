@@ -255,3 +255,226 @@ function compareObjects(obj1: any, obj2: any, path: string = ""): {
   return result;
 }
 
+/**
+ * Generate TypeScript interface from JSON
+ */
+export function jsonToTypeScript(json: string, interfaceName: string = "GeneratedType"): string {
+  try {
+    const parsed = JSON.parse(json);
+    return generateTypeScriptInterface(parsed, interfaceName);
+  } catch (error) {
+    throw new Error("Invalid JSON");
+  }
+}
+
+function generateTypeScriptInterface(obj: any, name: string, depth: number = 0): string {
+  const indent = "  ".repeat(depth);
+  let result = "";
+
+  if (depth === 0) {
+    result += `export interface ${name} {\n`;
+  }
+
+  if (Array.isArray(obj) && obj.length > 0) {
+    const itemType = generateTypeScriptInterface(obj[0], "", depth + 1);
+    return `Array<${itemType.trim()}>`;
+  } else if (obj !== null && typeof obj === "object") {
+    const entries = Object.entries(obj);
+    for (const [key, value] of entries) {
+      const safeKey = /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(key) ? key : `"${key}"`;
+      let type: string;
+
+      if (value === null) {
+        type = "null";
+      } else if (Array.isArray(value)) {
+        if (value.length === 0) {
+          type = "any[]";
+        } else {
+          const itemType = generateTypeScriptInterface(value[0], "", depth + 1);
+          type = `Array<${itemType.trim()}>`;
+        }
+      } else if (typeof value === "object") {
+        const nested = generateTypeScriptInterface(value, "", depth + 1);
+        type = nested.trim();
+      } else {
+        type = typeof value;
+      }
+
+      result += `${indent}  ${safeKey}: ${type};\n`;
+    }
+  } else {
+    return typeof obj;
+  }
+
+  if (depth === 0) {
+    result += "}\n";
+  }
+
+  return result;
+}
+
+/**
+ * Convert JSON to SQL INSERT statements
+ */
+export function jsonToSQL(json: string, tableName: string = "data"): string {
+  try {
+    const parsed = JSON.parse(json);
+    if (!Array.isArray(parsed)) {
+      throw new Error("JSON must be an array of objects");
+    }
+    if (parsed.length === 0) {
+      return `-- No data to insert into ${tableName}`;
+    }
+
+    const headers = Object.keys(parsed[0]);
+    const safeTableName = tableName.replace(/[^a-zA-Z0-9_]/g, "_");
+    const safeHeaders = headers.map((h) => `\`${h.replace(/`/g, "``")}\``);
+
+    const sqlStatements: string[] = [];
+
+    for (const row of parsed) {
+      const values = headers.map((header) => {
+        const value = row[header];
+        if (value === null || value === undefined) {
+          return "NULL";
+        } else if (typeof value === "string") {
+          return `'${value.replace(/'/g, "''")}'`;
+        } else if (typeof value === "number" || typeof value === "boolean") {
+          return String(value);
+        } else {
+          return `'${JSON.stringify(value).replace(/'/g, "''")}'`;
+        }
+      });
+
+      sqlStatements.push(
+        `INSERT INTO \`${safeTableName}\` (${safeHeaders.join(", ")}) VALUES (${values.join(", ")});`
+      );
+    }
+
+    return sqlStatements.join("\n");
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : "Failed to convert JSON to SQL");
+  }
+}
+
+/**
+ * Simple JSONPath-like query (basic implementation)
+ */
+export function jsonPathQuery(json: string, path: string): { matches: any[]; error?: string } {
+  try {
+    const parsed = JSON.parse(json);
+    const matches: any[] = [];
+
+    // Simple path implementation for common cases
+    if (path === "$" || path === "") {
+      return { matches: [parsed] };
+    }
+
+    // Handle $.* pattern
+    if (path.startsWith("$.")) {
+      const keys = path.slice(2).split(".");
+      let current: any = parsed;
+
+      for (const key of keys) {
+        if (current === null || current === undefined) {
+          return { matches: [], error: `Path not found: ${path}` };
+        }
+
+        if (key === "*" && Array.isArray(current)) {
+          return { matches: current };
+        } else if (key === "*" && typeof current === "object") {
+          return { matches: Object.values(current) };
+        } else if (Array.isArray(current)) {
+          const index = parseInt(key, 10);
+          if (!isNaN(index)) {
+            current = current[index];
+          } else {
+            current = current.find((item: any) => item && item[key] !== undefined);
+            if (current) current = current[key];
+          }
+        } else {
+          current = current[key];
+        }
+      }
+
+      if (current !== undefined) {
+        matches.push(current);
+      }
+    } else {
+      return { matches: [], error: "Path must start with $." };
+    }
+
+    return { matches };
+  } catch (error) {
+    return {
+      matches: [],
+      error: error instanceof Error ? error.message : "Invalid JSON or path",
+    };
+  }
+}
+
+/**
+ * Validate JSON against a simple schema (basic implementation)
+ */
+export function validateJSONSchema(
+  json: string,
+  schema: string
+): { valid: boolean; errors: string[] } {
+  try {
+    const data = JSON.parse(json);
+    const schemaObj = JSON.parse(schema);
+    const errors: string[] = [];
+
+    // Basic schema validation
+    if (schemaObj.type) {
+      if (schemaObj.type === "object" && typeof data !== "object") {
+        errors.push("Expected object type");
+      } else if (schemaObj.type === "array" && !Array.isArray(data)) {
+        errors.push("Expected array type");
+      } else if (schemaObj.type === "string" && typeof data !== "string") {
+        errors.push("Expected string type");
+      } else if (schemaObj.type === "number" && typeof data !== "number") {
+        errors.push("Expected number type");
+      } else if (schemaObj.type === "boolean" && typeof data !== "boolean") {
+        errors.push("Expected boolean type");
+      }
+    }
+
+    if (schemaObj.required && Array.isArray(schemaObj.required)) {
+      for (const field of schemaObj.required) {
+        if (!(field in data)) {
+          errors.push(`Missing required field: ${field}`);
+        }
+      }
+    }
+
+    if (schemaObj.properties && typeof data === "object" && !Array.isArray(data)) {
+      for (const [key, propSchema] of Object.entries(schemaObj.properties)) {
+        if (key in data) {
+          const value = data[key];
+          const prop = propSchema as any;
+          if (prop.type) {
+            if (prop.type === "string" && typeof value !== "string") {
+              errors.push(`Field '${key}' must be a string`);
+            } else if (prop.type === "number" && typeof value !== "number") {
+              errors.push(`Field '${key}' must be a number`);
+            } else if (prop.type === "boolean" && typeof value !== "boolean") {
+              errors.push(`Field '${key}' must be a boolean`);
+            }
+          }
+        }
+      }
+    }
+
+    return {
+      valid: errors.length === 0,
+      errors,
+    };
+  } catch (error) {
+    return {
+      valid: false,
+      errors: [error instanceof Error ? error.message : "Invalid JSON or schema"],
+    };
+  }
+}
+

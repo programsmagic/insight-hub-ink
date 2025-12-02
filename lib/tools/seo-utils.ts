@@ -143,3 +143,117 @@ function escapeXML(str: string): string {
     .replace(/'/g, "&#39;");
 }
 
+/**
+ * Generate JSON-LD schema markup
+ */
+export function generateSchemaMarkup(type: string, data: Record<string, any>): string {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": type,
+    ...data,
+  };
+  return JSON.stringify(schema, null, 2);
+}
+
+/**
+ * Generate Open Graph meta tags
+ */
+export function generateOpenGraphTags(data: {
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+  type?: string;
+  siteName?: string;
+}): string {
+  let tags = "";
+
+  if (data.title) {
+    tags += `<meta property="og:title" content="${escapeXML(data.title)}">\n`;
+  }
+  if (data.description) {
+    tags += `<meta property="og:description" content="${escapeXML(data.description)}">\n`;
+  }
+  if (data.image) {
+    tags += `<meta property="og:image" content="${escapeXML(data.image)}">\n`;
+  }
+  if (data.url) {
+    tags += `<meta property="og:url" content="${escapeXML(data.url)}">\n`;
+  }
+  if (data.type) {
+    tags += `<meta property="og:type" content="${escapeXML(data.type)}">\n`;
+  }
+  if (data.siteName) {
+    tags += `<meta property="og:site_name" content="${escapeXML(data.siteName)}">\n`;
+  }
+
+  return tags.trim();
+}
+
+/**
+ * Generate Twitter Card meta tags
+ */
+export function generateTwitterCardTags(data: {
+  card?: "summary" | "summary_large_image";
+  title?: string;
+  description?: string;
+  image?: string;
+  site?: string;
+  creator?: string;
+}): string {
+  let tags = "";
+
+  if (data.card) {
+    tags += `<meta name="twitter:card" content="${data.card}">\n`;
+  }
+  if (data.title) {
+    tags += `<meta name="twitter:title" content="${escapeXML(data.title)}">\n`;
+  }
+  if (data.description) {
+    tags += `<meta name="twitter:description" content="${escapeXML(data.description)}">\n`;
+  }
+  if (data.image) {
+    tags += `<meta name="twitter:image" content="${escapeXML(data.image)}">\n`;
+  }
+  if (data.site) {
+    tags += `<meta name="twitter:site" content="${escapeXML(data.site)}">\n`;
+  }
+  if (data.creator) {
+    tags += `<meta name="twitter:creator" content="${escapeXML(data.creator)}">\n`;
+  }
+
+  return tags.trim();
+}
+
+/**
+ * Generate keyword density report
+ */
+export function generateKeywordDensityReport(text: string, topN: number = 10): Array<{
+  keyword: string;
+  count: number;
+  density: number;
+}> {
+  const words = text
+    .toLowerCase()
+    .replace(/[^\w\s]/g, " ")
+    .split(/\s+/)
+    .filter((w) => w.length > 2);
+
+  const wordCount: Record<string, number> = {};
+  for (const word of words) {
+    wordCount[word] = (wordCount[word] || 0) + 1;
+  }
+
+  const totalWords = words.length;
+  const report = Object.entries(wordCount)
+    .map(([keyword, count]) => ({
+      keyword,
+      count,
+      density: (count / totalWords) * 100,
+    }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, topN);
+
+  return report;
+}
+

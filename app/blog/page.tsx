@@ -7,7 +7,7 @@ import { blogPosts } from "./data";
 
 export default function BlogPage() {
   return (
-    <div className="container py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="container mx-auto py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8">Latest Insights</h1>
         

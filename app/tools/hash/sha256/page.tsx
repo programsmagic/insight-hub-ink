@@ -1,0 +1,110 @@
+"use client";
+
+import { useState } from "react";
+import { ToolLayout, CopyButton, DownloadButton } from "@/components/tools/tool-layout";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
+import CryptoJS from "crypto-js";
+
+export default function SHA256HashPage() {
+  const [input, setInput] = useState("");
+  const [output, setOutput] = useState("");
+
+  const generateHash = () => {
+    if (!input.trim()) {
+      toast.error("Please enter text to hash");
+      return;
+    }
+
+    try {
+      const hash = CryptoJS.SHA256(input).toString();
+      setOutput(hash);
+      toast.success("SHA256 hash generated!");
+    } catch (err) {
+      toast.error("Failed to generate hash");
+    }
+  };
+
+  const handleInputChange = (value: string) => {
+    setInput(value);
+    if (value.trim()) {
+      try {
+        const hash = CryptoJS.SHA256(value).toString();
+        setOutput(hash);
+      } catch (err) {
+        // Ignore errors during typing
+      }
+    } else {
+      setOutput("");
+    }
+  };
+
+  const handleClear = () => {
+    setInput("");
+    setOutput("");
+  };
+
+  return (
+    <ToolLayout
+      title="SHA256 Hash Generator"
+      description="Generate SHA256 hash from text instantly"
+      category="Hash Tools"
+    >
+      <div className="space-y-6">
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <Label htmlFor="input">Input Text</Label>
+            <div className="flex gap-2">
+              <Button onClick={generateHash} size="sm">
+                Generate Hash
+              </Button>
+              <Button onClick={handleClear} variant="ghost" size="sm">
+                Clear
+              </Button>
+            </div>
+          </div>
+          <Textarea
+            id="input"
+            value={input}
+            onChange={(e) => handleInputChange(e.target.value)}
+            placeholder="Enter text to generate SHA256 hash..."
+            className="font-mono text-sm min-h-[200px]"
+          />
+        </div>
+
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <Label htmlFor="output">SHA256 Hash</Label>
+            {output && (
+              <div className="flex gap-2">
+                <CopyButton text={output} />
+                <DownloadButton content={output} filename="sha256-hash.txt" />
+              </div>
+            )}
+          </div>
+          <Textarea
+            id="output"
+            value={output}
+            readOnly
+            className="font-mono text-sm min-h-[100px] bg-muted"
+            placeholder="SHA256 hash will appear here..."
+          />
+        </div>
+
+        <div className="text-sm text-muted-foreground bg-muted p-4 rounded-md">
+          <p className="font-semibold mb-2">About SHA256:</p>
+          <ul className="list-disc list-inside space-y-1">
+            <li><strong>SHA256</strong> produces a 256-bit (64-character) hash</li>
+            <li>Recommended for most security use cases</li>
+            <li>Good balance of security and performance</li>
+            <li>Widely used in blockchain, digital signatures, and password hashing</li>
+            <li>Hash is generated in real-time as you type</li>
+          </ul>
+        </div>
+      </div>
+    </ToolLayout>
+  );
+}
+

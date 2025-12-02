@@ -54,7 +54,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="container py-12">
+    <div className="container mx-auto py-12">
       {/* Hero Section */}
       <section className="max-w-4xl mx-auto text-center mb-20">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight gradient-text mb-6">

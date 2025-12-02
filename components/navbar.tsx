@@ -17,7 +17,6 @@ export function Navbar() {
     { href: "/blog", label: "Blog" },
     { href: "/smm", label: "SMM Services" },
     { href: "/fintrack", label: "FinTrack" },
-    { href: "/shop", label: "Shop" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ]
