@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { formatJSON, minifyJSON, validateJSON } from "@/lib/tools/json-utils";
 import { toast } from "sonner";
-import { Metadata } from "next";
 
 export default function JSONFormatterPage() {
   const [input, setInput] = useState("");

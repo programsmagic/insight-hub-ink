@@ -26,21 +26,6 @@ export default function TextCaseConverterPage() {
   const [output, setOutput] = useState("");
   const [selectedCase, setSelectedCase] = useState<CaseType>("lower");
 
-  const handleConvert = () => {
-    if (!input.trim()) {
-      toast.error("Please enter text to convert");
-      return;
-    }
-
-    try {
-      const converted = convertCase(input, selectedCase);
-      setOutput(converted);
-      toast.success("Text converted successfully!");
-    } catch (err) {
-      toast.error("Failed to convert text");
-    }
-  };
-
   const handleClear = () => {
     setInput("");
     setOutput("");
@@ -63,8 +48,13 @@ export default function TextCaseConverterPage() {
                 onClick={() => {
                   setSelectedCase(caseType.value);
                   if (input) {
-                    const converted = convertCase(input, caseType.value);
-                    setOutput(converted);
+                    try {
+                      const converted = convertCase(input, caseType.value);
+                      setOutput(converted);
+                    } catch (err) {
+                      toast.error("Failed to convert text");
+                      setOutput("");
+                    }
                   }
                 }}
                 className={`p-4 border rounded-lg text-left transition-all ${
@@ -95,8 +85,13 @@ export default function TextCaseConverterPage() {
               onChange={(e) => {
                 setInput(e.target.value);
                 if (e.target.value) {
-                  const converted = convertCase(e.target.value, selectedCase);
-                  setOutput(converted);
+                  try {
+                    const converted = convertCase(e.target.value, selectedCase);
+                    setOutput(converted);
+                  } catch (err) {
+                    toast.error("Failed to convert text");
+                    setOutput("");
+                  }
                 } else {
                   setOutput("");
                 }

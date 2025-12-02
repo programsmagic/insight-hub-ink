@@ -24,11 +24,6 @@ export function ToolLayout({
   backUrl = "/tools",
   categoryUrl,
 }: ToolLayoutProps) {
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast.success("Copied to clipboard!");
-  };
-
   return (
     <article className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">

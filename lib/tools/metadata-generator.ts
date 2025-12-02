@@ -83,7 +83,7 @@ export function generateToolMetadata(options: ToolMetadataOptions): Metadata {
 export function generateSoftwareApplicationSchema(
   options: ToolMetadataOptions
 ): SoftwareApplication {
-  const { tool, categoryName, features } = options;
+  const { tool, features } = options;
   const categoryMap: Record<string, string> = {
     json: "DeveloperApplication",
     text: "TextEditor",
