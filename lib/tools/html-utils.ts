@@ -58,7 +58,9 @@ export function extractLinks(html: string): string[] {
   let match;
 
   while ((match = linkRegex.exec(html)) !== null) {
-    links.push(match[1]);
+    if (match[1]) {
+      links.push(match[1]);
+    }
   }
 
   return links;
@@ -70,7 +72,9 @@ export function extractImages(html: string): string[] {
   let match;
 
   while ((match = imageRegex.exec(html)) !== null) {
-    images.push(match[1]);
+    if (match[1]) {
+      images.push(match[1]);
+    }
   }
 
   return images;
@@ -139,10 +143,10 @@ export function generateMetaTags(metadata: {
     meta += `<meta property="og:description" content="${encodeHTMLEntities(metadata.ogDescription)}">\n`;
   }
   if (metadata.ogImage) {
-    meta += `<meta property="og:image" content="${metadata.ogImage}">\n`;
+    meta += `<meta property="og:image" content="${encodeHTMLEntities(metadata.ogImage)}">\n`;
   }
   if (metadata.ogUrl) {
-    meta += `<meta property="og:url" content="${metadata.ogUrl}">\n`;
+    meta += `<meta property="og:url" content="${encodeHTMLEntities(metadata.ogUrl)}">\n`;
   }
 
   // Twitter Card
@@ -156,7 +160,7 @@ export function generateMetaTags(metadata: {
     meta += `<meta name="twitter:description" content="${encodeHTMLEntities(metadata.twitterDescription)}">\n`;
   }
   if (metadata.twitterImage) {
-    meta += `<meta name="twitter:image" content="${metadata.twitterImage}">\n`;
+    meta += `<meta name="twitter:image" content="${encodeHTMLEntities(metadata.twitterImage)}">\n`;
   }
 
   return meta.trim();

@@ -80,7 +80,7 @@ export function optimizeImageUrl(
   quality: number | "auto" = "auto"
 ): string {
   return buildCloudinaryUrl(publicId, {
-    format: format === "auto" ? "f_auto" : format,
+    format: format === "auto" ? "f_auto" : `f_${format}`,
     quality: quality === "auto" ? "q_auto" : quality,
   });
 }

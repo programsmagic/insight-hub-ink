@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { ToolLayout, DownloadButton } from "@/components/tools/tool-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,9 +11,9 @@ import QRCode from "qrcode";
 export default function QRCodeGeneratorPage() {
   const [text, setText] = useState("");
   const [qrDataUrl, setQrDataUrl] = useState("");
+  const [qrSvgString, setQrSvgString] = useState("");
   const [size, setSize] = useState(300);
   const [errorCorrection, setErrorCorrection] = useState<"L" | "M" | "Q" | "H">("M");
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const generateQR = async () => {
     if (!text.trim()) {
@@ -22,6 +22,7 @@ export default function QRCodeGeneratorPage() {
     }
 
     try {
+      // Generate PNG data URL
       const dataUrl = await QRCode.toDataURL(text, {
         width: size,
         errorCorrectionLevel: errorCorrection,
@@ -32,6 +33,19 @@ export default function QRCodeGeneratorPage() {
         },
       });
       setQrDataUrl(dataUrl);
+
+      // Generate SVG string separately
+      const svgString = await QRCode.toString(text, {
+        type: "svg",
+        width: size,
+        errorCorrectionLevel: errorCorrection,
+        margin: 2,
+        color: {
+          dark: "#000000",
+          light: "#FFFFFF",
+        },
+      });
+      setQrSvgString(svgString);
       toast.success("QR code generated successfully!");
     } catch (err) {
       toast.error("Failed to generate QR code");
@@ -41,6 +55,30 @@ export default function QRCodeGeneratorPage() {
   const handleClear = () => {
     setText("");
     setQrDataUrl("");
+    setQrSvgString("");
+  };
+
+  const handleDownloadSVG = () => {
+    if (!qrSvgString) {
+      toast.error("Please generate QR code first");
+      return;
+    }
+
+    try {
+      // Create a proper SVG data URL
+      const svgBlob = new Blob([qrSvgString], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(svgBlob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "qrcode.svg";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      toast.success("SVG downloaded successfully!");
+    } catch (err) {
+      toast.error("Failed to download SVG");
+    }
   };
 
   return (
@@ -116,16 +154,10 @@ export default function QRCodeGeneratorPage() {
                       label="Download PNG"
                     />
                     <Button
-                      onClick={() => {
-                        const link = document.createElement("a");
-                        link.href = qrDataUrl.replace("image/png", "image/svg+xml");
-                        link.download = "qrcode.svg";
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                      }}
+                      onClick={handleDownloadSVG}
                       variant="outline"
                       size="sm"
+                      disabled={!qrSvgString}
                     >
                       Download SVG
                     </Button>
