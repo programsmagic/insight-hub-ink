@@ -13,6 +13,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
   const navLinks = [
+    { href: "/tools", label: "Tools" },
     { href: "/blog", label: "Blog" },
     { href: "/smm", label: "SMM Services" },
     { href: "/fintrack", label: "FinTrack" },

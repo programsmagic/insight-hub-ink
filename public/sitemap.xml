@@ -76,5 +76,52 @@
     <priority>0.3</priority>
   </url>
   
+  <!-- Tools Hub - High Priority -->
+  <url>
+    <loc>https://insighthub.ink/tools</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Popular Tools - High Priority -->
+  <url>
+    <loc>https://insighthub.ink/tools/json/formatter</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://insighthub.ink/tools/text/case-converter</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://insighthub.ink/tools/text/hash-generator</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://insighthub.ink/tools/image/qr-generator</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://insighthub.ink/tools/seo/meta-tag-generator</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Note: Additional tool pages should be added dynamically via sitemap generation script -->
+  <!-- All 141+ tools are accessible and should be included in a dynamic sitemap -->
+  
 </urlset>
 

@@ -56,4 +56,6 @@ Allow: /smm
 Allow: /blog
 Allow: /about
 Allow: /contact
+Allow: /tools
+Allow: /tools/
 
