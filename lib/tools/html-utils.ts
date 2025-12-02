@@ -238,19 +238,26 @@ export function generateHTMLTable(
   let table = `<table${border ? ' border="1"' : ""}${className ? ` class="${className}"` : ""}${striped ? ' style="border-collapse: collapse;"' : ""}>\n`;
 
   if (hasHeader && data.length > 0) {
-    table += "  <thead>\n    <tr>\n";
-    for (const cell of data[0]) {
-      table += `      <th>${encodeHTMLEntities(String(cell))}</th>\n`;
+    const headerRow = data[0];
+    if (headerRow) {
+      table += "  <thead>\n    <tr>\n";
+      for (const cell of headerRow) {
+        table += `      <th>${encodeHTMLEntities(String(cell))}</th>\n`;
+      }
+      table += "    </tr>\n  </thead>\n";
     }
-    table += "    </tr>\n  </thead>\n";
   }
 
   table += "  <tbody>\n";
   const startRow = hasHeader ? 1 : 0;
   for (let i = startRow; i < data.length; i++) {
+    const row = data[i];
+    if (!row) {
+      continue;
+    }
     const rowClass = striped && i % 2 === 0 ? ' class="striped"' : "";
     table += `    <tr${rowClass}>\n`;
-    for (const cell of data[i]) {
+    for (const cell of row) {
       table += `      <td>${encodeHTMLEntities(String(cell))}</td>\n`;
     }
     table += "    </tr>\n";
@@ -275,12 +282,13 @@ export function rgbToHex(r: number, g: number, b: number): string {
  */
 export function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : null;
+  if (!result || !result[1] || !result[2] || !result[3]) {
+    return null;
+  }
+  return {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16),
+  };
 }
 
