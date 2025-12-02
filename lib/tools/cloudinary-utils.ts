@@ -79,9 +79,11 @@ export function optimizeImageUrl(
   format: "auto" | "webp" | "avif" = "auto",
   quality: number | "auto" = "auto"
 ): string {
+  // buildCloudinaryUrl adds prefixes automatically ('f_' for format, 'q_' for quality)
+  // So we pass raw values: "auto"/"webp"/"avif" for format, "auto" or number for quality
   return buildCloudinaryUrl(publicId, {
-    format: format === "auto" ? "f_auto" : `f_${format}`,
-    quality: quality === "auto" ? "q_auto" : quality,
+    format: format, // Will become f_auto, f_webp, or f_avif
+    quality: quality, // Will become q_auto or q_<number>
   });
 }
 
