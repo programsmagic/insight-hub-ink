@@ -179,6 +179,9 @@ export function validateHTML(html: string): { valid: boolean; errors: string[]; 
   let match;
 
   while ((match = tagRegex.exec(html)) !== null) {
+    if (!match[1]) {
+      continue;
+    }
     const tagName = match[1].toLowerCase();
     const isClosing = match[0].startsWith("</");
 
