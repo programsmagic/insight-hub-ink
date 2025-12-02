@@ -148,6 +148,26 @@ export function Footer() {
                   Terms of Service
                 </Link>
               </li>
+              <li>
+                <Link href="/cookie-policy" className="text-sm text-muted-foreground hover:text-foreground">
+                  Cookie Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/refund-policy" className="text-sm text-muted-foreground hover:text-foreground">
+                  Refund Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/disclaimer" className="text-sm text-muted-foreground hover:text-foreground">
+                  Disclaimer
+                </Link>
+              </li>
+              <li>
+                <Link href="/dmca" className="text-sm text-muted-foreground hover:text-foreground">
+                  DMCA Policy
+                </Link>
+              </li>
             </ul>
             <div className="mt-6">
               <h3 className="font-semibold mb-4">Contact</h3>
