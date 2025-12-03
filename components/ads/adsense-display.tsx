@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 interface AdSenseDisplayProps {
   /**
-   * Ad slot ID from Google AdSense (optional, uses default if not provided)
+   * Ad slot ID from Google AdSense (optional, uses default from NEXT_PUBLIC_GOOGLE_ADSENSE_DISPLAY_SLOT if not provided)
    */
   adSlot?: string;
   /**
@@ -102,6 +102,15 @@ export function AdSenseDisplay({
     return null;
   }
 
+  // Use provided adSlot or default from environment variable
+  const finalAdSlot = adSlot || process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_DISPLAY_SLOT;
+  
+  // Don't render if no ad slot is available
+  if (!finalAdSlot) {
+    console.warn("AdSenseDisplay: No ad slot provided and NEXT_PUBLIC_GOOGLE_ADSENSE_DISPLAY_SLOT is not set. Ad will not render.");
+    return null;
+  }
+
   // Determine ad format attributes
   const getFormatAttributes = () => {
     switch (format) {
@@ -152,7 +161,7 @@ export function AdSenseDisplay({
           minWidth: "320px",
         }}
         data-ad-client={adsenseId}
-        data-ad-slot={adSlot}
+        data-ad-slot={finalAdSlot}
         {...getFormatAttributes()}
       />
     </div>

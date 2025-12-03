@@ -12,6 +12,9 @@ const requiredEnvVars = [
 const optionalEnvVars = [
   'NEXT_PUBLIC_SITE_URL',
   'NEXT_PUBLIC_GOOGLE_ADSENSE_ID',
+  'NEXT_PUBLIC_GOOGLE_ADSENSE_DISPLAY_SLOT',
+  'NEXT_PUBLIC_GOOGLE_ADSENSE_IN_ARTICLE_SLOT',
+  'NEXT_PUBLIC_GOOGLE_ADSENSE_MATCHED_CONTENT_SLOT',
 ] as const;
 
 type RequiredEnvVar = typeof requiredEnvVars[number];

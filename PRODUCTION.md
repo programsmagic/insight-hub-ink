@@ -55,9 +55,15 @@ This document outlines the production-ready improvements made to the codebase an
 1. Copy `.env.example` to `.env.local` or `.env.production`
 2. Set all required environment variables:
    - `NEXT_PUBLIC_SITE_URL` - Your production URL
-   - `NEXT_PUBLIC_GOOGLE_ADSENSE_ID` - Your AdSense ID
+   - `NEXT_PUBLIC_GOOGLE_ADSENSE_ID` - Your AdSense ID (e.g., `ca-pub-xxxxxxxxxxxxx`)
    - `GOOGLE_VERIFICATION_CODE` - Google Search Console verification
    - Optional: Email service API keys, database URLs, etc.
+3. Set AdSense ad slot IDs (optional but recommended for proper ad rendering):
+   - `NEXT_PUBLIC_GOOGLE_ADSENSE_DISPLAY_SLOT` - Default display ad slot ID
+   - `NEXT_PUBLIC_GOOGLE_ADSENSE_IN_ARTICLE_SLOT` - Default in-article ad slot ID
+   - `NEXT_PUBLIC_GOOGLE_ADSENSE_MATCHED_CONTENT_SLOT` - Default matched content ad slot ID
+   
+   **Note:** If ad slot IDs are not provided via environment variables, you must pass the `adSlot` prop to each AdSense component. Otherwise, ads will not render.
 
 ### Build & Test
 ```bash
