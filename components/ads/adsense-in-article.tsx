@@ -34,7 +34,7 @@ export function AdSenseInArticle({
   showPlaceholder = true,
   minHeight = 280,
 }: AdSenseInArticleProps) {
-  const adRef = useRef<HTMLDivElement>(null);
+  const adRef = useRef<HTMLModElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [isAdSenseLoaded, setIsAdSenseLoaded] = useState(false);
