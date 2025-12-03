@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { blogPosts } from "./data";
+import { AdSenseDisplay } from "@/components/ads";
 
 export default function BlogPage() {
   return (
@@ -11,9 +12,13 @@ export default function BlogPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8">Latest Insights</h1>
         
+        {/* Ad after header */}
+        <AdSenseDisplay format="horizontal" minHeight={100} className="mb-6" />
+        
         <div className="grid gap-6 sm:gap-8">
-          {blogPosts.map((post) => (
-            <Card key={post.id} className="overflow-hidden">
+          {blogPosts.map((post, index) => (
+            <div key={post.id}>
+            <Card className="overflow-hidden">
               <div className="flex flex-col md:flex-row">
                 <div className="w-full md:w-1/3">
                   <div className="relative aspect-[4/3]">
@@ -43,8 +48,17 @@ export default function BlogPage() {
                 </div>
               </div>
             </Card>
+              
+              {/* Ad between posts (every 2 posts) */}
+              {index > 0 && (index + 1) % 2 === 0 && index < blogPosts.length - 1 && (
+                <AdSenseDisplay format="auto" minHeight={250} className="my-6" />
+              )}
+            </div>
           ))}
         </div>
+        
+        {/* Ad after all posts */}
+        <AdSenseDisplay format="auto" minHeight={250} className="mt-8" />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { AdSenseDisplay } from "@/components/ads";
 import {
   allTools,
   toolCategories,
@@ -102,6 +103,9 @@ export default function ToolsPage() {
         </div>
       </section>
 
+      {/* Ad after hero section */}
+      <AdSenseDisplay format="horizontal" minHeight={100} className="py-4" />
+
       {/* Search Section */}
       <section className="py-8 px-4 sm:px-6 lg:px-8 bg-background border-b">
         <div className="max-w-4xl mx-auto">
@@ -155,6 +159,9 @@ export default function ToolsPage() {
         </div>
       </section>
 
+      {/* Ad after category navigation */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
+
       {/* Featured Tools */}
       {!searchQuery && selectedCategory === "all" && (
         <section className="py-12 px-4 sm:px-6 lg:px-8">
@@ -193,6 +200,11 @@ export default function ToolsPage() {
             </div>
           </div>
         </section>
+      )}
+
+      {/* Ad after featured tools */}
+      {!searchQuery && selectedCategory === "all" && (
+        <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
       )}
 
       {/* All Tools Grid */}
@@ -252,6 +264,9 @@ export default function ToolsPage() {
           )}
         </div>
       </section>
+
+      {/* Ad after tools grid */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
 
       {/* CTA Section */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-accent/10">

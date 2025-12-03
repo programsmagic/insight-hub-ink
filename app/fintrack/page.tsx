@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
+import { AdSenseDisplay } from "@/components/ads";
 import {
   Wallet,
   Target,
@@ -184,6 +185,9 @@ export default function FinTrackPage() {
         </div>
       </section>
 
+      {/* Ad after hero */}
+      <AdSenseDisplay format="horizontal" minHeight={100} className="py-4" />
+
       {/* Core Features Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -208,6 +212,9 @@ export default function FinTrackPage() {
         </div>
       </section>
 
+      {/* Ad after core features */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
+
       {/* Trust & Quality Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">
         <div className="max-w-7xl mx-auto">
@@ -231,6 +238,9 @@ export default function FinTrackPage() {
           </div>
         </div>
       </section>
+
+      {/* Ad after trust section */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
 
       {/* Use Cases Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
@@ -259,6 +269,9 @@ export default function FinTrackPage() {
           </div>
         </div>
       </section>
+
+      {/* Ad after use cases */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
 
       {/* How It Works Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">

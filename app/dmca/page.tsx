@@ -1,3 +1,5 @@
+import { AdSenseDisplay } from "@/components/ads";
+
 export default function DMCAPage() {
   return (
     <div className="container mx-auto py-12">
@@ -6,6 +8,9 @@ export default function DMCAPage() {
         <p className="lead">
           InsightHub.ink respects the intellectual property rights of others and expects our users to do the same. As a platform committed to supporting students, educators, and knowledge sharing, we understand the importance of protecting both original content creators and educational resources. This Digital Millennium Copyright Act (DMCA) Policy outlines our procedures for handling copyright infringement claims while supporting legitimate educational use.
         </p>
+
+        {/* Ad after header */}
+        <AdSenseDisplay format="horizontal" minHeight={100} className="my-8" />
 
         <h2>1. Overview</h2>
         <p>
@@ -71,6 +76,9 @@ export default function DMCAPage() {
           Send your counter-notification to our designated agent at <a href="mailto:dmca@insighthub.ink">dmca@insighthub.ink</a>.
         </p>
 
+        {/* Ad after section 4 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
+
         <h2>5. Our Response Process</h2>
         <h3>5.1 Takedown Notices</h3>
         <p>
@@ -113,6 +121,9 @@ export default function DMCAPage() {
         <p>
           Only submit a DMCA takedown notice if you have a good faith belief that content on our website infringes your copyright.
         </p>
+
+        {/* Ad after section 7 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
 
         <h2>8. Good Faith Statement</h2>
         <p>

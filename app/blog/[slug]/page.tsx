@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { blogPosts } from "../data";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { AdSenseInArticle, AdSenseDisplay, AdSenseMatchedContent } from "@/components/ads";
 
 
 export async function generateStaticParams() {
@@ -39,6 +40,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
         <h1 className="text-4xl font-bold mb-6">{post.title}</h1>
         
+        {/* Ad after title */}
+        <AdSenseDisplay format="horizontal" minHeight={100} className="mb-8" />
+        
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <p className="lead">{post.excerpt}</p>
           
@@ -49,6 +53,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
             commodo consequat.
           </p>
+
+          {/* In-article ad */}
+          <AdSenseInArticle minHeight={280} />
 
           <h2>Key Takeaways</h2>
           <ul>
@@ -72,6 +79,12 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             explicabo.
           </p>
         </div>
+        
+        {/* Matched content ad after article */}
+        <AdSenseMatchedContent minHeight={200} className="mt-8" />
+        
+        {/* Display ad after article */}
+        <AdSenseDisplay format="auto" minHeight={250} className="mt-8" />
       </div>
     </article>
   );

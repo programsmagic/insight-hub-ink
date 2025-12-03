@@ -5,6 +5,7 @@ import { TrendingTopics } from "@/components/trending-topics";
 import { Stats } from "@/components/stats";
 import { Testimonials } from "@/components/testimonials";
 import { Metadata } from "next";
+import { AdSenseDisplay } from "@/components/ads";
 import { 
   LightbulbIcon, 
   TrendingUpIcon, 
@@ -87,6 +88,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Ad after hero */}
+      <AdSenseDisplay format="horizontal" minHeight={100} className="py-4" />
+
       {/* Stats Section */}
       <Stats />
 
@@ -125,6 +129,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Ad after features */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
+
       {/* Featured Posts with Enhanced Design */}
       <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-secondary/50">
         <div className="max-w-7xl mx-auto">
@@ -137,6 +144,9 @@ export default function Home() {
           <FeaturedPosts />
         </div>
       </section>
+
+      {/* Ad after featured posts */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
 
       {/* Testimonials Section */}
       <Testimonials />
@@ -153,6 +163,9 @@ export default function Home() {
           <TrendingTopics />
         </div>
       </section>
+
+      {/* Ad after trending topics */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
 
       {/* CTA Section - SMM Services Focus */}
       <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-accent/10 relative overflow-hidden">

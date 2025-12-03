@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
+import { AdSenseDisplay } from "@/components/ads";
 import {
   BarChart3,
   Users,
@@ -144,6 +145,9 @@ export default function SMMPage() {
         </div>
       </section>
 
+      {/* Ad after hero */}
+      <AdSenseDisplay format="horizontal" minHeight={100} className="py-4" />
+
       {/* Services We Offer Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -226,6 +230,9 @@ export default function SMMPage() {
         </div>
       </section>
 
+      {/* Ad after services */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
+
       {/* Trust & Quality Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">
         <div className="max-w-7xl mx-auto">
@@ -268,6 +275,9 @@ export default function SMMPage() {
         </div>
       </section>
 
+      {/* Ad after trust section */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
+
       {/* Platforms Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -290,6 +300,9 @@ export default function SMMPage() {
           </div>
         </div>
       </section>
+
+      {/* Ad after platforms */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
 
       {/* Features Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">

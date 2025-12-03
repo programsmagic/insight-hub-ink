@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { AdSenseDisplay } from "@/components/ads";
 import {
   Target,
   Users,
@@ -65,6 +66,9 @@ export default function AboutPage() {
         </p>
       </section>
 
+      {/* Ad after hero */}
+      <AdSenseDisplay format="horizontal" minHeight={100} className="mb-12" />
+
       {/* Mission Section */}
       <section className="max-w-6xl mx-auto mb-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -90,6 +94,9 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Ad after mission */}
+      <AdSenseDisplay format="auto" minHeight={250} className="my-12" />
+
       {/* Stats Section */}
       <section className="max-w-6xl mx-auto mb-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -101,6 +108,9 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
+
+      {/* Ad after stats */}
+      <AdSenseDisplay format="auto" minHeight={250} className="my-12" />
 
       {/* Values Section */}
       <section className="max-w-6xl mx-auto mb-20">
@@ -123,6 +133,9 @@ export default function AboutPage() {
           })}
         </div>
       </section>
+
+      {/* Ad after values */}
+      <AdSenseDisplay format="auto" minHeight={250} className="my-12" />
 
       {/* What We Do Section */}
       <section className="max-w-6xl mx-auto mb-20">

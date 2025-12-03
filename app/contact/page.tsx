@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { MailIcon, PhoneIcon, MapPinIcon } from "lucide-react";
+import { AdSenseDisplay } from "@/components/ads";
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
@@ -62,6 +63,9 @@ export default function ContactPage() {
     <div className="container mx-auto py-12">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
+        
+        {/* Ad after header */}
+        <AdSenseDisplay format="horizontal" minHeight={100} className="mb-8" />
         
         <div className="grid md:grid-cols-2 gap-12">
           <div>
@@ -186,6 +190,9 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+        
+        {/* Ad after contact form */}
+        <AdSenseDisplay format="auto" minHeight={250} className="mt-12" />
       </div>
     </div>
   );

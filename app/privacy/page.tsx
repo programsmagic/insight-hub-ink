@@ -1,3 +1,5 @@
+import { AdSenseDisplay } from "@/components/ads";
+
 export default function PrivacyPage() {
   return (
     <div className="container mx-auto py-12">
@@ -6,6 +8,9 @@ export default function PrivacyPage() {
         <p className="lead">
           At InsightHub.ink, we take your privacy seriously. As a platform committed to supporting students, educators, and knowledge sharing, we understand the importance of protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and protect your personal information when you use our services, including our SMM services platform, FinTrack application, educational tools, and knowledge resources.
         </p>
+
+        {/* Ad after header */}
+        <AdSenseDisplay format="horizontal" minHeight={100} className="my-8" />
 
         <h2>1. Information We Collect</h2>
         
@@ -91,6 +96,9 @@ export default function PrivacyPage() {
           We may share your information with third parties when you explicitly consent to such sharing.
         </p>
 
+        {/* Ad after section 3 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
+
         <h2>4. Your Rights and Choices</h2>
         <p>
           Depending on your location, you may have the following rights regarding your personal information:
@@ -127,6 +135,9 @@ export default function PrivacyPage() {
         <p>
           We retain your personal information for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law. When we no longer need your information, we will securely delete or anonymize it.
         </p>
+
+        {/* Ad after section 6 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
 
         <h2>7. International Data Transfers</h2>
         <p>

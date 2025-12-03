@@ -1,3 +1,5 @@
+import { AdSenseDisplay } from "@/components/ads";
+
 export default function DisclaimerPage() {
   return (
     <div className="container mx-auto py-12">
@@ -6,6 +8,9 @@ export default function DisclaimerPage() {
         <p className="lead">
           This Disclaimer sets forth the general guidelines, disclosures, and terms of use for InsightHub.ink and its services. As a platform committed to supporting students, educators, and knowledge sharing, we provide educational resources and tools to help learners succeed. By using our services, you acknowledge that you have read, understood, and agree to be bound by this Disclaimer.
         </p>
+
+        {/* Ad after header */}
+        <AdSenseDisplay format="horizontal" minHeight={100} className="my-8" />
 
         <h2>1. General Information Disclaimer</h2>
         <p>
@@ -63,6 +68,9 @@ export default function DisclaimerPage() {
           We are not liable for any account penalties, suspensions, bans, or other actions taken by social media platforms, even if such actions are related to the use of our services.
         </p>
 
+        {/* Ad after section 4 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
+
         <h2>5. Financial Advice Disclaimer (FinTrack)</h2>
         <p>
           The FinTrack application and any financial information, tools, or content provided are for informational and educational purposes only. They do not constitute:
@@ -118,6 +126,9 @@ export default function DisclaimerPage() {
         <p>
           Our total liability for any claims shall not exceed the amount you paid to us in the twelve (12) months preceding the claim.
         </p>
+
+        {/* Ad after section 8 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
 
         <h2>9. No Warranty</h2>
         <p>

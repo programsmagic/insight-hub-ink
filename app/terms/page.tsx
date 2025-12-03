@@ -1,3 +1,5 @@
+import { AdSenseDisplay } from "@/components/ads";
+
 export default function TermsPage() {
     return (
       <div className="container mx-auto py-12">
@@ -6,6 +8,9 @@ export default function TermsPage() {
           <p className="lead">
           By accessing and using InsightHub.ink and its services, including our SMM services platform, FinTrack application, educational tools, and knowledge-sharing resources, you agree to be bound by these Terms of Service. As a platform dedicated to supporting students, educators, and lifelong learners, we're committed to providing valuable resources while maintaining clear guidelines. Please read these terms carefully before using our services.
           </p>
+
+          {/* Ad after header */}
+          <AdSenseDisplay format="horizontal" minHeight={100} className="my-8" />
   
           <h2>1. Acceptance of Terms</h2>
           <p>
@@ -97,6 +102,9 @@ export default function TermsPage() {
           <li>You will not use our services for illegal or fraudulent purposes</li>
         </ul>
 
+        {/* Ad after section 5 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
+
         <h2>6. Intellectual Property Rights</h2>
         <h3>6.1 Our Content</h3>
         <p>
@@ -149,6 +157,9 @@ export default function TermsPage() {
         <p>
           Our total liability for any claims arising from or related to our services shall not exceed the amount you paid to us in the twelve (12) months preceding the claim.
         </p>
+
+        {/* Ad after section 9 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
 
         <h2>10. Indemnification</h2>
         <p>

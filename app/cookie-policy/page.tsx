@@ -1,3 +1,5 @@
+import { AdSenseDisplay } from "@/components/ads";
+
 export default function CookiePolicyPage() {
   return (
     <div className="container mx-auto py-12">
@@ -6,6 +8,9 @@ export default function CookiePolicyPage() {
         <p className="lead">
           This Cookie Policy explains how InsightHub.ink uses cookies and similar tracking technologies on our website and services. As a platform committed to supporting students, educators, and knowledge sharing, we use cookies to enhance your learning experience and improve our educational resources. By using our services, you consent to the use of cookies as described in this policy.
         </p>
+
+        {/* Ad after header */}
+        <AdSenseDisplay format="horizontal" minHeight={100} className="my-8" />
 
         <h2>1. What Are Cookies?</h2>
         <p>
@@ -74,6 +79,9 @@ export default function CookiePolicyPage() {
           These third-party cookies are subject to the respective privacy policies of these third parties. We do not control these cookies, and you should review the privacy policies of these third parties for more information.
         </p>
 
+        {/* Ad after section 3 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
+
         <h2>4. How Long Do Cookies Last?</h2>
         <p>
           Cookies can be either "session" or "persistent" cookies:
@@ -117,6 +125,9 @@ export default function CookiePolicyPage() {
           <li>Personalized content and recommendations may not be available</li>
           <li>Some services may be unavailable</li>
         </ul>
+
+        {/* Ad after section 5 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
 
         <h2>6. Do Not Track Signals</h2>
         <p>

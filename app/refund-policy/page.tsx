@@ -1,3 +1,5 @@
+import { AdSenseDisplay } from "@/components/ads";
+
 export default function RefundPolicyPage() {
   return (
     <div className="container mx-auto py-12">
@@ -6,6 +8,9 @@ export default function RefundPolicyPage() {
         <p className="lead">
           At InsightHub.ink, we strive to provide high-quality services and ensure customer satisfaction. As a platform dedicated to supporting students, educators, and learners, we understand the importance of fair and transparent refund policies. This Refund Policy outlines the terms and conditions under which refunds may be issued for our services.
         </p>
+
+        {/* Ad after header */}
+        <AdSenseDisplay format="horizontal" minHeight={100} className="my-8" />
 
         <h2>1. Refund Eligibility</h2>
         <p>
@@ -64,6 +69,9 @@ export default function RefundPolicyPage() {
           Requests submitted outside these timeframes may not be eligible for refunds.
         </p>
 
+        {/* Ad after section 3 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
+
         <h2>4. Refund Processing Timeframes</h2>
         <p>
           Once a refund is approved:
@@ -99,6 +107,9 @@ export default function RefundPolicyPage() {
         <p>
           We strongly encourage you to contact us first to resolve any issues before initiating a chargeback. We are committed to resolving disputes fairly and promptly.
         </p>
+
+        {/* Ad after section 6 */}
+        <AdSenseDisplay format="auto" minHeight={250} className="my-8" />
 
         <h2>7. Refund Methods</h2>
         <p>

@@ -6,6 +6,7 @@ import { ArrowLeft, Copy, Download, Home, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
+import { AdSenseDisplay } from "@/components/ads";
 
 interface ToolLayoutProps {
   title: string;
@@ -81,10 +82,16 @@ export function ToolLayout({
           </div>
         </header>
 
+        {/* Ad after header, before tool content */}
+        <AdSenseDisplay format="horizontal" minHeight={100} className="mb-6" />
+
         {/* Tool Content */}
         <section>
           <Card className="p-6">{children}</Card>
         </section>
+
+        {/* Ad after tool content */}
+        <AdSenseDisplay format="auto" minHeight={250} className="mt-6" />
       </div>
     </article>
   );
