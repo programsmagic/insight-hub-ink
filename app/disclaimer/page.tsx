@@ -1,3 +1,5 @@
+"use client";
+
 import { AdSenseDisplay } from "@/components/ads";
 
 export default function DisclaimerPage() {
