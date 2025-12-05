@@ -438,7 +438,11 @@ export async function addWatermark(
         "bottom-right": { x: canvas.width - 20, y: canvas.height - 20 },
       };
 
-      const pos = positions[options.position] || positions.center;
+      const pos = positions[options.position] ?? positions.center;
+      if (!pos) {
+        reject(new Error("Invalid watermark position"));
+        return;
+      }
 
       if (options.type === "text" && options.text) {
         // Text watermark
@@ -481,8 +485,13 @@ export async function addWatermark(
           }
 
           // Adjust position based on alignment
-          let x = pos.x;
-          let y = pos.y;
+          const basePos = positions[options.position] ?? positions.center;
+          if (!basePos) {
+            reject(new Error("Invalid watermark position"));
+            return;
+          }
+          let x = basePos.x;
+          let y = basePos.y;
 
           if (options.position.includes("center") || options.position.includes("right")) {
             x -= watermarkWidth / 2;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ToolLayout, DownloadButton } from "@/components/tools/tool-layout";
+import { ToolLayout } from "@/components/tools/tool-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

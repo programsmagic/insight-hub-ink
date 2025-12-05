@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { addWatermark, imageToBase64, base64ToBlob } from "@/lib/tools/image-utils";
 import { useToolAnalytics } from "@/hooks/use-tool-analytics";
-import { Watermark } from "lucide-react";
+import { Droplet } from "lucide-react";
 
 type WatermarkPosition =
   | "top-left"
@@ -100,7 +100,7 @@ export default function ImageWatermarkPage() {
         text: watermarkType === "text" ? watermarkText : undefined,
         watermarkImageUrl: watermarkType === "image" ? watermarkImage : undefined,
         position,
-        opacity: opacity[0] / 100,
+        opacity: (opacity[0] ?? 50) / 100,
         fontSize,
         fontColor,
       });
@@ -308,7 +308,7 @@ export default function ImageWatermarkPage() {
 
             <div className="flex gap-2">
               <Button onClick={handleApplyWatermark} disabled={isProcessing} className="flex-1">
-                <Watermark className="w-4 h-4 mr-2" />
+                <Droplet className="w-4 h-4 mr-2" />
                 {isProcessing ? "Processing..." : "Apply Watermark"}
               </Button>
               <Button onClick={handleClear} variant="outline" disabled={isProcessing}>

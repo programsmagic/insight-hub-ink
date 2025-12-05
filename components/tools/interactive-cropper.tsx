@@ -13,7 +13,7 @@ interface InteractiveCropperProps {
   imageUrl: string;
   imageWidth: number;
   imageHeight: number;
-  onCropChange: (crop: CropArea) => void;
+  onCropChange: (_crop: CropArea) => void;
   aspectRatio?: "free" | "1:1" | "16:9" | "4:3" | "3:2";
   disabled?: boolean;
 }
@@ -203,8 +203,9 @@ export function InteractiveCropper({
   useEffect(() => {
     if (isDragging) {
       const handleTouchMove = (e: TouchEvent) => {
-        if (e.touches.length > 0) {
-          handleMove(e.touches[0].clientX, e.touches[0].clientY);
+        const touch = e.touches[0];
+        if (touch) {
+          handleMove(touch.clientX, touch.clientY);
         }
       };
       const handleTouchEnd = () => handleEnd();
@@ -267,8 +268,9 @@ export function InteractiveCropper({
             }}
             onMouseDown={(e) => handleStart(e.clientX, e.clientY, "move")}
             onTouchStart={(e) => {
-              if (e.touches.length > 0) {
-                handleStart(e.touches[0].clientX, e.touches[0].clientY, "move");
+              const touch = e.touches[0];
+              if (touch) {
+                handleStart(touch.clientX, touch.clientY, "move");
               }
             }}
           >
@@ -282,8 +284,9 @@ export function InteractiveCropper({
               }}
               onTouchStart={(e) => {
                 e.stopPropagation();
-                if (e.touches.length > 0) {
-                  handleStart(e.touches[0].clientX, e.touches[0].clientY, "resize");
+                const touch = e.touches[0];
+                if (touch) {
+                  handleStart(touch.clientX, touch.clientY, "resize");
                 }
               }}
             />
