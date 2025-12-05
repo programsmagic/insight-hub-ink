@@ -2,8 +2,6 @@
  * Cloudinary utility functions
  */
 
-import { cloudinaryConfig } from "@/lib/cloudinary/config";
-
 export interface CloudinaryTransformOptions {
   width?: number;
   height?: number;
@@ -29,10 +27,16 @@ export interface CloudinaryTransformOptions {
 
 export function buildCloudinaryUrl(
   publicId: string,
-  options: CloudinaryTransformOptions = {}
+  options: CloudinaryTransformOptions = {},
+  cloudName?: string
 ): string {
-  const cloudName = cloudinaryConfig.cloudName;
-  const baseUrl = `https://res.cloudinary.com/${cloudName}/image/upload`;
+  // Use provided cloudName or fallback to environment variable or default
+  const finalCloudName =
+    cloudName ||
+    process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ||
+    process.env.CLOUDINARY_CLOUD_NAME ||
+    "demo"; // Default fallback for URL generation (doesn't affect functionality)
+  const baseUrl = `https://res.cloudinary.com/${finalCloudName}/image/upload`;
 
   const transformations: string[] = [];
 
@@ -64,11 +68,12 @@ export function buildCloudinaryUrl(
 export function generateResponsiveSrcSet(
   publicId: string,
   widths: number[] = [320, 640, 768, 1024, 1280, 1920],
-  options: CloudinaryTransformOptions = {}
+  options: CloudinaryTransformOptions = {},
+  cloudName?: string
 ): string {
   return widths
     .map((width) => {
-      const url = buildCloudinaryUrl(publicId, { ...options, width, crop: options.crop || "scale" });
+      const url = buildCloudinaryUrl(publicId, { ...options, width, crop: options.crop || "scale" }, cloudName);
       return `${url} ${width}w`;
     })
     .join(", ");
@@ -77,21 +82,23 @@ export function generateResponsiveSrcSet(
 export function optimizeImageUrl(
   publicId: string,
   format: "auto" | "webp" | "avif" = "auto",
-  quality: number | "auto" = "auto"
+  quality: number | "auto" = "auto",
+  cloudName?: string
 ): string {
   // buildCloudinaryUrl adds prefixes automatically ('f_' for format, 'q_' for quality)
   // So we pass raw values: "auto"/"webp"/"avif" for format, "auto" or number for quality
   return buildCloudinaryUrl(publicId, {
     format: format, // Will become f_auto, f_webp, or f_avif
     quality: quality, // Will become q_auto or q_<number>
-  });
+  }, cloudName);
 }
 
 export function generateThumbnailUrl(
   publicId: string,
   width: number = 200,
   height: number = 200,
-  crop: string = "fill"
+  crop: string = "fill",
+  cloudName?: string
 ): string {
   return buildCloudinaryUrl(publicId, {
     width,
@@ -99,17 +106,18 @@ export function generateThumbnailUrl(
     crop,
     quality: 80,
     format: "auto",
-  });
+  }, cloudName);
 }
 
 export function applyImageEffect(
   publicId: string,
   effect: string,
-  value?: number
+  value?: number,
+  cloudName?: string
 ): string {
   const effectString = value !== undefined ? `${effect}:${value}` : effect;
   return buildCloudinaryUrl(publicId, {
     effect: effectString,
-  });
+  }, cloudName);
 }
 

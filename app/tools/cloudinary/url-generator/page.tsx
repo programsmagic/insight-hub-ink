@@ -12,6 +12,7 @@ import { buildCloudinaryUrl } from "@/lib/tools/cloudinary-utils";
 import type { CloudinaryTransformOptions } from "@/lib/tools/cloudinary-utils";
 
 export default function CloudinaryUrlGeneratorPage() {
+  const [cloudName, setCloudName] = useState("");
   const [publicId, setPublicId] = useState("sample");
   const [width, setWidth] = useState<number | undefined>(undefined);
   const [height, setHeight] = useState<number | undefined>(undefined);
@@ -29,6 +30,8 @@ export default function CloudinaryUrlGeneratorPage() {
       return;
     }
 
+    const finalCloudName = cloudName.trim() || "demo";
+
     try {
       const options: CloudinaryTransformOptions = {};
       if (width) options.width = width;
@@ -40,7 +43,7 @@ export default function CloudinaryUrlGeneratorPage() {
       if (brightness) options.brightness = brightness;
       if (contrast) options.contrast = contrast;
 
-      const url = buildCloudinaryUrl(publicId, options);
+      const url = buildCloudinaryUrl(publicId, options, finalCloudName);
       setOutput(url);
       toast.success("Cloudinary URL generated!");
     } catch (error) {
@@ -49,6 +52,7 @@ export default function CloudinaryUrlGeneratorPage() {
   };
 
   const handleClear = () => {
+    setCloudName("");
     setPublicId("sample");
     setWidth(undefined);
     setHeight(undefined);
@@ -72,6 +76,18 @@ export default function CloudinaryUrlGeneratorPage() {
           <div className="space-y-4">
             <h3 className="font-semibold text-lg mb-4">Basic Settings</h3>
             <div className="space-y-4">
+              <div>
+                <Label htmlFor="cloud-name">Cloud Name *</Label>
+                <Input
+                  id="cloud-name"
+                  value={cloudName}
+                  onChange={(e) => setCloudName(e.target.value)}
+                  placeholder="your-cloud-name"
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Your Cloudinary cloud name (e.g., "demo" for testing)
+                </p>
+              </div>
               <div>
                 <Label htmlFor="public-id">Public ID *</Label>
                 <Input
@@ -236,12 +252,12 @@ export default function CloudinaryUrlGeneratorPage() {
         <div className="text-sm text-muted-foreground bg-muted p-4 rounded-md">
           <p className="font-semibold mb-2">How to use:</p>
           <ul className="list-disc list-inside space-y-1">
+            <li>Enter your Cloudinary cloud name (or use "demo" for testing)</li>
             <li>Enter your Cloudinary public ID (e.g., "sample" or "folder/image")</li>
             <li>Configure dimensions, crop mode, format, and quality</li>
             <li>Add optional effects like blur, brightness, and contrast</li>
             <li>Click "Generate URL" to create the Cloudinary delivery URL</li>
             <li>Copy the URL to use in your application</li>
-            <li>Note: Make sure your Cloudinary cloud name is configured</li>
           </ul>
         </div>
       </div>
