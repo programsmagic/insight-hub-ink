@@ -86,3 +86,4 @@ export function convertSpeed(value: number, from: string, to: string): number {
   return mps / (toMetersPerSecond[to.toLowerCase()] || 1);
 }
 
+
