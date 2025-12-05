@@ -75,8 +75,72 @@ export default function JSONFormatterPage() {
   return (
     <ToolLayout
       title="JSON Formatter"
-      description="Format and beautify JSON with proper indentation and syntax highlighting"
+      description="Format and beautify JSON with proper indentation and syntax highlighting. Transform messy, minified JSON into clean, readable code instantly. Perfect for developers working with APIs, configuration files, or debugging JSON responses."
       category="JSON Tools"
+      content={{
+        aboutText:
+          "A JSON formatter is an essential tool for developers that takes unformatted or minified JSON and converts it into a human-readable format with proper indentation, line breaks, and structure. This makes it easier to read, debug, and understand JSON data. Whether you're working with API responses, configuration files, or data structures, a well-formatted JSON is crucial for development and debugging.",
+        useCases: [
+          "Format API responses for easier debugging and inspection",
+          "Beautify minified JSON from production environments",
+          "Prepare JSON for documentation or code reviews",
+          "Debug JSON syntax errors by identifying structure issues",
+          "Format configuration files for better readability",
+          "Convert single-line JSON to multi-line format",
+        ],
+        examples: [
+          {
+            description: "Formatting minified JSON",
+            input: '{"name":"John","age":30,"city":"New York"}',
+            output: `{
+  "name": "John",
+  "age": 30,
+  "city": "New York"
+}`,
+          },
+          {
+            description: "Formatting nested JSON structures",
+            input: '{"user":{"name":"Jane","details":{"email":"jane@example.com","role":"admin"}}}',
+            output: `{
+  "user": {
+    "name": "Jane",
+    "details": {
+      "email": "jane@example.com",
+      "role": "admin"
+    }
+  }
+}`,
+          },
+        ],
+        faqs: [
+          {
+            question: "What is JSON formatting?",
+            answer:
+              "JSON formatting is the process of adding proper indentation, line breaks, and spacing to JSON data to make it more readable. It doesn't change the data structure, only its visual presentation.",
+          },
+          {
+            question: "Does formatting change my JSON data?",
+            answer:
+              "No, formatting only changes the visual presentation (whitespace, indentation). The actual data structure and values remain exactly the same.",
+          },
+          {
+            question: "What's the difference between format and minify?",
+            answer:
+              "Formatting adds whitespace and indentation to make JSON readable. Minifying removes all unnecessary whitespace to reduce file size, which is useful for production environments.",
+          },
+          {
+            question: "Is my JSON data secure?",
+            answer:
+              "Yes! All processing happens entirely in your browser. Your JSON data never leaves your device and is not sent to any server.",
+          },
+        ],
+        relatedTools: [
+          { id: "json-validator", name: "JSON Validator", route: "/tools/json/validator" },
+          { id: "json-minifier", name: "JSON Minifier", route: "/tools/json/minifier" },
+          { id: "json-to-csv", name: "JSON to CSV", route: "/tools/json/to-csv" },
+          { id: "json-to-xml", name: "JSON to XML", route: "/tools/json/to-xml" },
+        ],
+      }}
     >
       <div className="space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

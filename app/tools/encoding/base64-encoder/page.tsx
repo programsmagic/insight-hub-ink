@@ -42,8 +42,64 @@ export default function Base64EncoderPage() {
   return (
     <ToolLayout
       title="Base64 Encoder/Decoder"
-      description="Encode or decode Base64 strings for data transmission and storage"
+      description="Encode or decode Base64 strings instantly. Base64 encoding is used for transmitting binary data over text-based protocols, embedding data in URLs, and storing binary data in JSON. Perfect for developers working with APIs, data transmission, and web development."
       category="Encoding Tools"
+      content={{
+        aboutText:
+          "Base64 is an encoding scheme that converts binary data into ASCII text format. It's widely used in web development for embedding images in HTML/CSS (data URIs), encoding credentials, transmitting binary data over text protocols, and storing binary data in JSON. Base64 encoding increases the data size by approximately 33%, but ensures safe transmission across systems that only handle text.",
+        useCases: [
+          "Encode images as data URIs for embedding in HTML or CSS",
+          "Encode credentials for HTTP Basic Authentication",
+          "Transmit binary data over text-based protocols (email, JSON)",
+          "Store binary data in JSON or XML formats",
+          "Encode file contents for API transmission",
+          "Create data URLs for inline resources",
+        ],
+        examples: [
+          {
+            description: "Encoding text to Base64",
+            input: "Hello, World!",
+            output: "SGVsbG8sIFdvcmxkIQ==",
+          },
+          {
+            description: "Decoding Base64 to text",
+            input: "SGVsbG8sIFdvcmxkIQ==",
+            output: "Hello, World!",
+          },
+          {
+            description: "Data URI example (image)",
+            input: "data:image/png;base64,iVBORw0KGgo...",
+            output: "Decoded image data (binary)",
+          },
+        ],
+        faqs: [
+          {
+            question: "What is Base64 encoding used for?",
+            answer:
+              "Base64 is commonly used for encoding binary data (like images) into text format for transmission over text-based protocols, embedding in URLs, storing in JSON/XML, and creating data URIs for inline resources in HTML/CSS.",
+          },
+          {
+            question: "Does Base64 encoding provide security?",
+            answer:
+              "No, Base64 is an encoding scheme, not encryption. It's easily reversible and should not be used for security purposes. For security, use proper encryption algorithms.",
+          },
+          {
+            question: "How much larger does Base64 make data?",
+            answer:
+              "Base64 encoding increases data size by approximately 33% because it uses 4 ASCII characters to represent 3 bytes of binary data.",
+          },
+          {
+            question: "Is my data secure when using this tool?",
+            answer:
+              "Yes! All encoding/decoding happens entirely in your browser. Your data never leaves your device and is not sent to any server.",
+          },
+        ],
+        relatedTools: [
+          { id: "url-encoder", name: "URL Encoder", route: "/tools/encoding/url-encoder" },
+          { id: "html-entity-encoder", name: "HTML Entity Encoder", route: "/tools/encoding/html-entity" },
+          { id: "image-to-base64", name: "Image to Base64", route: "/tools/image/to-base64" },
+        ],
+      }}
     >
       <div className="space-y-6">
         <div className="flex gap-2">

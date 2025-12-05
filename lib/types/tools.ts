@@ -33,6 +33,8 @@ export interface Tool {
   pricing?: PricingTier;
   isClientSide?: boolean; // Whether tool runs client-side only
   requiresAuth?: boolean; // Whether tool requires authentication
+  isImplemented?: boolean; // Whether tool is fully implemented (not "coming soon")
+  relatedToolIds?: string[]; // IDs of related tools
 }
 
 export interface ToolCategoryInfo {

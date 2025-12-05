@@ -8,8 +8,10 @@ import { Label } from "@/components/ui/label";
 import { validateJSON } from "@/lib/tools/json-utils";
 import { toast } from "sonner";
 import { CheckCircle, XCircle } from "lucide-react";
+import { useToolAnalytics } from "@/hooks/use-tool-analytics";
 
 export default function JSONValidatorPage() {
+  const analytics = useToolAnalytics("json-validator");
   const [input, setInput] = useState("");
   const [validation, setValidation] = useState<{ valid: boolean; error?: string } | null>(null);
 
@@ -23,8 +25,10 @@ export default function JSONValidatorPage() {
     setValidation(result);
     if (result.valid) {
       toast.success("JSON is valid!");
+      analytics.trackUsage("validate", { valid: true, inputLength: input.length });
     } else {
       toast.error("JSON is invalid");
+      analytics.trackUsage("validate", { valid: false, inputLength: input.length, error: result.error });
     }
   };
 
@@ -36,8 +40,70 @@ export default function JSONValidatorPage() {
   return (
     <ToolLayout
       title="JSON Validator"
-      description="Validate JSON syntax and check for errors instantly with this free online JSON validator"
+      description="Validate JSON syntax and check for errors instantly with this free online JSON validator. This tool helps developers identify syntax errors, missing commas, unclosed brackets, and other common JSON issues before they cause problems in production."
       category="JSON Tools"
+      content={{
+        aboutText:
+          "JSON (JavaScript Object Notation) is a lightweight data-interchange format that's easy for humans to read and write, and easy for machines to parse and generate. However, JSON has strict syntax rules, and even small errors can cause parsing failures. This validator checks your JSON for syntax errors, missing commas, unclosed brackets, incorrect quotes, and other common issues, helping you debug JSON data before using it in APIs, configuration files, or data processing.",
+        useCases: [
+          "API development: Validate JSON responses from APIs before processing",
+          "Configuration files: Check JSON config files for syntax errors",
+          "Data validation: Verify JSON data before storing in databases",
+          "Debugging: Identify and fix JSON syntax errors quickly",
+          "Code review: Validate JSON in pull requests and code reviews",
+          "Data migration: Ensure JSON data is valid before migration",
+          "Frontend development: Validate JSON before parsing in JavaScript",
+        ],
+        examples: [
+          {
+            input: '{"name": "John", "age": 30}',
+            output: "Valid JSON",
+            description: "Valid JSON object with proper syntax",
+          },
+          {
+            input: '{"name": "John" "age": 30}',
+            output: "Invalid JSON - Missing comma",
+            description: "Common error: missing comma between properties",
+          },
+          {
+            input: '{"name": "John", "age": 30',
+            output: "Invalid JSON - Unclosed bracket",
+            description: "Common error: missing closing brace",
+          },
+          {
+            input: '{"name": "John", "hobbies": ["reading", "coding"]}',
+            output: "Valid JSON",
+            description: "Valid JSON with nested array",
+          },
+        ],
+        faqs: [
+          {
+            question: "What are the most common JSON errors?",
+            answer:
+              "Common JSON errors include: missing commas between properties, unclosed brackets or braces, trailing commas (not allowed in JSON), using single quotes instead of double quotes, and invalid escape sequences. This validator identifies all of these issues.",
+          },
+          {
+            question: "Does this validator check JSON schema?",
+            answer:
+              "No, this tool only validates JSON syntax (structure and formatting). It doesn't validate against a JSON schema or check data types, required fields, or value constraints. For schema validation, use a JSON Schema validator.",
+          },
+          {
+            question: "Can I validate minified JSON?",
+            answer:
+              "Yes, this validator works with both formatted and minified JSON. However, formatted JSON is easier to debug when errors are found. Consider using a JSON formatter first if you're working with minified JSON.",
+          },
+          {
+            question: "What's the difference between JSON and JavaScript objects?",
+            answer:
+              "JSON is a text format that follows strict rules: keys must be in double quotes, no trailing commas, no comments, and only specific data types are allowed. JavaScript objects are more flexible. JSON can be parsed into JavaScript objects, but not all JavaScript objects can be converted to valid JSON.",
+          },
+        ],
+        relatedTools: [
+          { id: "json-formatter", name: "JSON Formatter", route: "/tools/json/formatter" },
+          { id: "json-minifier", name: "JSON Minifier", route: "/tools/json/minifier" },
+          { id: "json-to-csv", name: "JSON to CSV", route: "/tools/json/to-csv" },
+        ],
+      }}
     >
       <div className="space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

@@ -6,8 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { hexToRgb, rgbToHex, rgbToHsl, hslToRgb, type RGB, type HSL } from "@/lib/tools/color-utils";
+import { useToolAnalytics } from "@/hooks/use-tool-analytics";
 
 export default function ColorPickerPage() {
+  const analytics = useToolAnalytics("color-picker");
   const [hex, setHex] = useState("#000000");
   const [rgb, setRgb] = useState<RGB>({ r: 0, g: 0, b: 0 });
   const [hsl, setHsl] = useState<HSL>({ h: 0, s: 0, l: 0 });
@@ -19,6 +21,7 @@ export default function ColorPickerPage() {
       if (rgbValue) {
         setRgb(rgbValue);
         setHsl(rgbToHsl(rgbValue.r, rgbValue.g, rgbValue.b));
+        analytics.trackInteraction("color", "change", { format: "hex", color: value });
       }
     } else if (value.startsWith("#") && value.length <= 7) {
       setHex(value);
@@ -43,8 +46,65 @@ export default function ColorPickerPage() {
   return (
     <ToolLayout
       title="Color Picker"
-      description="Pick colors and get hex, RGB, HSL values with a visual color picker"
+      description="Pick colors and get hex, RGB, HSL values with a visual color picker. Perfect for web design, CSS styling, and graphic design. All color formats update in real-time as you adjust values."
       category="Color Tools"
+      content={{
+        aboutText:
+          "A color picker is an essential tool for designers and developers working with colors. This tool allows you to select colors using multiple formats (HEX, RGB, HSL) and see real-time conversions between formats. HEX codes are used in web development and CSS, RGB values represent red-green-blue color channels, and HSL (Hue-Saturation-Lightness) provides an intuitive way to adjust colors. All formats are synchronized, so changing any value updates the others instantly.",
+        useCases: [
+          "Web development: Pick colors for CSS styling, themes, and UI components",
+          "Graphic design: Select colors for logos, branding, and visual designs",
+          "Color scheme creation: Build cohesive color palettes for projects",
+          "Accessibility: Check color contrast and ensure readability",
+          "Brand consistency: Maintain consistent colors across digital assets",
+          "CSS development: Get exact color codes for stylesheets",
+          "Design systems: Define color tokens and design variables",
+        ],
+        examples: [
+          {
+            input: "HEX: #FF5733",
+            output: "RGB: rgb(255, 87, 51), HSL: hsl(9, 100%, 60%)",
+            description: "Convert a HEX color to RGB and HSL formats",
+          },
+          {
+            input: "RGB: rgb(74, 144, 226)",
+            output: "HEX: #4A90E2, HSL: hsl(210, 73%, 59%)",
+            description: "Convert RGB values to HEX and HSL",
+          },
+          {
+            input: "HSL: hsl(120, 100%, 50%)",
+            output: "HEX: #00FF00, RGB: rgb(0, 255, 0)",
+            description: "Convert HSL values to HEX and RGB (pure green)",
+          },
+        ],
+        faqs: [
+          {
+            question: "What's the difference between RGB and HSL?",
+            answer:
+              "RGB (Red-Green-Blue) represents colors as combinations of three color channels (0-255 each). HSL (Hue-Saturation-Lightness) represents colors using hue (0-360°), saturation (0-100%), and lightness (0-100%). HSL is more intuitive for adjusting colors - you can change lightness without affecting hue, making it easier to create color variations.",
+          },
+          {
+            question: "What is a HEX color code?",
+            answer:
+              "HEX (hexadecimal) color codes are 6-digit codes prefixed with # that represent RGB values in hexadecimal format. Each pair of digits represents red, green, and blue values (00-FF each). For example, #FF0000 is pure red, #00FF00 is pure green, and #0000FF is pure blue.",
+          },
+          {
+            question: "How do I use these color values in CSS?",
+            answer:
+              "You can use any format in CSS: HEX (#FF5733), RGB (rgb(255, 87, 51)), or HSL (hsl(9, 100%, 60%)). Modern CSS also supports rgba() and hsla() for colors with alpha transparency. Simply copy the color code and paste it into your CSS file.",
+          },
+          {
+            question: "Can I pick colors with transparency?",
+            answer:
+              "This tool provides RGB and HSL values. For transparency, you can use rgba() or hsla() formats in CSS by adding an alpha channel (0-1). For example, rgba(255, 87, 51, 0.5) is 50% transparent.",
+          },
+        ],
+        relatedTools: [
+          { id: "color-converter", name: "Color Converter", route: "/tools/color/converter" },
+          { id: "color-palette-generator", name: "Color Palette Generator", route: "/tools/color/palette-generator" },
+          { id: "color-contrast-checker", name: "Color Contrast Checker", route: "/tools/color/contrast-checker" },
+        ],
+      }}
     >
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

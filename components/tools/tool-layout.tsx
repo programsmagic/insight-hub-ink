@@ -7,6 +7,15 @@ import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import { AdSenseDisplay } from "@/components/ads";
+import { ToolContentSection } from "./tool-content-section";
+
+interface ToolContentData {
+  aboutText?: string;
+  useCases?: string[];
+  examples?: Array<{ input: string; output: string; description?: string }>;
+  faqs?: Array<{ question: string; answer: string }>;
+  relatedTools?: Array<{ id: string; name: string; route: string }>;
+}
 
 interface ToolLayoutProps {
   title: string;
@@ -15,6 +24,7 @@ interface ToolLayoutProps {
   children: React.ReactNode;
   backUrl?: string;
   categoryUrl?: string;
+  content?: ToolContentData;
 }
 
 export function ToolLayout({
@@ -24,6 +34,7 @@ export function ToolLayout({
   children,
   backUrl = "/tools",
   categoryUrl,
+  content,
 }: ToolLayoutProps) {
   return (
     <article className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
@@ -89,6 +100,9 @@ export function ToolLayout({
         <section>
           <Card className="p-6">{children}</Card>
         </section>
+
+        {/* Rich Content Section */}
+        {content && <ToolContentSection {...content} />}
 
         {/* Ad after tool content */}
         <AdSenseDisplay format="auto" minHeight={250} className="mt-6" />

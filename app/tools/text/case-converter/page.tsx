@@ -34,8 +34,54 @@ export default function TextCaseConverterPage() {
   return (
     <ToolLayout
       title="Text Case Converter"
-      description="Convert text between different cases: upper, lower, title, sentence, camel, kebab, snake, and pascal case"
+      description="Convert text between different cases instantly: uppercase, lowercase, title case, sentence case, camelCase, kebab-case, snake_case, and PascalCase. Perfect for developers, content creators, and anyone working with code or text formatting."
       category="Text Tools"
+      content={{
+        aboutText:
+          "A text case converter is a versatile tool that transforms text between different capitalization formats. This is essential for developers working with code (variable names, function names, CSS classes), content creators formatting titles, and anyone who needs to standardize text formatting. Each case format has specific rules and use cases in programming and writing.",
+        useCases: [
+          "Convert variable names between camelCase, snake_case, and PascalCase in code",
+          "Format titles and headings for articles and blog posts",
+          "Standardize CSS class names to kebab-case",
+          "Convert database column names to different naming conventions",
+          "Format API endpoint names and route paths",
+          "Prepare text for different programming language conventions",
+        ],
+        examples: [
+          {
+            description: "Converting to different cases",
+            input: "hello world example",
+            output: "HelloWorldExample (PascalCase), helloWorldExample (camelCase), hello-world-example (kebab-case), hello_world_example (snake_case)",
+          },
+          {
+            description: "Title case conversion",
+            input: "the quick brown fox",
+            output: "The Quick Brown Fox",
+          },
+        ],
+        faqs: [
+          {
+            question: "What's the difference between camelCase and PascalCase?",
+            answer:
+              "camelCase starts with a lowercase letter (e.g., 'myVariable'), while PascalCase starts with an uppercase letter (e.g., 'MyVariable'). camelCase is common in JavaScript/Java, while PascalCase is used for class names in many languages.",
+          },
+          {
+            question: "When should I use kebab-case?",
+            answer:
+              "kebab-case (words-separated-by-hyphens) is commonly used for CSS class names, HTML attributes, URL slugs, and file names. It's more readable than camelCase for multi-word identifiers.",
+          },
+          {
+            question: "What is snake_case used for?",
+            answer:
+              "snake_case (words_separated_by_underscores) is commonly used in Python, Ruby, and database column names. It's also used for constants in many programming languages.",
+          },
+        ],
+        relatedTools: [
+          { id: "text-case-converter", name: "Text Case Converter", route: "/tools/text/case-converter" },
+          { id: "word-counter", name: "Word Counter", route: "/tools/text/word-counter" },
+          { id: "text-reverser", name: "Text Reverser", route: "/tools/text/reverser" },
+        ],
+      }}
     >
       <div className="space-y-6">
         {/* Case Type Selector */}

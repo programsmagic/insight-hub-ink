@@ -7,8 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { encodeURL, decodeURL } from "@/lib/tools/encoding-utils";
 import { toast } from "sonner";
+import { useToolAnalytics } from "@/hooks/use-tool-analytics";
 
 export default function URLEncoderPage() {
+  const analytics = useToolAnalytics("url-encoder");
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [mode, setMode] = useState<"encode" | "decode">("encode");
@@ -24,13 +26,16 @@ export default function URLEncoderPage() {
         const encoded = encodeURL(input);
         setOutput(encoded);
         toast.success("Text encoded successfully!");
+        analytics.trackUsage("encode", { inputLength: input.length });
       } else {
         const decoded = decodeURL(input);
         setOutput(decoded);
         toast.success("Text decoded successfully!");
+        analytics.trackUsage("decode", { inputLength: input.length });
       }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed to process text");
+      analytics.trackError("Conversion failed", { mode, error: err instanceof Error ? err.message : "Unknown error" });
     }
   };
 
@@ -42,20 +47,83 @@ export default function URLEncoderPage() {
   return (
     <ToolLayout
       title="URL Encoder/Decoder"
-      description="Encode or decode URL-encoded strings for safe transmission in URLs"
+      description="Encode or decode URL-encoded strings for safe transmission in URLs. Convert special characters to percent-encoded format and back. Essential for web development, API integration, and handling query parameters."
       category="Encoding Tools"
+      content={{
+        aboutText:
+          "URL encoding (also called percent encoding) is a mechanism for encoding information in a Uniform Resource Identifier (URI). Special characters, spaces, and non-ASCII characters are converted to a format that can be safely transmitted in URLs. This tool provides bidirectional conversion between plain text and URL-encoded strings, making it essential for web developers, API developers, and anyone working with URLs.",
+        useCases: [
+          "Web development: Encode query parameters and URL components for safe transmission",
+          "API integration: Encode data in API requests and decode responses",
+          "Form data: Encode form values before submitting to servers",
+          "Link generation: Create safe URLs with special characters",
+          "Data parsing: Decode URL-encoded data received from web requests",
+          "Email links: Encode email addresses and other data in mailto links",
+          "Social media: Encode URLs for sharing on social platforms",
+        ],
+        examples: [
+          {
+            input: "Hello World!",
+            output: "Hello%20World%21",
+            description: "Encode text with spaces and special characters",
+          },
+          {
+            input: "https://example.com/search?q=test query&page=1",
+            output: "https%3A%2F%2Fexample.com%2Fsearch%3Fq%3Dtest%20query%26page%3D1",
+            description: "Encode a complete URL with query parameters",
+          },
+          {
+            input: "Hello%20World%21",
+            output: "Hello World!",
+            description: "Decode URL-encoded text back to plain text",
+          },
+        ],
+        faqs: [
+          {
+            question: "What characters are encoded in URLs?",
+            answer:
+              "Characters that are encoded include spaces (become %20), special characters like !, @, #, $, %, &, and non-ASCII characters. Reserved characters like :, /, ?, #, [, ], @, !, $, &, ', (, ), *, +, ,, ;, and = are also encoded when they appear in URL components where they have special meaning.",
+          },
+          {
+            question: "When should I use URL encoding?",
+            answer:
+              "Use URL encoding when including user input in URLs, passing data in query parameters, creating links with special characters, or sending data via GET requests. It's essential for security and proper URL formatting.",
+          },
+          {
+            question: "What's the difference between encodeURI and encodeURIComponent?",
+            answer:
+              "encodeURI encodes a complete URI but preserves characters that have meaning in URIs (like :, /, ?, #). encodeURIComponent encodes a component of a URI and encodes all special characters. This tool uses encodeURIComponent for encoding individual components.",
+          },
+          {
+            question: "Can I encode entire URLs?",
+            answer:
+              "Yes, but be careful. Encoding an entire URL will encode characters like :, /, and ? which are necessary for the URL structure. It's better to encode only the parts that need encoding (like query parameter values) rather than the entire URL.",
+          },
+        ],
+        relatedTools: [
+          { id: "url-decoder", name: "URL Decoder", route: "/tools/encoding/url-decoder" },
+          { id: "base64-encoder", name: "Base64 Encoder", route: "/tools/encoding/base64-encoder" },
+          { id: "html-entity", name: "HTML Entity Encoder", route: "/tools/encoding/html-entity" },
+        ],
+      }}
     >
       <div className="space-y-6">
         <div className="flex gap-2">
           <Button
-            onClick={() => setMode("encode")}
+            onClick={() => {
+              setMode("encode");
+              analytics.trackInteraction("mode", "switch", { mode: "encode" });
+            }}
             variant={mode === "encode" ? "default" : "outline"}
             size="sm"
           >
             Encode
           </Button>
           <Button
-            onClick={() => setMode("decode")}
+            onClick={() => {
+              setMode("decode");
+              analytics.trackInteraction("mode", "switch", { mode: "decode" });
+            }}
             variant={mode === "decode" ? "default" : "outline"}
             size="sm"
           >
