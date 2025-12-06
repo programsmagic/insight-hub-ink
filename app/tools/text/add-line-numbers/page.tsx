@@ -41,9 +41,9 @@ export default function AddLineNumbersPage() {
       category="Text Tools"
     >
       <div className="space-y-6">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <Label htmlFor="startFrom">Start From:</Label>
+        <div className="flex flex-wrap items-center gap-4 p-4 rounded-lg bg-muted/30 border border-border/50">
+          <div className="flex items-center gap-3">
+            <Label htmlFor="startFrom" className="font-medium">Start From:</Label>
             <Input
               id="startFrom"
               type="number"
@@ -58,9 +58,9 @@ export default function AddLineNumbersPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <Label htmlFor="input">Input Text</Label>
+              <Label htmlFor="input" className="text-base">Input Text</Label>
               <div className="flex gap-2">
-                <Button onClick={handleAdd} size="sm">
+                <Button onClick={handleAdd} size="sm" className="shadow-md">
                   Add Line Numbers
                 </Button>
                 <Button onClick={handleClear} variant="ghost" size="sm">
@@ -73,13 +73,13 @@ export default function AddLineNumbersPage() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Enter text, one item per line..."
-              className="font-mono text-sm min-h-[300px]"
+              className="font-mono text-sm min-h-[300px] input-area"
             />
           </div>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <Label htmlFor="output">Numbered Text</Label>
+              <Label htmlFor="output" className="text-base">Numbered Text</Label>
               {output && (
                 <div className="flex gap-2">
                   <CopyButton text={output} />
@@ -91,25 +91,50 @@ export default function AddLineNumbersPage() {
               id="output"
               value={output}
               readOnly
-              className="font-mono text-sm min-h-[300px] bg-muted"
+              className="font-mono text-sm min-h-[300px] output-area"
               placeholder="Text with line numbers will appear here..."
             />
           </div>
         </div>
 
-        <div className="text-sm text-muted-foreground bg-muted p-4 rounded-md">
-          <p className="font-semibold mb-2">How to use:</p>
-          <ul className="list-disc list-inside space-y-1">
-            <li>Enter text with one item per line</li>
-            <li>Set the starting line number (default: 1)</li>
-            <li>Click "Add Line Numbers" to number each line</li>
-            <li>Copy or download the numbered result</li>
-            <li>Perfect for code snippets, lists, and documentation</li>
-          </ul>
+        <div className="text-sm bg-gradient-to-br from-accent/5 to-primary/5 border-2 border-accent/10 p-6 rounded-lg">
+          <div className="flex items-start gap-3 mb-3">
+            <div className="p-1.5 rounded bg-accent/10 flex-shrink-0">
+              <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="font-bold text-base mb-3 text-foreground">How to use:</p>
+              <ul className="list-none space-y-2">
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Enter text with one item per line</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Set the starting line number (default: 1)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Click "Add Line Numbers" to number each line</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Copy or download the numbered result</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Perfect for code snippets, lists, and documentation</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </ToolLayout>
   );
 }
+
 
 

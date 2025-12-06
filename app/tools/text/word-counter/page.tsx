@@ -41,36 +41,36 @@ export default function WordCounterPage() {
       <div className="space-y-6">
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <Card className="p-4 text-center">
-            <div className="text-2xl font-bold text-primary">{stats.words}</div>
-            <div className="text-sm text-muted-foreground">Words</div>
+          <Card className="p-6 text-center border-accent/20 shadow-elevation-md hover:shadow-elevation-lg transition-all duration-200 hover:scale-105">
+            <div className="text-3xl font-bold text-primary mb-2 animate-scale-in">{stats.words}</div>
+            <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Words</div>
           </Card>
-          <Card className="p-4 text-center">
-            <div className="text-2xl font-bold text-primary">{stats.characters}</div>
-            <div className="text-sm text-muted-foreground">Characters</div>
+          <Card className="p-6 text-center border-accent/20 shadow-elevation-md hover:shadow-elevation-lg transition-all duration-200 hover:scale-105">
+            <div className="text-3xl font-bold text-primary mb-2 animate-scale-in">{stats.characters}</div>
+            <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Characters</div>
           </Card>
-          <Card className="p-4 text-center">
-            <div className="text-2xl font-bold text-primary">{stats.charactersNoSpaces}</div>
-            <div className="text-sm text-muted-foreground">No Spaces</div>
+          <Card className="p-6 text-center border-accent/20 shadow-elevation-md hover:shadow-elevation-lg transition-all duration-200 hover:scale-105">
+            <div className="text-3xl font-bold text-primary mb-2 animate-scale-in">{stats.charactersNoSpaces}</div>
+            <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">No Spaces</div>
           </Card>
-          <Card className="p-4 text-center">
-            <div className="text-2xl font-bold text-primary">{stats.lines}</div>
-            <div className="text-sm text-muted-foreground">Lines</div>
+          <Card className="p-6 text-center border-accent/20 shadow-elevation-md hover:shadow-elevation-lg transition-all duration-200 hover:scale-105">
+            <div className="text-3xl font-bold text-primary mb-2 animate-scale-in">{stats.lines}</div>
+            <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Lines</div>
           </Card>
-          <Card className="p-4 text-center">
-            <div className="text-2xl font-bold text-primary">{stats.sentences}</div>
-            <div className="text-sm text-muted-foreground">Sentences</div>
+          <Card className="p-6 text-center border-accent/20 shadow-elevation-md hover:shadow-elevation-lg transition-all duration-200 hover:scale-105">
+            <div className="text-3xl font-bold text-primary mb-2 animate-scale-in">{stats.sentences}</div>
+            <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Sentences</div>
           </Card>
-          <Card className="p-4 text-center">
-            <div className="text-2xl font-bold text-primary">{stats.paragraphs}</div>
-            <div className="text-sm text-muted-foreground">Paragraphs</div>
+          <Card className="p-6 text-center border-accent/20 shadow-elevation-md hover:shadow-elevation-lg transition-all duration-200 hover:scale-105">
+            <div className="text-3xl font-bold text-primary mb-2 animate-scale-in">{stats.paragraphs}</div>
+            <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Paragraphs</div>
           </Card>
         </div>
 
         {/* Input */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <Label htmlFor="input">Your Text</Label>
+            <Label htmlFor="input" className="text-base">Your Text</Label>
             <CopyButton text={input} />
           </div>
           <Textarea
@@ -78,23 +78,45 @@ export default function WordCounterPage() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Start typing or paste your text here..."
-            className="font-mono text-sm min-h-[400px]"
+            className="font-mono text-sm min-h-[400px] input-area"
           />
         </div>
 
         {/* Info */}
-        <div className="text-sm text-muted-foreground bg-muted p-4 rounded-md">
-          <p className="font-semibold mb-2">How it works:</p>
-          <ul className="list-disc list-inside space-y-1">
-            <li>Real-time counting as you type</li>
-            <li>Counts words, characters (with and without spaces), lines, sentences, and paragraphs</li>
-            <li>Perfect for writers, students, and content creators</li>
-            <li>Useful for meeting word count requirements and character limits</li>
-          </ul>
+        <div className="text-sm bg-gradient-to-br from-accent/5 to-primary/5 border-2 border-accent/10 p-6 rounded-lg">
+          <div className="flex items-start gap-3 mb-3">
+            <div className="p-1.5 rounded bg-accent/10 flex-shrink-0">
+              <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="font-bold text-base mb-3 text-foreground">How it works:</p>
+              <ul className="list-none space-y-2">
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Real-time counting as you type</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Counts words, characters (with and without spaces), lines, sentences, and paragraphs</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Perfect for writers, students, and content creators</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Useful for meeting word count requirements and character limits</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </ToolLayout>
   );
 }
+
 
 

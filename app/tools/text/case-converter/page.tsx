@@ -86,7 +86,7 @@ export default function TextCaseConverterPage() {
       <div className="space-y-6">
         {/* Case Type Selector */}
         <div className="space-y-4">
-          <Label>Select Case Type</Label>
+          <Label className="text-base">Select Case Type</Label>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {caseTypes.map((caseType) => (
               <button
@@ -103,13 +103,13 @@ export default function TextCaseConverterPage() {
                     }
                   }
                 }}
-                className={`p-4 border rounded-lg text-left transition-all ${
+                className={`p-4 border-2 rounded-lg text-left transition-all duration-200 ${
                   selectedCase === caseType.value
-                    ? "border-accent bg-accent/10"
-                    : "border-border hover:border-accent/50"
+                    ? "border-accent bg-accent/10 shadow-elevation-md scale-105"
+                    : "border-border/50 hover:border-accent/50 hover:shadow-elevation-sm"
                 }`}
               >
-                <div className="font-semibold text-sm mb-1">{caseType.label}</div>
+                <div className="font-bold text-sm mb-1">{caseType.label}</div>
                 <div className="text-xs text-muted-foreground">{caseType.description}</div>
               </button>
             ))}
@@ -120,7 +120,7 @@ export default function TextCaseConverterPage() {
           {/* Input */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <Label htmlFor="input">Input Text</Label>
+              <Label htmlFor="input" className="text-base">Input Text</Label>
               <Button onClick={handleClear} variant="ghost" size="sm">
                 Clear
               </Button>
@@ -143,14 +143,14 @@ export default function TextCaseConverterPage() {
                 }
               }}
               placeholder="Enter text to convert..."
-              className="font-mono text-sm min-h-[300px]"
+              className="font-mono text-sm min-h-[300px] input-area"
             />
           </div>
 
           {/* Output */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <Label htmlFor="output">Converted Text</Label>
+              <Label htmlFor="output" className="text-base">Converted Text</Label>
               <div className="flex gap-2">
                 {output && (
                   <>
@@ -164,25 +164,58 @@ export default function TextCaseConverterPage() {
               id="output"
               value={output}
               readOnly
-              className="font-mono text-sm min-h-[300px] bg-muted"
+              className="font-mono text-sm min-h-[300px] output-area"
               placeholder="Converted text will appear here..."
             />
           </div>
         </div>
 
         {/* Info */}
-        <div className="text-sm text-muted-foreground bg-muted p-4 rounded-md">
-          <p className="font-semibold mb-2">Case Types:</p>
-          <ul className="list-disc list-inside space-y-1">
-            <li><strong>UPPER CASE:</strong> All letters in uppercase</li>
-            <li><strong>lower case:</strong> All letters in lowercase</li>
-            <li><strong>Title Case:</strong> First letter of each word capitalized</li>
-            <li><strong>Sentence case:</strong> First letter of sentence capitalized</li>
-            <li><strong>camelCase:</strong> First word lowercase, subsequent words capitalized</li>
-            <li><strong>PascalCase:</strong> First letter of each word capitalized</li>
-            <li><strong>kebab-case:</strong> Words separated by hyphens</li>
-            <li><strong>snake_case:</strong> Words separated by underscores</li>
-          </ul>
+        <div className="text-sm bg-gradient-to-br from-accent/5 to-primary/5 border-2 border-accent/10 p-6 rounded-lg">
+          <div className="flex items-start gap-3 mb-3">
+            <div className="p-1.5 rounded bg-accent/10 flex-shrink-0">
+              <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="font-bold text-base mb-3 text-foreground">Case Types:</p>
+              <ul className="list-none space-y-2">
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground"><strong>UPPER CASE:</strong> All letters in uppercase</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground"><strong>lower case:</strong> All letters in lowercase</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground"><strong>Title Case:</strong> First letter of each word capitalized</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground"><strong>Sentence case:</strong> First letter of sentence capitalized</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground"><strong>camelCase:</strong> First word lowercase, subsequent words capitalized</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground"><strong>PascalCase:</strong> First letter of each word capitalized</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground"><strong>kebab-case:</strong> Words separated by hyphens</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground"><strong>snake_case:</strong> Words separated by underscores</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </ToolLayout>

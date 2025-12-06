@@ -42,9 +42,9 @@ export default function TextToBase64Page() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <Label htmlFor="input">Input Text</Label>
+              <Label htmlFor="input" className="text-base">Input Text</Label>
               <div className="flex gap-2">
-                <Button onClick={handleEncode} size="sm">
+                <Button onClick={handleEncode} size="sm" className="shadow-md">
                   Encode
                 </Button>
                 <Button onClick={handleClear} variant="ghost" size="sm">
@@ -57,13 +57,13 @@ export default function TextToBase64Page() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Enter text to encode to Base64..."
-              className="font-mono text-sm min-h-[300px]"
+              className="font-mono text-sm min-h-[300px] input-area"
             />
           </div>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <Label htmlFor="output">Base64 Encoded</Label>
+              <Label htmlFor="output" className="text-base">Base64 Encoded</Label>
               {output && (
                 <div className="flex gap-2">
                   <CopyButton text={output} />
@@ -75,24 +75,46 @@ export default function TextToBase64Page() {
               id="output"
               value={output}
               readOnly
-              className="font-mono text-sm min-h-[300px] bg-muted"
+              className="font-mono text-sm min-h-[300px] output-area"
               placeholder="Base64 encoded text will appear here..."
             />
           </div>
         </div>
 
-        <div className="text-sm text-muted-foreground bg-muted p-4 rounded-md">
-          <p className="font-semibold mb-2">How to use:</p>
-          <ul className="list-disc list-inside space-y-1">
-            <li>Enter text in the input field</li>
-            <li>Click "Encode" to convert to Base64</li>
-            <li>Copy or download the encoded result</li>
-            <li>Base64 encoding is commonly used for data transmission and storage</li>
-          </ul>
+        <div className="text-sm bg-gradient-to-br from-accent/5 to-primary/5 border-2 border-accent/10 p-6 rounded-lg">
+          <div className="flex items-start gap-3 mb-3">
+            <div className="p-1.5 rounded bg-accent/10 flex-shrink-0">
+              <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="font-bold text-base mb-3 text-foreground">How to use:</p>
+              <ul className="list-none space-y-2">
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Enter text in the input field</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Click "Encode" to convert to Base64</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Copy or download the encoded result</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent mt-1">•</span>
+                  <span className="text-muted-foreground">Base64 encoding is commonly used for data transmission and storage</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </ToolLayout>
   );
 }
+
 
 
