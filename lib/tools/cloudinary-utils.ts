@@ -25,17 +25,30 @@ export interface CloudinaryTransformOptions {
   background?: string;
 }
 
+/**
+ * Build a Cloudinary delivery URL with transformations
+ * 
+ * @param publicId - The public ID of the image in Cloudinary
+ * @param options - Transformation options to apply
+ * @param cloudName - **Required** Cloudinary cloud name. Must be provided explicitly.
+ *                    For the URL generator tool, users input this value.
+ *                    For programmatic use, pass the cloud name from your configuration.
+ * @returns The complete Cloudinary delivery URL
+ * @throws Error if cloudName is not provided
+ */
 export function buildCloudinaryUrl(
   publicId: string,
   options: CloudinaryTransformOptions = {},
-  cloudName?: string
+  cloudName: string
 ): string {
-  // Use provided cloudName or fallback to environment variable or default
-  const finalCloudName =
-    cloudName ||
-    process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ||
-    process.env.CLOUDINARY_CLOUD_NAME ||
-    "demo"; // Default fallback for URL generation (doesn't affect functionality)
+  if (!cloudName || !cloudName.trim()) {
+    throw new Error(
+      "cloudName is required. Please provide your Cloudinary cloud name. " +
+      "For testing, you can use 'demo', but for production use your actual cloud name."
+    );
+  }
+
+  const finalCloudName = cloudName.trim();
   const baseUrl = `https://res.cloudinary.com/${finalCloudName}/image/upload`;
 
   const transformations: string[] = [];
@@ -69,7 +82,7 @@ export function generateResponsiveSrcSet(
   publicId: string,
   widths: number[] = [320, 640, 768, 1024, 1280, 1920],
   options: CloudinaryTransformOptions = {},
-  cloudName?: string
+  cloudName: string
 ): string {
   return widths
     .map((width) => {
@@ -83,7 +96,7 @@ export function optimizeImageUrl(
   publicId: string,
   format: "auto" | "webp" | "avif" = "auto",
   quality: number | "auto" = "auto",
-  cloudName?: string
+  cloudName: string
 ): string {
   // buildCloudinaryUrl adds prefixes automatically ('f_' for format, 'q_' for quality)
   // So we pass raw values: "auto"/"webp"/"avif" for format, "auto" or number for quality
@@ -98,7 +111,7 @@ export function generateThumbnailUrl(
   width: number = 200,
   height: number = 200,
   crop: string = "fill",
-  cloudName?: string
+  cloudName: string
 ): string {
   return buildCloudinaryUrl(publicId, {
     width,
@@ -112,8 +125,8 @@ export function generateThumbnailUrl(
 export function applyImageEffect(
   publicId: string,
   effect: string,
-  value?: number,
-  cloudName?: string
+  value: number | undefined,
+  cloudName: string
 ): string {
   const effectString = value !== undefined ? `${effect}:${value}` : effect;
   return buildCloudinaryUrl(publicId, {

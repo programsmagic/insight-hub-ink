@@ -30,6 +30,8 @@ export default function CloudinaryUrlGeneratorPage() {
       return;
     }
 
+    // For the URL generator tool, we allow "demo" as a fallback for testing
+    // If user leaves cloud name empty, we use "demo" for convenience
     const finalCloudName = cloudName.trim() || "demo";
 
     try {
