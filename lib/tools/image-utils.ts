@@ -767,3 +767,133 @@ export async function createCollage(
   });
 }
 
+/**
+ * Compress image to reduce file size
+ */
+export async function compressImage(
+  imageUrl: string,
+  quality: number = 0.8,
+  format: "image/jpeg" | "image/webp" | "image/png" = "image/jpeg",
+  maxWidth?: number,
+  maxHeight?: number
+): Promise<{ dataUrl: string; originalSize: number; compressedSize: number; compressionRatio: number }> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      let width = img.width;
+      let height = img.height;
+
+      // Resize if max dimensions specified
+      if (maxWidth || maxHeight) {
+        const aspectRatio = width / height;
+        if (maxWidth && width > maxWidth) {
+          width = maxWidth;
+          height = width / aspectRatio;
+        }
+        if (maxHeight && height > maxHeight) {
+          height = maxHeight;
+          width = height * aspectRatio;
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        reject(new Error("Failed to get canvas context"));
+        return;
+      }
+
+      // Draw image with high quality
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Convert to blob to get size
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            reject(new Error("Failed to compress image"));
+            return;
+          }
+
+          // Get original size from base64
+          const originalBase64 = imageUrl.split(",")[1] || imageUrl;
+          const originalSize = Math.ceil((originalBase64.length * 3) / 4);
+
+          // Convert blob to data URL
+          const reader = new FileReader();
+          reader.onload = () => {
+            const dataUrl = reader.result as string;
+            const compressedSize = blob.size;
+            const compressionRatio = ((originalSize - compressedSize) / originalSize) * 100;
+
+            resolve({
+              dataUrl,
+              originalSize,
+              compressedSize,
+              compressionRatio: Math.max(0, compressionRatio),
+            });
+          };
+          reader.onerror = () => reject(new Error("Failed to read compressed image"));
+          reader.readAsDataURL(blob);
+        },
+        format,
+        quality
+      );
+    };
+    img.onerror = () => reject(new Error("Failed to load image"));
+    img.src = imageUrl;
+  });
+}
+
+/**
+ * Remove background from image using canvas-based approach
+ * This is a basic implementation - for better results, consider using ML models
+ */
+export async function removeBackground(
+  imageUrl: string,
+  threshold: number = 128
+): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        reject(new Error("Failed to get canvas context"));
+        return;
+      }
+
+      ctx.drawImage(img, 0, 0);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+
+      // Simple background removal: make pixels near white/light colors transparent
+      // This is a basic approach - for production, use ML-based solutions
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i] ?? 0;
+        const g = data[i + 1] ?? 0;
+        const b = data[i + 2] ?? 0;
+        const brightness = (r + g + b) / 3;
+
+        // If pixel is bright enough, make it transparent
+        if (brightness > threshold) {
+          // Calculate transparency based on how close to white it is
+          const alpha = Math.max(0, 1 - (brightness - threshold) / (255 - threshold));
+          data[i + 3] = Math.floor(alpha * 255);
+        }
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+      resolve(canvas.toDataURL("image/png"));
+    };
+    img.onerror = () => reject(new Error("Failed to load image"));
+    img.src = imageUrl;
+  });
+}
+

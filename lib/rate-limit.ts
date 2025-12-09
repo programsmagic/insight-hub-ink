@@ -80,6 +80,7 @@ class RateLimiter {
 // Create rate limiters for different endpoints
 export const consultationRateLimiter = new RateLimiter(60000, 5); // 5 requests per minute
 export const contactRateLimiter = new RateLimiter(60000, 10); // 10 requests per minute
+export const toolRateLimiter = new RateLimiter(60000, 20); // 20 requests per minute for tools
 
 // Get client identifier from request
 export function getClientIdentifier(request: Request): string {

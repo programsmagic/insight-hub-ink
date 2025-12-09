@@ -1,0 +1,81 @@
+import { NextRequest, NextResponse } from "next/server";
+import { logger } from "@/lib/logger";
+import { toolRateLimiter, getClientIdentifier } from "@/lib/rate-limit";
+import { cloudinaryConfig, validateCloudinaryConfig } from "@/lib/cloudinary/config";
+import { v2 as cloudinary } from "cloudinary";
+
+export const runtime = "nodejs";
+export const maxDuration = 60;
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: cloudinaryConfig.cloudName,
+  api_key: cloudinaryConfig.apiKey,
+  api_secret: cloudinaryConfig.apiSecret,
+});
+
+export async function POST(request: NextRequest) {
+  try {
+    const clientId = getClientIdentifier(request);
+    const rateLimitResult = toolRateLimiter.check(clientId);
+
+    if (!rateLimitResult.allowed) {
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+    }
+
+    if (!validateCloudinaryConfig()) {
+      return NextResponse.json(
+        { error: "Cloudinary configuration is missing. Please set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET." },
+        { status: 500 }
+      );
+    }
+
+    const formData = await request.formData();
+    const file = formData.get("file") as File;
+    const transformationsJson = formData.get("transformations") as string;
+
+    if (!file || !file.type.startsWith("image/")) {
+      return NextResponse.json({ error: "Please upload a valid image file" }, { status: 400 });
+    }
+
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    let transformations = {};
+    if (transformationsJson) {
+      try {
+        transformations = JSON.parse(transformationsJson);
+      } catch {
+        return NextResponse.json({ error: "Invalid transformations format" }, { status: 400 });
+      }
+    }
+
+    // Upload to Cloudinary with transformations
+    const uploadResult = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          transformation: transformations,
+          resource_type: "image",
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+      uploadStream.end(buffer);
+    });
+
+    return NextResponse.json({
+      success: true,
+      data: uploadResult,
+      url: (uploadResult as any).secure_url,
+    });
+  } catch (error) {
+    logger.error("Cloudinary upload error", error);
+    return NextResponse.json(
+      { error: "Failed to upload and transform image" },
+      { status: 500 }
+    );
+  }
+}
+
