@@ -454,7 +454,8 @@ const imageTools: Tool[] = [
     icon: "Minimize2",
     tags: ["compress", "image", "optimize"],
     keywords: ["image compressor", "compress image", "reduce image size"],
-    isClientSide: false,
+    isClientSide: true,
+    isImplemented: true,
   },
   {
     id: "image-format-converter",
@@ -582,7 +583,8 @@ const imageTools: Tool[] = [
     icon: "Scissors",
     tags: ["background", "remove", "ai", "image"],
     keywords: ["remove background", "background remover", "transparent background"],
-    isClientSide: false,
+    isClientSide: true,
+    isImplemented: true,
   },
   {
     id: "image-blur",
