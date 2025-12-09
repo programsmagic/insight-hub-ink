@@ -15,6 +15,7 @@ const optionalEnvVars = [
   'NEXT_PUBLIC_GOOGLE_ADSENSE_DISPLAY_SLOT',
   'NEXT_PUBLIC_GOOGLE_ADSENSE_IN_ARTICLE_SLOT',
   'NEXT_PUBLIC_GOOGLE_ADSENSE_MATCHED_CONTENT_SLOT',
+  'NEXT_PUBLIC_FINTRACK_API_URL',
 ] as const;
 
 type RequiredEnvVar = typeof requiredEnvVars[number];

@@ -1,65 +1,141 @@
-"use client";
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { AdSenseDisplay } from '@/components/ads';
+import { PostCard } from '@/components/blog/post-card';
+import { BlogPagination } from '@/components/blog/pagination';
+import { SearchFilter } from '@/components/blog/search-filter';
+import { getBlogPosts, getCategories } from '@/lib/services/blog-api';
 
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { blogPosts } from "./data";
-import { AdSenseDisplay } from "@/components/ads";
+interface BlogPageProps {
+  searchParams: {
+    page?: string;
+    limit?: string;
+    category?: string;
+    search?: string;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+  };
+}
 
-export default function BlogPage() {
-  return (
-    <div className="container mx-auto py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8">Latest Insights</h1>
-        
-        {/* Ad after header */}
-        <AdSenseDisplay format="horizontal" minHeight={100} className="mb-6" />
-        
-        <div className="grid gap-6 sm:gap-8">
-          {blogPosts.map((post, index) => (
-            <div key={post.id}>
-            <Card className="overflow-hidden">
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full md:w-1/3">
-                  <div className="relative aspect-[4/3]">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="object-cover w-full h-full"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
-                <div className="p-4 sm:p-6 md:w-2/3">
-                  <div className="flex items-center gap-2 text-xs sm:text-sm mb-2">
-                    <span className="text-accent font-medium">{post.category}</span>
-                    <span className="text-muted-foreground">•</span>
-                    <span className="text-muted-foreground">{post.date}</span>
-                  </div>
-                  <h2 className="text-xl sm:text-2xl font-semibold mb-2">
-                    <Link href={`/blog/${post.slug}`} className="hover:text-accent transition-colors">
-                      {post.title}
-                    </Link>
-                  </h2>
-                  <p className="text-sm sm:text-base text-muted-foreground mb-4">{post.excerpt}</p>
-                  <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
-                    <Link href={`/blog/${post.slug}`}>Read More</Link>
-                  </Button>
-                </div>
-              </div>
-            </Card>
-              
-              {/* Ad between posts (every 2 posts) */}
-              {index > 0 && (index + 1) % 2 === 0 && index < blogPosts.length - 1 && (
-                <AdSenseDisplay format="auto" minHeight={250} className="my-6" />
-              )}
+export const metadata: Metadata = {
+  title: 'Blog - Latest Insights & Articles',
+  description:
+    'Explore our latest articles on personal finance, money management, budgeting, investing, and financial planning. Expert tips and strategies to help you achieve your financial goals.',
+  keywords: [
+    'personal finance',
+    'money management',
+    'budgeting',
+    'investing',
+    'financial planning',
+    'debt repayment',
+    'savings',
+    'financial tips',
+  ],
+  openGraph: {
+    title: 'Blog - Latest Insights & Articles | InsightHub.ink',
+    description:
+      'Explore our latest articles on personal finance, money management, and financial planning.',
+    type: 'website',
+  },
+};
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  // Parse search params with defaults
+  const page = parseInt(searchParams.page || '1', 10);
+  const limit = parseInt(searchParams.limit || '10', 10);
+  const category = searchParams.category;
+  const search = searchParams.search;
+  const sortBy = searchParams.sortBy || 'published_date';
+  const sortOrder = searchParams.sortOrder || 'desc';
+
+  try {
+    // Fetch posts and categories in parallel
+    const [postsData, categoriesData] = await Promise.all([
+      getBlogPosts({
+        page,
+        limit,
+        category,
+        search,
+        sortBy,
+        sortOrder,
+      }),
+      getCategories(),
+    ]);
+
+    const { posts, pagination } = postsData;
+    const { categories } = categoriesData;
+
+    // Create a map of category IDs to category objects for quick lookup
+    const categoriesMap = new Map(
+      categories.map((cat) => [cat.id, cat])
+    );
+
+    return (
+      <div className="container mx-auto py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8">
+            Latest Insights
+          </h1>
+
+          {/* Ad after header */}
+          <AdSenseDisplay format="horizontal" minHeight={100} className="mb-6" />
+
+          {/* Search and Filters */}
+          <SearchFilter
+            categories={categories}
+            currentCategory={category}
+            currentSearch={search}
+            currentSortBy={sortBy}
+            currentSortOrder={sortOrder}
+          />
+
+          {/* Blog Posts */}
+          {posts.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">
+                No blog posts found.
+                {search && ` Try adjusting your search terms.`}
+                {category && ` Try selecting a different category.`}
+              </p>
             </div>
-          ))}
+          ) : (
+            <>
+              <div className="grid gap-6 sm:gap-8">
+                {posts.map((post, index) => (
+                  <div key={post.id}>
+                    <PostCard post={post} categoriesMap={categoriesMap} />
+
+                    {/* Ad between posts (every 2 posts) */}
+                    {index > 0 &&
+                      (index + 1) % 2 === 0 &&
+                      index < posts.length - 1 && (
+                        <AdSenseDisplay
+                          format="auto"
+                          minHeight={250}
+                          className="my-6"
+                        />
+                      )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Pagination */}
+              {pagination.totalPages > 1 && (
+                <div className="mt-8">
+                  <BlogPagination pagination={pagination} />
+                </div>
+              )}
+            </>
+          )}
+
+          {/* Ad after all posts */}
+          <AdSenseDisplay format="auto" minHeight={250} className="mt-8" />
         </div>
-        
-        {/* Ad after all posts */}
-        <AdSenseDisplay format="auto" minHeight={250} className="mt-8" />
       </div>
-    </div>
-  );
+    );
+  } catch (error) {
+    // Log error and show not found
+    console.error('Error fetching blog posts:', error);
+    notFound();
+  }
 }

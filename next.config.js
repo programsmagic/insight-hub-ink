@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Removed 'output: export' to enable Server Components and API routes
+  // Note: This requires deployment to Vercel, Netlify, or a Node.js server
   eslint: {
     ignoreDuringBuilds: false,
     dirs: ['app', 'components', 'lib', 'hooks'],
@@ -8,12 +9,18 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-  images: { unoptimized: true },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
+    ],
+  },
   poweredByHeader: false,
   compress: true,
   reactStrictMode: true,
-  // Note: Custom headers cannot be used with static export (output: 'export')
-  // Headers must be configured at the CDN/hosting level (see PRODUCTION.md)
 };
 
 module.exports = nextConfig;
