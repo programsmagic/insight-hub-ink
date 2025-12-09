@@ -11,8 +11,11 @@ import {
   AdSenseMatchedContent,
 } from '@/components/ads';
 import { getBlogPostBySlug, getBlogPosts, getBlogImageUrl } from '@/lib/services/blog-api';
+import { getReadingTime } from '@/lib/utils/blog-utils';
+import { RelatedPosts } from '@/components/blog/related-posts';
+import { SocialShare } from '@/components/blog/social-share';
 import { env } from '@/lib/env';
-import { Calendar, Tag, ArrowLeft } from 'lucide-react';
+import { Calendar, Tag, ArrowLeft, Clock, Eye, User } from 'lucide-react';
 import Script from 'next/script';
 
 interface BlogPostPageProps {
@@ -101,6 +104,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     const publishedDate = new Date(post.published_date);
     const formattedDate = format(publishedDate, 'MMMM d, yyyy');
     const imageUrl = getBlogImageUrl(post, 'large') || post.featured_image;
+    const readingTime = getReadingTime(post.content || post.excerpt);
 
     // Fetch related posts (same category or tags)
     let relatedPosts: typeof post[] = [];
@@ -155,118 +159,164 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             __html: JSON.stringify(articleStructuredData),
           }}
         />
-        <article className="container mx-auto py-12">
-          <div className="max-w-3xl mx-auto">
-            <Button asChild variant="outline" className="mb-8">
-              <Link href="/blog">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Blog
-              </Link>
-            </Button>
+        
+        <article className="min-h-screen">
+          {/* Hero Section */}
+          <section className="relative py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-secondary via-secondary/95 to-background">
+            <div className="container mx-auto max-w-4xl">
+              <Button asChild variant="ghost" className="mb-6 sm:mb-8 -ml-2">
+                <Link href="/blog">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back to Blog
+                </Link>
+              </Button>
 
-            {/* Featured Image */}
-            {imageUrl && (
-              <div className="relative aspect-[16/9] mb-8 rounded-lg overflow-hidden">
-                <Image
-                  src={imageUrl}
-                  alt={post.title}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 768px"
-                />
-              </div>
-            )}
-
-            {/* Meta Information */}
-            <div className="flex items-center gap-2 text-sm mb-4 flex-wrap">
-              <div className="flex items-center gap-1 text-muted-foreground">
-                <Calendar className="h-4 w-4" />
-                <span>{formattedDate}</span>
-              </div>
-              {post.tags.length > 0 && (
-                <>
-                  <span className="text-muted-foreground">•</span>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <Tag className="h-4 w-4 text-muted-foreground" />
-                    {post.tags.slice(0, 3).map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                    {post.tags.length > 3 && (
-                      <Badge variant="secondary" className="text-xs">
-                        +{post.tags.length - 3} more
-                      </Badge>
-                    )}
-                  </div>
-                </>
+              {/* Featured Image */}
+              {imageUrl && (
+                <div className="relative aspect-[16/9] mb-8 rounded-xl overflow-hidden shadow-2xl border border-border/50">
+                  <Image
+                    src={imageUrl}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 896px"
+                  />
+                </div>
               )}
-            </div>
 
-            <h1 className="text-4xl font-bold mb-6">{post.title}</h1>
+              {/* Meta Information */}
+              <div className="flex flex-wrap items-center gap-3 text-sm mb-6">
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <Calendar className="h-4 w-4" />
+                  <span>{formattedDate}</span>
+                </div>
+                <span className="text-muted-foreground">•</span>
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <Clock className="h-4 w-4" />
+                  <span>{readingTime}</span>
+                </div>
+                {post.analytics?.views !== undefined && post.analytics.views > 0 && (
+                  <>
+                    <span className="text-muted-foreground">•</span>
+                    <div className="flex items-center gap-1.5 text-muted-foreground">
+                      <Eye className="h-4 w-4" />
+                      <span>{post.analytics.views} views</span>
+                    </div>
+                  </>
+                )}
+                <span className="text-muted-foreground">•</span>
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <User className="h-4 w-4" />
+                  <span>InsightHub.ink</span>
+                </div>
+              </div>
 
-            {/* Ad after title */}
-            <AdSenseDisplay format="horizontal" minHeight={100} className="mb-8" />
+              {/* Title */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                {post.title}
+              </h1>
 
-            {/* Article Content */}
-            <div className="prose prose-lg dark:prose-invert max-w-none">
+              {/* Excerpt */}
               {post.excerpt && (
-                <p className="lead text-xl text-muted-foreground mb-6">
+                <p className="text-lg sm:text-xl text-muted-foreground mb-6 leading-relaxed">
                   {post.excerpt}
                 </p>
               )}
 
-              {/* Render HTML content */}
-              {post.content && (
-                <div
-                  dangerouslySetInnerHTML={{ __html: post.content }}
-                  className="blog-content"
-                />
-              )}
-
-              {/* In-article ad */}
-              <AdSenseInArticle minHeight={280} />
-            </div>
-
-            {/* Analytics Info */}
-            {post.analytics && (
-              <div className="mt-8 pt-8 border-t text-sm text-muted-foreground">
-                <p>
-                  {post.analytics.views} views
-                  {post.analytics.likes !== undefined && ` • ${post.analytics.likes} likes`}
-                  {post.analytics.shares !== undefined &&
-                    ` • ${post.analytics.shares} shares`}
-                </p>
-              </div>
-            )}
-
-            {/* Related Posts */}
-            {relatedPosts.length > 0 && (
-              <div className="mt-12 pt-8 border-t">
-                <h2 className="text-2xl font-bold mb-6">Related Posts</h2>
-                <div className="grid gap-4">
-                  {relatedPosts.map((relatedPost) => (
-                    <Link
-                      key={relatedPost.id}
-                      href={`/blog/${relatedPost.slug}`}
-                      className="block p-4 border rounded-lg hover:bg-accent/50 transition-colors"
+              {/* Tags */}
+              {post.tags.length > 0 && (
+                <div className="flex items-center gap-2 flex-wrap mb-6">
+                  <Tag className="h-4 w-4 text-muted-foreground" />
+                  {post.tags.map((tag) => (
+                    <Badge 
+                      key={tag} 
+                      variant="secondary" 
+                      className="text-xs sm:text-sm bg-accent/10 text-accent border-accent/20 hover:bg-accent/20 transition-colors"
                     >
-                      <h3 className="font-semibold mb-2">{relatedPost.title}</h3>
-                      <p className="text-sm text-muted-foreground line-clamp-2">
-                        {relatedPost.excerpt}
-                      </p>
-                    </Link>
+                      {tag}
+                    </Badge>
                   ))}
                 </div>
+              )}
+
+              {/* Social Share */}
+              <div className="mb-8">
+                <SocialShare 
+                  url={postUrl}
+                  title={post.title}
+                  description={post.excerpt}
+                  variant="compact"
+                />
               </div>
-            )}
+            </div>
+          </section>
 
-            {/* Matched content ad after article */}
-            <AdSenseMatchedContent minHeight={200} className="mt-8" />
+          {/* Article Content */}
+          <div className="container mx-auto py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto">
+              {/* Ad after hero */}
+              <AdSenseDisplay format="horizontal" minHeight={100} className="mb-8" />
 
-            {/* Display ad after article */}
-            <AdSenseDisplay format="auto" minHeight={250} className="mt-8" />
+              {/* Article Content */}
+              <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-code:text-accent prose-pre:bg-secondary prose-pre:border prose-pre:border-border">
+                {post.content && (
+                  <div
+                    dangerouslySetInnerHTML={{ __html: post.content }}
+                    className="blog-content"
+                  />
+                )}
+
+                {/* In-article ad */}
+                <AdSenseInArticle minHeight={280} />
+              </div>
+
+              {/* Social Share Footer */}
+              <div className="mt-12 pt-8 border-t">
+                <SocialShare 
+                  url={postUrl}
+                  title={post.title}
+                  description={post.excerpt}
+                />
+              </div>
+
+              {/* Analytics Info */}
+              {post.analytics && (
+                <div className="mt-8 pt-8 border-t">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <Eye className="h-4 w-4" />
+                      <span>{post.analytics.views} views</span>
+                    </div>
+                    {post.analytics.likes !== undefined && (
+                      <div className="flex items-center gap-2">
+                        <span>❤️</span>
+                        <span>{post.analytics.likes} likes</span>
+                      </div>
+                    )}
+                    {post.analytics.shares !== undefined && (
+                      <div className="flex items-center gap-2">
+                        <span>📤</span>
+                        <span>{post.analytics.shares} shares</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Related Posts */}
+              {relatedPosts.length > 0 && (
+                <div className="mt-16 pt-12 border-t">
+                  <RelatedPosts posts={relatedPosts} />
+                </div>
+              )}
+
+              {/* Matched content ad after article */}
+              <AdSenseMatchedContent minHeight={200} className="mt-12" />
+
+              {/* Display ad after article */}
+              <AdSenseDisplay format="auto" minHeight={250} className="mt-12" />
+            </div>
           </div>
         </article>
       </>
