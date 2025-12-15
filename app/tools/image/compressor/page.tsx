@@ -65,7 +65,7 @@ export default function ImageCompressorPage() {
     try {
       const result = await compressImage(
         originalImage,
-        quality[0] / 100,
+        (quality[0] ?? 80) / 100,
         format,
         maxWidth ? parseInt(maxWidth) : undefined,
         maxHeight ? parseInt(maxHeight) : undefined
@@ -80,7 +80,7 @@ export default function ImageCompressorPage() {
 
       toast.success("Image compressed successfully!");
       analytics.trackUsage("compress", {
-        quality: quality[0],
+        quality: quality[0] ?? 80,
         format,
         maxWidth: maxWidth || "none",
         maxHeight: maxHeight || "none",
@@ -88,7 +88,7 @@ export default function ImageCompressorPage() {
       });
     } catch (error) {
       toast.error("Failed to compress image");
-      analytics.trackError("Failed to compress image", { quality: quality[0], format });
+      analytics.trackError("Failed to compress image", { quality: quality[0] ?? 80, format });
     } finally {
       setIsProcessing(false);
     }
@@ -158,7 +158,7 @@ export default function ImageCompressorPage() {
             {originalImage && (
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label>Quality: {quality[0]}%</Label>
+                  <Label>Quality: {quality[0] ?? 80}%</Label>
                   <Slider
                     value={quality}
                     onValueChange={setQuality}

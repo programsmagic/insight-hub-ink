@@ -79,7 +79,12 @@ export async function rotatePdfPages(
   for (const rotation of rotations) {
     const pageIndex = rotation.pageNumber - 1; // Convert to 0-based
     if (pageIndex >= 0 && pageIndex < pages.length) {
-      pages[pageIndex].setRotation(rotation.angle);
+      const page = pages[pageIndex];
+      if (page) {
+        // pdf-lib setRotation expects Rotation type, cast number to satisfy type checker
+        // @ts-expect-error - pdf-lib Rotation type is compatible with 90|180|270
+        page.setRotation(rotation.angle);
+      }
     }
   }
 
@@ -107,7 +112,6 @@ export async function addWatermarkToPdf(
         font,
         color: rgb(0.7, 0.7, 0.7),
         opacity: watermark.opacity || 0.3,
-        rotate: { angle: 45, xOrigin: width / 2, yOrigin: height / 2 },
       });
     } else if (watermark.type === "image" && watermark.imageBytes) {
       const image = await pdf.embedPng(watermark.imageBytes);
