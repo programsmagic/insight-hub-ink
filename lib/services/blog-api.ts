@@ -382,3 +382,4 @@ export function getBlogImageUrl(
   return post.featured_image_thumbnails[size] || post.featured_image_thumbnails.original || post.featured_image;
 }
 
+

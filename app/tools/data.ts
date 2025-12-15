@@ -661,6 +661,7 @@ const pdfTools: Tool[] = [
     tags: ["pdf", "text", "extract", "converter"],
     keywords: ["pdf to text", "extract text from pdf", "pdf text converter"],
     isClientSide: false,
+    isImplemented: true,
   },
   {
     id: "pdf-to-image",
@@ -683,6 +684,7 @@ const pdfTools: Tool[] = [
     tags: ["pdf", "merge", "combine"],
     keywords: ["pdf merger", "merge pdf", "combine pdf"],
     isClientSide: false,
+    isImplemented: true,
   },
   {
     id: "pdf-splitter",
@@ -1135,6 +1137,7 @@ const seoTools: Tool[] = [
     tags: ["seo", "redirect", "http", "checker"],
     keywords: ["redirect checker", "http redirect", "check redirect"],
     isClientSide: false,
+    isImplemented: true,
   },
   {
     id: "page-speed-analyzer",
@@ -1172,6 +1175,7 @@ const cloudinaryTools: Tool[] = [
     tags: ["cloudinary", "upload", "transform", "image"],
     keywords: ["cloudinary upload", "image transform", "cloudinary"],
     isClientSide: false,
+    isImplemented: true,
   },
   {
     id: "cloudinary-optimization-wizard",

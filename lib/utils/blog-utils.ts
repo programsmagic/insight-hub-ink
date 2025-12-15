@@ -45,3 +45,4 @@ export function getReadingTime(content: string | null | undefined): string {
   return formatReadingTime(minutes);
 }
 
+
