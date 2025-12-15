@@ -1,17 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logger } from "@/lib/logger";
 import { toolRateLimiter, getClientIdentifier } from "@/lib/rate-limit";
-import { cloudinaryConfig, validateCloudinaryConfig } from "@/lib/cloudinary/config";
+import { getCloudinaryConfig, validateCloudinaryConfig } from "@/lib/cloudinary/config";
 import { v2 as cloudinary } from "cloudinary";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
-
-cloudinary.config({
-  cloud_name: cloudinaryConfig.cloudName,
-  api_key: cloudinaryConfig.apiKey,
-  api_secret: cloudinaryConfig.apiSecret,
-});
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,6 +19,14 @@ export async function POST(request: NextRequest) {
     if (!validateCloudinaryConfig()) {
       return NextResponse.json({ error: "Cloudinary configuration is missing" }, { status: 500 });
     }
+
+    // Configure Cloudinary only at runtime after validation
+    const config = getCloudinaryConfig();
+    cloudinary.config({
+      cloud_name: config.cloudName,
+      api_key: config.apiKey,
+      api_secret: config.apiSecret,
+    });
 
     const formData = await request.formData();
     const file = formData.get("file") as File;

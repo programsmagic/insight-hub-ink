@@ -25,13 +25,29 @@ function getOptionalEnvVar(name: string): string | undefined {
   return process.env[name];
 }
 
-export const cloudinaryConfig = {
-  cloudName: getRequiredEnvVarOr("NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME", "CLOUDINARY_CLOUD_NAME"),
-  apiKey: getRequiredEnvVar("CLOUDINARY_API_KEY"),
-  apiSecret: getRequiredEnvVar("CLOUDINARY_API_SECRET"),
-  url: getOptionalEnvVar("CLOUDINARY_URL"),
-  assetsEnabled: process.env.NEXT_PUBLIC_CLOUDINARY_ASSETS_ENABLED === "true",
-};
+/**
+ * Get Cloudinary configuration (lazy-loaded to avoid build-time errors)
+ * Only throws errors when actually accessed at runtime, not during build
+ */
+export function getCloudinaryConfig() {
+  return {
+    cloudName: getRequiredEnvVarOr("NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME", "CLOUDINARY_CLOUD_NAME"),
+    apiKey: getRequiredEnvVar("CLOUDINARY_API_KEY"),
+    apiSecret: getRequiredEnvVar("CLOUDINARY_API_SECRET"),
+    url: getOptionalEnvVar("CLOUDINARY_URL"),
+    assetsEnabled: process.env.NEXT_PUBLIC_CLOUDINARY_ASSETS_ENABLED === "true",
+  };
+}
+
+/**
+ * @deprecated Use getCloudinaryConfig() instead to avoid build-time errors
+ * Kept for backward compatibility but will throw during build if env vars are missing
+ */
+export const cloudinaryConfig = new Proxy({} as ReturnType<typeof getCloudinaryConfig>, {
+  get(_target, prop) {
+    return getCloudinaryConfig()[prop as keyof ReturnType<typeof getCloudinaryConfig>];
+  },
+});
 
 export const unsplashConfig = {
   accessKey: getOptionalEnvVar("UNSPLASH_ACCESS_KEY"),
@@ -47,10 +63,11 @@ export const pexelsConfig = {
  */
 export function validateCloudinaryConfig(): boolean {
   try {
+    const config = getCloudinaryConfig();
     return !!(
-      cloudinaryConfig.cloudName &&
-      cloudinaryConfig.apiKey &&
-      cloudinaryConfig.apiSecret
+      config.cloudName &&
+      config.apiKey &&
+      config.apiSecret
     );
   } catch {
     return false;
