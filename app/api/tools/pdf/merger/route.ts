@@ -7,10 +7,16 @@ export const runtime = "nodejs";
 export const maxDuration = 30;
 
 export async function POST(request: NextRequest) {
+  // #region agent log
+  fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/api/tools/pdf/merger/route.ts:9',message:'API route entry',data:{route:'/api/tools/pdf/merger'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+  // #endregion
   try {
     // Rate limiting
     const clientId = getClientIdentifier(request);
     const rateLimitResult = toolRateLimiter.check(clientId);
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/api/tools/pdf/merger/route.ts:13',message:'Rate limit check',data:{allowed:rateLimitResult.allowed,remaining:rateLimitResult.remaining},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
+    // #endregion
 
     if (!rateLimitResult.allowed) {
       return NextResponse.json(
@@ -32,6 +38,9 @@ export async function POST(request: NextRequest) {
 
     const formData = await request.formData();
     const files = formData.getAll("files") as File[];
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/api/tools/pdf/merger/route.ts:34',message:'Files received',data:{fileCount:files.length,fileNames:files.map(f=>f.name)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
 
     if (!files || files.length < 2) {
       return NextResponse.json(
@@ -64,7 +73,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Merge PDFs
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/api/tools/pdf/merger/route.ts:67',message:'Before mergePdfs call',data:{pdfCount:pdfBytesArray.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
     const mergedPdf = await mergePdfs(pdfBytesArray);
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/api/tools/pdf/merger/route.ts:68',message:'After mergePdfs call',data:{mergedSize:mergedPdf.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
 
     logger.info("PDFs merged successfully", {
       fileCount: files.length,
@@ -82,9 +97,16 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/api/tools/pdf/merger/route.ts:85',message:'Error caught',data:{errorMessage:error instanceof Error?error.message:String(error),errorStack:error instanceof Error?error.stack:undefined},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
     logger.error("PDF merger error", error);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { error: "Failed to merge PDFs. Please try again." },
+      { 
+        error: "Failed to merge PDFs. Please try again.",
+        details: process.env.NODE_ENV === "development" ? errorMessage : undefined
+      },
       { status: 500 }
     );
   }

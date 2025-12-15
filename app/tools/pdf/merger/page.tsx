@@ -42,6 +42,9 @@ export default function PdfMergerPage() {
     setIsProcessing(true);
     setMergedPdfUrl(null);
 
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:36',message:'API call initiated',data:{fileCount:files.length,fileNames:files.map(f=>f.name)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    // #endregion
     try {
       const formData = new FormData();
       files.forEach((file) => {
@@ -52,19 +55,41 @@ export default function PdfMergerPage() {
         method: "POST",
         body: formData,
       });
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:51',message:'Response received',data:{status:response.status,statusText:response.statusText,ok:response.ok,contentType:response.headers.get('content-type')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || "Failed to merge PDFs");
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch (e) {
+          // #region agent log
+          fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:57',message:'Failed to parse error response',data:{status:response.status},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+          // #endregion
+          errorData = { error: `HTTP ${response.status}: ${response.statusText}` };
+        }
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:60',message:'Error response parsed',data:{errorData,status:response.status},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+        // #endregion
+        const errorMessage = errorData.error || "Failed to merge PDFs";
+        const details = errorData.details ? `\n\nDetails: ${errorData.details}` : "";
+        throw new Error(`${errorMessage}${details}`);
       }
 
       const blob = await response.blob();
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:66',message:'Blob received',data:{blobSize:blob.size,blobType:blob.type},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
       const url = URL.createObjectURL(blob);
       setMergedPdfUrl(url);
 
       toast.success("PDFs merged successfully!");
       analytics.trackUsage("merge", { fileCount: files.length });
     } catch (error) {
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:72',message:'Error caught in frontend',data:{errorMessage:error instanceof Error?error.message:String(error),errorName:error instanceof Error?error.name:undefined},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
       toast.error(error instanceof Error ? error.message : "Failed to merge PDFs");
       analytics.trackError("Failed to merge PDFs", { fileCount: files.length });
     } finally {

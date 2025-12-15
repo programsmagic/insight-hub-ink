@@ -36,8 +36,15 @@ export async function POST(request: NextRequest) {
       const parsed = JSON.parse(rotationsJson);
       const validated = pdfRotateSchema.parse({ rotations: parsed });
       rotations = validated.rotations;
-    } catch {
-      return NextResponse.json({ error: "Invalid rotations format" }, { status: 400 });
+    } catch (error) {
+      logger.warn("PDF rotator validation error", { error, parsed: rotationsJson });
+      return NextResponse.json(
+        { 
+          error: "Invalid rotations format",
+          details: process.env.NODE_ENV === "development" && error instanceof Error ? error.message : undefined
+        },
+        { status: 400 }
+      );
     }
 
     const pdfBytes = new Uint8Array(await file.arrayBuffer());
@@ -57,8 +64,12 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     logger.error("PDF rotator error", error);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { error: "Failed to rotate PDF. Please try again." },
+      { 
+        error: "Failed to rotate PDF. Please try again.",
+        details: process.env.NODE_ENV === "development" ? errorMessage : undefined
+      },
       { status: 500 }
     );
   }

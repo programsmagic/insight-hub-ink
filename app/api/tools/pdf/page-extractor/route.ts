@@ -40,8 +40,15 @@ export async function POST(request: NextRequest) {
       const parsed = JSON.parse(pageNumbersJson);
       const validated = extractPagesSchema.parse({ pageNumbers: parsed });
       pageNumbers = validated.pageNumbers;
-    } catch {
-      return NextResponse.json({ error: "Invalid page numbers format" }, { status: 400 });
+    } catch (error) {
+      logger.warn("PDF page extractor validation error", { error, parsed: pageNumbersJson });
+      return NextResponse.json(
+        { 
+          error: "Invalid page numbers format",
+          details: process.env.NODE_ENV === "development" && error instanceof Error ? error.message : undefined
+        },
+        { status: 400 }
+      );
     }
 
     if (pageNumbers.length === 0) {
@@ -65,8 +72,12 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     logger.error("PDF page extractor error", error);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { error: "Failed to extract pages. Please try again." },
+      { 
+        error: "Failed to extract pages. Please try again.",
+        details: process.env.NODE_ENV === "development" ? errorMessage : undefined
+      },
       { status: 500 }
     );
   }

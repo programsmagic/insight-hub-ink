@@ -170,8 +170,10 @@ export async function updatePdfMetadata(
  */
 export async function textToPdf(text: string, options?: { fontSize?: number; fontFamily?: string }): Promise<Uint8Array> {
   const pdf = await PDFDocument.create();
-  const page = pdf.addPage([612, 792]); // US Letter size
-  const font = await pdf.embedFont("Helvetica");
+  let page = pdf.addPage([612, 792]); // US Letter size
+  // Use provided fontFamily or default to Helvetica
+  const fontName = options?.fontFamily || "Helvetica";
+  const font = await pdf.embedFont(fontName);
   const fontSize = options?.fontSize || 12;
   const margin = 50;
   const maxWidth = page.getWidth() - 2 * margin;
@@ -182,8 +184,8 @@ export async function textToPdf(text: string, options?: { fontSize?: number; fon
 
   for (const line of lines) {
     if (y < margin) {
-      const newPage = pdf.addPage([612, 792]);
-      y = newPage.getHeight() - margin;
+      page = pdf.addPage([612, 792]);
+      y = page.getHeight() - margin;
     }
 
     const words = line.split(" ");
@@ -205,8 +207,8 @@ export async function textToPdf(text: string, options?: { fontSize?: number; fon
         currentLine = word;
         y -= fontSize + 5;
         if (y < margin) {
-          const newPage = pdf.addPage([612, 792]);
-          y = newPage.getHeight() - margin;
+          page = pdf.addPage([612, 792]);
+          y = page.getHeight() - margin;
         }
       } else {
         currentLine = testLine;
