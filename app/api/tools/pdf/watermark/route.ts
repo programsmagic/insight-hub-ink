@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "File is too large (max 50MB)" }, { status: 400 });
     }
 
-    let watermark;
+    let watermark: { type: "text" | "image"; text?: string; imageBytes?: Uint8Array; opacity?: number };
     try {
       const parsed = JSON.parse(watermarkJson);
       const validated = pdfWatermarkSchema.parse(parsed);
