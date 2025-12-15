@@ -2,7 +2,7 @@
  * PDF manipulation utilities using pdf-lib
  */
 
-import { PDFDocument, PDFPage, rgb, PDFFont, PDFImage } from "pdf-lib";
+import { PDFDocument, rgb } from "pdf-lib";
 
 /**
  * Extract text from PDF
@@ -171,7 +171,6 @@ export async function textToPdf(text: string, options?: { fontSize?: number; fon
   const fontSize = options?.fontSize || 12;
   const margin = 50;
   const maxWidth = page.getWidth() - 2 * margin;
-  const maxHeight = page.getHeight() - 2 * margin;
 
   // Simple text wrapping
   const lines = text.split("\n");
@@ -185,7 +184,7 @@ export async function textToPdf(text: string, options?: { fontSize?: number; fon
 
     const words = line.split(" ");
     let currentLine = "";
-    let x = margin;
+    const x = margin;
 
     for (const word of words) {
       const testLine = currentLine ? `${currentLine} ${word}` : word;
@@ -252,8 +251,8 @@ export async function imagesToPdf(imageBytesArray: Array<{ bytes: Uint8Array; fo
  */
 export async function addPasswordProtection(
   pdfBytes: Uint8Array,
-  userPassword: string,
-  ownerPassword?: string
+  _userPassword: string,
+  _ownerPassword?: string
 ): Promise<Uint8Array> {
   const pdf = await PDFDocument.load(pdfBytes);
   // Note: pdf-lib doesn't support encryption directly
@@ -265,7 +264,7 @@ export async function addPasswordProtection(
 /**
  * Remove password from PDF (requires password)
  */
-export async function removePassword(pdfBytes: Uint8Array, password: string): Promise<Uint8Array> {
+export async function removePassword(pdfBytes: Uint8Array, _password: string): Promise<Uint8Array> {
   // Note: pdf-lib doesn't support decryption directly
   // This would require additional library
   // For now, try to load and save (which will fail if password is wrong)
