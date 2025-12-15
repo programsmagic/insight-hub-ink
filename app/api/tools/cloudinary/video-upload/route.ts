@@ -5,7 +5,7 @@ import { getCloudinaryConfig, validateCloudinaryConfig } from "@/lib/cloudinary/
 import { v2 as cloudinary } from "cloudinary";
 
 export const runtime = "nodejs";
-export const maxDuration = 120;
+export const maxDuration = 60;
 
 export async function POST(request: NextRequest) {
   try {
