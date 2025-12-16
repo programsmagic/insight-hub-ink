@@ -39,10 +39,14 @@ export default function PdfPageExtractorPage() {
       const trimmed = part.trim();
       if (trimmed.includes("-")) {
         // Handle ranges like "1-5"
-        const [start, end] = trimmed.split("-").map((n) => parseInt(n.trim()));
-        if (!isNaN(start) && !isNaN(end) && start > 0 && end > 0 && start <= end) {
-          for (let i = start; i <= end; i++) {
-            if (!numbers.includes(i)) numbers.push(i);
+        const rangeParts = trimmed.split("-");
+        if (rangeParts.length === 2 && rangeParts[0] && rangeParts[1]) {
+          const start = parseInt(rangeParts[0].trim());
+          const end = parseInt(rangeParts[1].trim());
+          if (!isNaN(start) && !isNaN(end) && start > 0 && end > 0 && start <= end) {
+            for (let i = start; i <= end; i++) {
+              if (!numbers.includes(i)) numbers.push(i);
+            }
           }
         }
       } else {
@@ -103,6 +107,15 @@ export default function PdfPageExtractorPage() {
         contentType: response.headers.get("content-type")
       });
       // #endregion
+      
+      // #region agent log
+      console.log("[PDF Page Extractor] Response received", { 
+        status: response.status, 
+        statusText: response.statusText, 
+        ok: response.ok,
+        contentType: response.headers.get("content-type")
+      });
+      // #endregion
 
       if (!response.ok) {
         let errorData;
@@ -129,6 +142,12 @@ export default function PdfPageExtractorPage() {
       toast.success(`Successfully extracted ${pages.length} page(s)!`);
       analytics.trackUsage("extract", { pageCount: pages.length });
     } catch (error) {
+      // #region agent log
+      console.error("[PDF Page Extractor] Error caught", { 
+        error: error instanceof Error ? error.message : String(error), 
+        stack: error instanceof Error ? error.stack : undefined 
+      });
+      // #endregion
       toast.error(error instanceof Error ? error.message : "Failed to extract pages");
       analytics.trackError("Failed to extract pages", { pageCount: pages.length });
     } finally {

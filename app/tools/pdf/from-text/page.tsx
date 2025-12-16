@@ -85,6 +85,12 @@ export default function TextToPdfPage() {
       toast.success("PDF created successfully!");
       analytics.trackUsage("convert", { textLength: text.length, fontSize, fontFamily });
     } catch (error) {
+      // #region agent log
+      console.error("[Text to PDF] Error caught", { 
+        error: error instanceof Error ? error.message : String(error), 
+        stack: error instanceof Error ? error.stack : undefined 
+      });
+      // #endregion
       toast.error(error instanceof Error ? error.message : "Failed to convert text to PDF");
       analytics.trackError("Failed to convert text to PDF", { textLength: text.length });
     } finally {

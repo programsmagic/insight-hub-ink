@@ -16,6 +16,9 @@ export default function PdfMergerPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // #region agent log
+    console.log('[PDF Merger] File select triggered', { fileCount: event.target.files?.length || 0 });
+    // #endregion
     const selectedFiles = Array.from(event.target.files || []);
     const pdfFiles = selectedFiles.filter((file) => file.type === "application/pdf");
 
@@ -24,6 +27,9 @@ export default function PdfMergerPage() {
     }
 
     if (pdfFiles.length > 0) {
+      // #region agent log
+      console.log('[PDF Merger] Files added', { pdfCount: pdfFiles.length, totalFiles: files.length + pdfFiles.length });
+      // #endregion
       setFiles((prev) => [...prev, ...pdfFiles]);
       analytics.trackInteraction("files", "upload", { count: pdfFiles.length });
     }
@@ -43,7 +49,7 @@ export default function PdfMergerPage() {
     setMergedPdfUrl(null);
 
     // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:36',message:'API call initiated',data:{fileCount:files.length,fileNames:files.map(f=>f.name)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    console.log('[PDF Merger] Starting merge', { fileCount: files.length, fileNames: files.map(f => f.name) });
     // #endregion
     try {
       const formData = new FormData();
@@ -51,27 +57,30 @@ export default function PdfMergerPage() {
         formData.append("files", file);
       });
 
+      // #region agent log
+      console.log('[PDF Merger] Sending request to API', { fileCount: files.length });
+      // #endregion
       const response = await fetch("/api/tools/pdf/merger", {
         method: "POST",
         body: formData,
       });
       // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:51',message:'Response received',data:{status:response.status,statusText:response.statusText,ok:response.ok,contentType:response.headers.get('content-type')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      console.log('[PDF Merger] Response received', { status: response.status, statusText: response.statusText, ok: response.ok, contentType: response.headers.get('content-type') });
       // #endregion
 
       if (!response.ok) {
         let errorData;
         try {
           errorData = await response.json();
+          // #region agent log
+          console.error('[PDF Merger] Error response', { status: response.status, errorData });
+          // #endregion
         } catch (e) {
           // #region agent log
-          fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:57',message:'Failed to parse error response',data:{status:response.status},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+          console.error('[PDF Merger] Failed to parse error response', { status: response.status, error: e });
           // #endregion
           errorData = { error: `HTTP ${response.status}: ${response.statusText}` };
         }
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:60',message:'Error response parsed',data:{errorData,status:response.status},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-        // #endregion
         const errorMessage = errorData.error || "Failed to merge PDFs";
         const details = errorData.details ? `\n\nDetails: ${errorData.details}` : "";
         throw new Error(`${errorMessage}${details}`);
@@ -79,16 +88,19 @@ export default function PdfMergerPage() {
 
       const blob = await response.blob();
       // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:66',message:'Blob received',data:{blobSize:blob.size,blobType:blob.type},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      console.log('[PDF Merger] Blob received', { blobSize: blob.size, blobType: blob.type });
       // #endregion
       const url = URL.createObjectURL(blob);
       setMergedPdfUrl(url);
 
+      // #region agent log
+      console.log('[PDF Merger] Merge successful', { url });
+      // #endregion
       toast.success("PDFs merged successfully!");
       analytics.trackUsage("merge", { fileCount: files.length });
     } catch (error) {
       // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/tools/pdf/merger/page.tsx:72',message:'Error caught in frontend',data:{errorMessage:error instanceof Error?error.message:String(error),errorName:error instanceof Error?error.name:undefined},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      console.error('[PDF Merger] Error caught', { error: error instanceof Error ? error.message : String(error), stack: error instanceof Error ? error.stack : undefined });
       // #endregion
       toast.error(error instanceof Error ? error.message : "Failed to merge PDFs");
       analytics.trackError("Failed to merge PDFs", { fileCount: files.length });

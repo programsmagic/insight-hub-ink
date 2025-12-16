@@ -718,6 +718,7 @@ const pdfTools: Tool[] = [
     tags: ["pdf", "rotate", "edit"],
     keywords: ["pdf rotator", "rotate pdf", "pdf rotation"],
     isClientSide: false,
+    isImplemented: true,
   },
   {
     id: "pdf-watermark",
@@ -740,6 +741,7 @@ const pdfTools: Tool[] = [
     tags: ["pdf", "extract", "pages"],
     keywords: ["pdf page extractor", "extract pdf pages", "pdf pages"],
     isClientSide: false,
+    isImplemented: true,
   },
   {
     id: "pdf-page-reorder",
@@ -773,6 +775,7 @@ const pdfTools: Tool[] = [
     tags: ["pdf", "text", "converter"],
     keywords: ["text to pdf", "create pdf", "text pdf converter"],
     isClientSide: false,
+    isImplemented: true,
   },
   {
     id: "image-to-pdf",

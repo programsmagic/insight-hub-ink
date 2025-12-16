@@ -136,6 +136,12 @@ export default function PdfRotatorPage() {
       toast.success(`Successfully rotated ${rotations.length} page(s)!`);
       analytics.trackUsage("rotate", { rotationCount: rotations.length });
     } catch (error) {
+      // #region agent log
+      console.error("[PDF Rotator] Error caught", { 
+        error: error instanceof Error ? error.message : String(error), 
+        stack: error instanceof Error ? error.stack : undefined 
+      });
+      // #endregion
       toast.error(error instanceof Error ? error.message : "Failed to rotate PDF");
       analytics.trackError("Failed to rotate PDF", { rotationCount: rotations.length });
     } finally {

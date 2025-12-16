@@ -24,15 +24,38 @@ export async function extractTextFromPdf(pdfBytes: Uint8Array): Promise<string> 
  * Merge multiple PDFs into one
  */
 export async function mergePdfs(pdfBytesArray: Uint8Array[]): Promise<Uint8Array> {
-  const mergedPdf = await PDFDocument.create();
+  try {
+    if (pdfBytesArray.length === 0) {
+      throw new Error("No PDFs provided to merge");
+    }
+    
+    const mergedPdf = await PDFDocument.create();
 
-  for (const pdfBytes of pdfBytesArray) {
-    const pdf = await PDFDocument.load(pdfBytes);
-    const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-    pages.forEach((page) => mergedPdf.addPage(page));
+    for (let i = 0; i < pdfBytesArray.length; i++) {
+      const pdfBytes = pdfBytesArray[i];
+      if (!pdfBytes) {
+        throw new Error(`PDF ${i + 1} is empty or invalid`);
+      }
+      try {
+        const pdf = await PDFDocument.load(pdfBytes);
+        const pageIndices = pdf.getPageIndices();
+        if (pageIndices.length === 0) {
+          throw new Error(`PDF ${i + 1} has no pages`);
+        }
+        const pages = await mergedPdf.copyPages(pdf, pageIndices);
+        pages.forEach((page) => mergedPdf.addPage(page));
+      } catch (error) {
+        throw new Error(`Failed to process PDF ${i + 1}: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    }
+
+    return await mergedPdf.save();
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(`Failed to merge PDFs: ${String(error)}`);
   }
-
-  return await mergedPdf.save();
 }
 
 /**
@@ -59,11 +82,34 @@ export async function splitPdf(
  * Extract specific pages from PDF
  */
 export async function extractPages(pdfBytes: Uint8Array, pageNumbers: number[]): Promise<Uint8Array> {
-  const sourcePdf = await PDFDocument.load(pdfBytes);
-  const newPdf = await PDFDocument.create();
-  const pages = await newPdf.copyPages(sourcePdf, pageNumbers.map((n) => n - 1)); // Convert to 0-based
-  pages.forEach((page) => newPdf.addPage(page));
-  return await newPdf.save();
+  try {
+    const sourcePdf = await PDFDocument.load(pdfBytes);
+    const totalPages = sourcePdf.getPageCount();
+    
+    // Validate page numbers
+    const validPageNumbers = pageNumbers
+      .map((n) => n - 1) // Convert to 0-based
+      .filter((n) => n >= 0 && n < totalPages);
+    
+    if (validPageNumbers.length === 0) {
+      throw new Error(`No valid pages to extract. PDF has ${totalPages} page(s).`);
+    }
+    
+    if (validPageNumbers.length !== pageNumbers.length) {
+      const invalidPages = pageNumbers.filter((n) => n < 1 || n > totalPages);
+      throw new Error(`Invalid page numbers: ${invalidPages.join(", ")}. PDF has ${totalPages} page(s).`);
+    }
+    
+    const newPdf = await PDFDocument.create();
+    const pages = await newPdf.copyPages(sourcePdf, validPageNumbers);
+    pages.forEach((page) => newPdf.addPage(page));
+    return await newPdf.save();
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(`Failed to extract pages: ${String(error)}`);
+  }
 }
 
 /**
@@ -73,22 +119,34 @@ export async function rotatePdfPages(
   pdfBytes: Uint8Array,
   rotations: Array<{ pageNumber: number; angle: 90 | 180 | 270 }>
 ): Promise<Uint8Array> {
-  const pdf = await PDFDocument.load(pdfBytes);
-  const pages = pdf.getPages();
+  try {
+    const pdf = await PDFDocument.load(pdfBytes);
+    const pages = pdf.getPages();
+    const totalPages = pages.length;
 
-  for (const rotation of rotations) {
-    const pageIndex = rotation.pageNumber - 1; // Convert to 0-based
-    if (pageIndex >= 0 && pageIndex < pages.length) {
-      const page = pages[pageIndex];
-      if (page) {
-        // pdf-lib setRotation expects Rotation type, cast number to satisfy type checker
-        // @ts-expect-error - pdf-lib Rotation type is compatible with 90|180|270
-        page.setRotation(rotation.angle);
+    for (const rotation of rotations) {
+      const pageIndex = rotation.pageNumber - 1; // Convert to 0-based
+      if (pageIndex < 0 || pageIndex >= totalPages) {
+        throw new Error(`Invalid page number ${rotation.pageNumber}. PDF has ${totalPages} page(s).`);
       }
+      
+      const page = pages[pageIndex];
+      if (!page) {
+        throw new Error(`Page ${rotation.pageNumber} not found`);
+      }
+      
+      // pdf-lib setRotation expects Rotation type, cast number to satisfy type checker
+      // @ts-expect-error - pdf-lib Rotation type is compatible with 90|180|270
+      page.setRotation(rotation.angle);
     }
-  }
 
-  return await pdf.save();
+    return await pdf.save();
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(`Failed to rotate PDF pages: ${String(error)}`);
+  }
 }
 
 /**
