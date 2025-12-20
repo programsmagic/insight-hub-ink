@@ -3,9 +3,12 @@ import { logger } from "@/lib/logger";
 import { toolRateLimiter, getClientIdentifier } from "@/lib/rate-limit";
 import { getCloudinaryConfig, validateCloudinaryConfig } from "@/lib/cloudinary/config";
 import { v2 as cloudinary } from "cloudinary";
+import { createGetHandler } from "@/lib/api-route-helpers";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
+
+export const GET = createGetHandler(['POST']);
 
 export async function POST(request: NextRequest) {
   try {

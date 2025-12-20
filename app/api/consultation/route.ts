@@ -5,7 +5,46 @@ import { consultationRateLimiter, getClientIdentifier } from '@/lib/rate-limit';
 
 export const runtime = 'nodejs';
 
+// #region agent log
+const LOG_ENDPOINT = 'http://127.0.0.1:7242/ingest/c72d9968-db9a-43d8-a1fa-4300d5bc8db2';
+function logRequest(data: { location: string; message: string; data: Record<string, unknown>; hypothesisId?: string }) {
+  const payload = { sessionId: 'debug-session', runId: 'run1', hypothesisId: data.hypothesisId || 'E', location: data.location, message: data.message, data: data.data, timestamp: Date.now() };
+  fetch(LOG_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
+}
+// #endregion agent log
+
+// Handle GET requests (should return 405, not 403)
+export async function GET(request: NextRequest) {
+  // #region agent log
+  logRequest({
+    location: 'app/api/consultation/route.ts:GET',
+    message: 'GET request to consultation API',
+    data: {
+      userAgent: request.headers.get('user-agent') || 'unknown',
+      isGooglebot: /Googlebot|Google-InspectionTool/i.test(request.headers.get('user-agent') || ''),
+    },
+    hypothesisId: 'E',
+  });
+  // #endregion agent log
+  
+  return NextResponse.json(
+    { error: 'Method not allowed. This endpoint only accepts POST requests.' },
+    { status: 405, headers: { 'Allow': 'POST' } }
+  );
+}
+
 export async function POST(request: NextRequest) {
+  // #region agent log
+  logRequest({
+    location: 'app/api/consultation/route.ts:POST-entry',
+    message: 'POST request received',
+    data: {
+      userAgent: request.headers.get('user-agent') || 'unknown',
+      isGooglebot: /Googlebot|Google-InspectionTool/i.test(request.headers.get('user-agent') || ''),
+    },
+    hypothesisId: 'E',
+  });
+  // #endregion agent log
   try {
     // Rate limiting
     const clientId = getClientIdentifier(request);

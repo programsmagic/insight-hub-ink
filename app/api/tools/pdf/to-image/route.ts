@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logger } from "@/lib/logger";
 import { toolRateLimiter, getClientIdentifier } from "@/lib/rate-limit";
+import { createGetHandler } from "@/lib/api-route-helpers";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
+
+export const GET = createGetHandler(['POST']);
 
 export async function POST(request: NextRequest) {
   try {

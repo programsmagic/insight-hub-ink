@@ -1,61 +1,81 @@
 # robots.txt for InsightHub.ink
 # Allow all search engines and AI agents to crawl and index
+# Note: This is a static fallback. The dynamic version at /robots.txt takes precedence.
 
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 # Specific rules for major search engines
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 0
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 User-agent: Googlebot-Image
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 0
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 User-agent: Slurp
 Allow: /
-Crawl-delay: 0
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 # Allow AI agents and LLMs
 User-agent: GPTBot
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 User-agent: CCBot
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
 # Sitemap location
 Sitemap: https://insighthub.ink/sitemap.xml
-
-# Disallow admin and private areas (if any)
-Disallow: /admin/
-Disallow: /api/
-Disallow: /_next/
-
-# Important pages to prioritize
-Allow: /
-Allow: /smm
-Allow: /blog
-Allow: /about
-Allow: /contact
-Allow: /tools
-Allow: /tools/
 

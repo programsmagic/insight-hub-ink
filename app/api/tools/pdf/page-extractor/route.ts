@@ -3,6 +3,7 @@ import { logger } from "@/lib/logger";
 import { toolRateLimiter, getClientIdentifier } from "@/lib/rate-limit";
 import { extractPages } from "@/lib/tools/pdf-utils";
 import { z } from "zod";
+import { createGetHandler } from "@/lib/api-route-helpers";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -10,6 +11,8 @@ export const maxDuration = 30;
 const extractPagesSchema = z.object({
   pageNumbers: z.array(z.number().int().min(1)),
 });
+
+export const GET = createGetHandler(['POST']);
 
 export async function POST(request: NextRequest) {
   try {

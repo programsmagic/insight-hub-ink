@@ -3,6 +3,7 @@ import { logger } from "@/lib/logger";
 import { toolRateLimiter, getClientIdentifier } from "@/lib/rate-limit";
 import { splitPdf } from "@/lib/tools/pdf-utils";
 import { z } from "zod";
+import { createGetHandler } from "@/lib/api-route-helpers";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -13,6 +14,8 @@ const splitPdfSchema = z.object({
     end: z.number().int().min(1),
   })),
 });
+
+export const GET = createGetHandler(['POST']);
 
 export async function POST(request: NextRequest) {
   try {
@@ -76,6 +79,7 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
 
 
 
