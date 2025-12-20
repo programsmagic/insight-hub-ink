@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
  * Returns 405 Method Not Allowed instead of 403 Forbidden
  */
 export function createGetHandler(allowedMethods: string[] = ['POST']) {
-  return async function GET(request: NextRequest) {
+  return async function GET(_request: NextRequest) {
     return NextResponse.json(
       { 
         error: 'Method not allowed',
@@ -26,7 +26,7 @@ export function createGetHandler(allowedMethods: string[] = ['POST']) {
  * Standard handler for unsupported HTTP methods
  */
 export function createMethodNotAllowedHandler(allowedMethods: string[] = ['POST']) {
-  return async function handler(request: NextRequest) {
+  return async function handler(_request: NextRequest) {
     return NextResponse.json(
       { 
         error: 'Method not allowed',
@@ -42,5 +42,6 @@ export function createMethodNotAllowedHandler(allowedMethods: string[] = ['POST'
     );
   };
 }
+
 
 

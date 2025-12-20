@@ -10,7 +10,7 @@ import { createGetHandler } from '@/lib/api-route-helpers';
  */
 export const GET = createGetHandler(['POST']);
 
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   return NextResponse.json(
     { 
       error: 'Not found',
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
   );
 }
 
-export async function PUT(request: NextRequest) {
+export async function PUT(_request: NextRequest) {
   return NextResponse.json(
     { 
       error: 'Method not allowed',
@@ -30,7 +30,7 @@ export async function PUT(request: NextRequest) {
   );
 }
 
-export async function DELETE(request: NextRequest) {
+export async function DELETE(_request: NextRequest) {
   return NextResponse.json(
     { 
       error: 'Method not allowed',
@@ -40,7 +40,7 @@ export async function DELETE(request: NextRequest) {
   );
 }
 
-export async function PATCH(request: NextRequest) {
+export async function PATCH(_request: NextRequest) {
   return NextResponse.json(
     { 
       error: 'Method not allowed',
