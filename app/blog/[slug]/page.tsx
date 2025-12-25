@@ -263,10 +263,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {/* Article Content */}
               <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-code:text-accent prose-pre:bg-secondary prose-pre:border prose-pre:border-border">
                 {post.content && (
-                  <div
-                    dangerouslySetInnerHTML={{ __html: post.content }}
-                    className="blog-content"
-                  />
+                  <>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                      className="blog-content"
+                    />
+                    
+                    {/* Mid-content ad for long articles */}
+                    <AdSenseDisplay format="auto" minHeight={250} className="my-12" />
+                  </>
                 )}
 
                 {/* In-article ad */}
@@ -400,6 +405,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 }
                 return null;
               })()}
+
+              {/* Ad before related posts */}
+              <AdSenseDisplay format="horizontal" minHeight={100} className="mt-12 mb-8" />
 
               {/* Related Posts */}
               {relatedPosts.length > 0 && (

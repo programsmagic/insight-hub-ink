@@ -113,6 +113,11 @@ export function ToolLayout({
           </Card>
         </section>
 
+        {/* Mid-content ad for tool pages */}
+        <div className="my-8">
+          <AdSenseDisplay format="auto" minHeight={250} />
+        </div>
+
         {/* Rich Content Section */}
         {content && (
           <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>

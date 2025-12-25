@@ -162,6 +162,9 @@ export default function ToolsPage() {
       {/* Ad after category navigation */}
       <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
 
+      {/* Additional ad placement */}
+      <AdSenseDisplay format="horizontal" minHeight={100} className="py-4" />
+
       {/* Featured Tools */}
       {!searchQuery && selectedCategory === "all" && (
         <section className="py-12 px-4 sm:px-6 lg:px-8">
