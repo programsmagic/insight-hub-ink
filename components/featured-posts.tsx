@@ -5,7 +5,7 @@ import { getBlogImageUrl } from '@/lib/services/blog-api';
 import { format } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
 import { Folder, Calendar } from 'lucide-react';
-import type { Category } from '@/lib/types/blog';
+import type { Category, BlogPost } from '@/lib/types/blog';
 
 /**
  * FeaturedPosts Component
@@ -13,15 +13,7 @@ import type { Category } from '@/lib/types/blog';
  * Falls back gracefully if API is unavailable
  */
 export async function FeaturedPosts() {
-  let posts: Array<{
-    id: string;
-    title: string;
-    excerpt: string;
-    slug: string;
-    featured_image: string | null;
-    published_date: string;
-    categories: string[];
-  }> = [];
+  let posts: BlogPost[] = [];
   
   let categoriesMap = new Map<string, Category>();
 
@@ -95,7 +87,7 @@ export async function FeaturedPosts() {
               </div>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm flex-wrap">
-                  {postCategories.length > 0 && (
+                  {postCategories.length > 0 && postCategories[0] && (
                     <>
                       <div className="flex items-center gap-1">
                         <Folder className="h-3 w-3 text-accent" />
