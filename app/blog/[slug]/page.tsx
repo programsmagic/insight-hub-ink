@@ -14,6 +14,8 @@ import { getBlogPostBySlug, getBlogPosts, getBlogImageUrl } from '@/lib/services
 import { getReadingTime } from '@/lib/utils/blog-utils';
 import { RelatedPosts } from '@/components/blog/related-posts';
 import { SocialShare } from '@/components/blog/social-share';
+import { CTASection } from '@/components/blog/cta-section';
+import { RelatedTools } from '@/components/blog/related-tools';
 import { env } from '@/lib/env';
 import { Calendar, Tag, ArrowLeft, Clock, Eye, User } from 'lucide-react';
 import Script from 'next/script';
@@ -303,6 +305,101 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                 </div>
               )}
+
+              {/* CTA Section - Determine type based on categories/tags */}
+              {(() => {
+                const isSMMRelated = post.categories.some(cat => 
+                  cat.toLowerCase().includes('smm') || 
+                  cat.toLowerCase().includes('social') ||
+                  cat.toLowerCase().includes('youtube') ||
+                  cat.toLowerCase().includes('instagram')
+                ) || post.tags.some(tag => 
+                  tag.toLowerCase().includes('smm') ||
+                  tag.toLowerCase().includes('social media') ||
+                  tag.toLowerCase().includes('youtube') ||
+                  tag.toLowerCase().includes('instagram')
+                );
+                
+                const isFinTrackRelated = post.categories.some(cat => 
+                  cat.toLowerCase().includes('finance') || 
+                  cat.toLowerCase().includes('money') ||
+                  cat.toLowerCase().includes('budget')
+                ) || post.tags.some(tag => 
+                  tag.toLowerCase().includes('finance') ||
+                  tag.toLowerCase().includes('expense') ||
+                  tag.toLowerCase().includes('budget')
+                );
+                
+                const isToolsRelated = post.categories.some(cat => 
+                  cat.toLowerCase().includes('tool') || 
+                  cat.toLowerCase().includes('developer') ||
+                  cat.toLowerCase().includes('json') ||
+                  cat.toLowerCase().includes('seo')
+                ) || post.tags.some(tag => 
+                  tag.toLowerCase().includes('tool') ||
+                  tag.toLowerCase().includes('developer') ||
+                  tag.toLowerCase().includes('json')
+                );
+
+                if (isSMMRelated) {
+                  return (
+                    <div className="mt-12">
+                      <CTASection type="smm" />
+                    </div>
+                  );
+                } else if (isFinTrackRelated) {
+                  return (
+                    <div className="mt-12">
+                      <CTASection type="fintrack" />
+                    </div>
+                  );
+                } else if (isToolsRelated) {
+                  return (
+                    <div className="mt-12">
+                      <CTASection type="tools" />
+                    </div>
+                  );
+                }
+                return null;
+              })()}
+
+              {/* Related Tools - Show for tool-related posts */}
+              {(() => {
+                const isToolsRelated = post.categories.some(cat => 
+                  cat.toLowerCase().includes('tool') || 
+                  cat.toLowerCase().includes('developer') ||
+                  cat.toLowerCase().includes('json') ||
+                  cat.toLowerCase().includes('seo') ||
+                  cat.toLowerCase().includes('image') ||
+                  cat.toLowerCase().includes('pdf')
+                ) || post.tags.some(tag => 
+                  tag.toLowerCase().includes('tool') ||
+                  tag.toLowerCase().includes('developer') ||
+                  tag.toLowerCase().includes('json') ||
+                  tag.toLowerCase().includes('formatter')
+                );
+
+                if (isToolsRelated) {
+                  // Try to find related tools based on tags
+                  const toolKeywords = post.tags.filter(tag => 
+                    tag.toLowerCase().includes('json') ||
+                    tag.toLowerCase().includes('image') ||
+                    tag.toLowerCase().includes('pdf') ||
+                    tag.toLowerCase().includes('seo') ||
+                    tag.toLowerCase().includes('html')
+                  );
+                  
+                  return (
+                    <div className="mt-12">
+                      <RelatedTools 
+                        category={toolKeywords[0]?.toLowerCase() || undefined}
+                        limit={3}
+                      />
+                    </div>
+                  );
+                }
+                return null;
+              })()}
 
               {/* Related Posts */}
               {relatedPosts.length > 0 && (

@@ -19,23 +19,30 @@ interface BlogPageProps {
 }
 
 export const metadata: Metadata = {
-  title: 'Blog - Latest Insights & Articles',
+  title: 'Developer Tools Tutorials & SMM Growth Guides | Blog',
   description:
-    'Explore our latest articles on personal finance, money management, budgeting, investing, and financial planning. Expert tips and strategies to help you achieve your financial goals.',
+    'Learn how to use free developer tools, grow your social media presence, and manage your finances. Tutorials on JSON formatters, image tools, SEO utilities, YouTube growth, Instagram strategies, and personal finance tips.',
   keywords: [
-    'personal finance',
-    'money management',
-    'budgeting',
-    'investing',
-    'financial planning',
-    'debt repayment',
-    'savings',
-    'financial tips',
+    'developer tools tutorials',
+    'JSON formatter guide',
+    'image resizer tutorial',
+    'SEO tools guide',
+    'YouTube growth strategies',
+    'Instagram growth guide',
+    'TikTok growth tips',
+    'how to get YouTube watch hours',
+    'social media growth',
+    'personal finance tips',
+    'expense tracking guide',
+    'budgeting for developers',
+    'tool tutorials',
+    'SMM guides',
+    'creator growth'
   ],
   openGraph: {
-    title: 'Blog - Latest Insights & Articles | InsightHub.ink',
+    title: 'Developer Tools Tutorials & SMM Growth Guides | InsightHub.ink Blog',
     description:
-      'Explore our latest articles on personal finance, money management, and financial planning.',
+      'Learn how to use free developer tools, grow your social media presence, and manage your finances with our comprehensive guides and tutorials.',
     type: 'website',
   },
 };

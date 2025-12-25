@@ -125,10 +125,10 @@ export default function SMMPage() {
             <span className="text-xs sm:text-sm font-medium">Professional SMM Services</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight gradient-text mb-4 sm:mb-6 px-4">
-            Transform Your Social Media Presence
+            Social Media Marketing Services for YouTube & Instagram | Buy Views, Subscribers, Likes
           </h1>
           <p className="mt-3 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-muted-foreground px-4">
-            Boost your social media presence with premium-quality services. Buy views, subscribers, likes, comments, and watch hours from trusted providers. Premium quality, instant delivery, and 100% satisfaction guaranteed. Trusted by 500+ businesses worldwide.
+            Buy premium-quality social media services: YouTube views, subscribers, watch hours, Instagram likes, TikTok views with instant delivery. 100% satisfaction guaranteed. Trusted by 500+ businesses worldwide.
           </p>
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
             <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
@@ -148,13 +148,13 @@ export default function SMMPage() {
       {/* Ad after hero */}
       <AdSenseDisplay format="horizontal" minHeight={100} className="py-4" />
 
-      {/* Services We Offer Section */}
+      {/* YouTube Growth Services Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Premium Social Media Growth Services</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">YouTube Growth Services</h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              Get instant, premium-quality growth for your social media accounts. All services come with quality guarantees and instant delivery.
+              Boost your YouTube channel with premium views, subscribers, watch hours, likes, and comments. All services deliver instantly with quality guarantees.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
@@ -278,7 +278,115 @@ export default function SMMPage() {
       {/* Ad after trust section */}
       <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
 
-      {/* Platforms Section */}
+      {/* Instagram Growth Services Section */}
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Instagram Growth Services</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+              Grow your Instagram account with real followers, likes, comments, and views. Premium quality engagement that boosts your reach and visibility.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+            <Card className="p-6 sm:p-8 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <Instagram className="h-12 w-12 text-pink-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Instagram Followers</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Get real, engaged Instagram followers that boost your account credibility and reach.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <ThumbsUp className="h-12 w-12 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Instagram Likes</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Increase post engagement with premium-quality likes from real accounts.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <MessageSquare className="h-12 w-12 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Instagram Comments</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Get authentic comments that boost your post engagement and visibility.
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* TikTok Growth Services Section */}
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">TikTok Growth Services</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+              Increase your TikTok views, followers, likes, and engagement. Fast delivery with premium quality to help your content go viral.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+            <Card className="p-6 sm:p-8 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <Eye className="h-12 w-12 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">TikTok Views</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Boost your TikTok video views to increase visibility and reach on the platform.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <Users className="h-12 w-12 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">TikTok Followers</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Grow your TikTok following with real, engaged followers who interact with your content.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <ThumbsUp className="h-12 w-12 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">TikTok Likes</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Increase engagement with premium-quality likes that boost your video's algorithm performance.
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* How to Buy Social Media Engagement Safely Section */}
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">How to Buy Social Media Engagement Safely</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+              Learn the best practices for purchasing social media services without risking your account. Our premium services are 100% safe and comply with platform guidelines.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-shadow">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4">Choose Premium Quality Services</h3>
+              <p className="text-sm sm:text-base text-muted-foreground mb-4">
+                Always opt for premium-quality services from trusted providers. Our services use real accounts and authentic engagement methods that comply with platform policies.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-shadow">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4">Start with Small Orders</h3>
+              <p className="text-sm sm:text-base text-muted-foreground mb-4">
+                Begin with smaller orders to test the quality and delivery speed. Once satisfied, gradually increase your orders for better results.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-shadow">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4">Verify Provider Reputation</h3>
+              <p className="text-sm sm:text-base text-muted-foreground mb-4">
+                Check reviews, testimonials, and provider history. We're trusted by 500+ clients with a 99.9% quality rate and 24/7 customer support.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-shadow">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4">Ensure Account Safety</h3>
+              <p className="text-sm sm:text-base text-muted-foreground mb-4">
+                Our services are 100% safe for your accounts. We use premium-quality, authentic engagement methods that comply with platform guidelines.
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* All Major Platforms Supported Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
@@ -395,6 +503,50 @@ export default function SMMPage() {
                 height={450}
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Frequently Asked Questions</h2>
+            <p className="text-base sm:text-lg text-muted-foreground">
+              Common questions about our social media growth services
+            </p>
+          </div>
+          <div className="space-y-4 sm:space-y-6">
+            <Card className="p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">Are your SMM services safe for my account?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Yes, all our services are 100% safe for your accounts. We use premium-quality, authentic engagement methods that comply with platform guidelines. Your account safety is our top priority.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">How fast is the delivery?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                We offer instant delivery for most services. You'll see results within hours, not days. Delivery speed depends on the service type and quantity ordered.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">What platforms do you support?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                We support all major social media platforms including YouTube, Instagram, TikTok, Facebook, Twitter, LinkedIn, and more. Visit smm.insighthub.ink to see all available services.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">Do you offer refunds?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Yes, we offer a 100% satisfaction guarantee. If you're not satisfied with our service, contact our support team for a refund.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">What payment methods do you accept?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                We accept all major payment methods including credit cards, debit cards, PayPal, and cryptocurrency. All payments are processed securely through our platform at smm.insighthub.ink.
+              </p>
+            </Card>
           </div>
         </div>
       </section>

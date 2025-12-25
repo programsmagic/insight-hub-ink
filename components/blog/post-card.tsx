@@ -29,6 +29,45 @@ export function PostCard({ post, categoriesMap, featured = false }: PostCardProp
     .map((catId) => categoriesMap?.get(catId))
     .filter((cat): cat is Category => cat !== undefined);
 
+  // Determine if post is related to SMM, FinTrack, or Tools for contextual links
+  const isSMMRelated = postCategories.some(cat => 
+    cat.name.toLowerCase().includes('smm') || 
+    cat.name.toLowerCase().includes('social media') ||
+    cat.name.toLowerCase().includes('youtube') ||
+    cat.name.toLowerCase().includes('instagram')
+  ) || post.tags.some(tag => 
+    tag.toLowerCase().includes('smm') || 
+    tag.toLowerCase().includes('social media') ||
+    tag.toLowerCase().includes('youtube') ||
+    tag.toLowerCase().includes('instagram')
+  );
+
+  const isFinTrackRelated = postCategories.some(cat => 
+    cat.name.toLowerCase().includes('finance') || 
+    cat.name.toLowerCase().includes('fintrack') ||
+    cat.name.toLowerCase().includes('budget') ||
+    cat.name.toLowerCase().includes('expense')
+  ) || post.tags.some(tag => 
+    tag.toLowerCase().includes('finance') || 
+    tag.toLowerCase().includes('fintrack') ||
+    tag.toLowerCase().includes('budget') ||
+    tag.toLowerCase().includes('expense')
+  );
+
+  const isToolRelated = postCategories.some(cat => 
+    cat.name.toLowerCase().includes('tools') || 
+    cat.name.toLowerCase().includes('developer') ||
+    cat.name.toLowerCase().includes('json') ||
+    cat.name.toLowerCase().includes('image') ||
+    cat.name.toLowerCase().includes('seo')
+  ) || post.tags.some(tag => 
+    tag.toLowerCase().includes('tools') || 
+    tag.toLowerCase().includes('developer') ||
+    tag.toLowerCase().includes('json') ||
+    tag.toLowerCase().includes('image') ||
+    tag.toLowerCase().includes('seo')
+  );
+
   return (
     <Card 
       className={cn(
@@ -151,6 +190,37 @@ export function PostCard({ post, categoriesMap, featured = false }: PostCardProp
                     </Badge>
                   )}
                 </div>
+              </div>
+            )}
+
+            {/* Contextual Links */}
+            {(isSMMRelated || isFinTrackRelated || isToolRelated) && (
+              <div className="flex items-center gap-2 mb-4 flex-wrap text-xs text-muted-foreground">
+                <span>Related:</span>
+                {isSMMRelated && (
+                  <Link
+                    href="/smm"
+                    className="text-accent hover:underline font-medium"
+                  >
+                    SMM Services
+                  </Link>
+                )}
+                {isFinTrackRelated && (
+                  <Link
+                    href="/fintrack"
+                    className="text-accent hover:underline font-medium"
+                  >
+                    Finance Tracker
+                  </Link>
+                )}
+                {isToolRelated && (
+                  <Link
+                    href="/tools"
+                    className="text-accent hover:underline font-medium"
+                  >
+                    Developer Tools
+                  </Link>
+                )}
               </div>
             )}
           </div>

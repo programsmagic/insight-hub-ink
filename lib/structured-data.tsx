@@ -192,6 +192,22 @@ export const faqSchema: FAQPage = {
   ]
 };
 
+/**
+ * Generate breadcrumb schema for a page
+ */
+export function generateBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
 export function StructuredData({ data }: { data: object }) {
   return (
     <script

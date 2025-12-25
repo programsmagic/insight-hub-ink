@@ -1,52 +1,92 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { FeaturedPosts } from "@/components/featured-posts";
-import { TrendingTopics } from "@/components/trending-topics";
 import { Stats } from "@/components/stats";
 import { Testimonials } from "@/components/testimonials";
 import { Metadata } from "next";
 import { AdSenseDisplay } from "@/components/ads";
+import Link from "next/link";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
+import Script from "next/script";
+import { createBreadcrumbSchema } from "@/lib/structured-data";
 import { 
-  LightbulbIcon, 
-  TrendingUpIcon, 
-  BookOpenIcon, 
   ArrowRight,
   Sparkles,
   Wallet,
   Target,
   Brain,
   FileSpreadsheet,
-  CheckCircle
+  CheckCircle,
+  Wrench,
+  TrendingUp,
+  Code,
+  Image as ImageIcon,
+  FileJson,
+  Search,
+  Users,
+  Eye,
+  ThumbsUp,
+  MessageSquare,
+  Clock
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Buy Premium SMM Services - Views, Subscribers, Likes, Watch Hours",
-  description: "Buy premium-quality social media services: YouTube views, subscribers, watch hours, Instagram likes, TikTok views with instant delivery. 100% satisfaction guaranteed. Trusted by 500+ clients. Visit smm.insighthub.ink.",
+  title: "Free Online Tools for Developers | SMM Services & Finance Tracker",
+  description: "Access 200+ free developer tools: JSON formatter, image resizer, PDF tools, SEO utilities, and more. Plus premium SMM services and AI-powered finance tracker. All tools work instantly in your browser.",
   keywords: [
-    "buy youtube views",
-    "buy instagram followers",
-    "buy subscribers",
-    "buy likes",
-    "buy watch hours",
+    "free online tools",
+    "developer tools",
+    "JSON formatter",
+    "image resizer",
+    "PDF tools",
+    "SEO tools",
     "SMM services",
-    "social media growth",
-    "premium SMM panel",
-    "instant delivery SMM"
+    "buy youtube views",
+    "finance tracker",
+    "expense manager",
+    "AI finance tool"
   ],
   alternates: {
     canonical: "https://insighthub.ink",
   },
   openGraph: {
-    title: "Buy Premium SMM Services - Instant Delivery | InsightHub.ink",
-    description: "Buy YouTube views, subscribers, watch hours, Instagram likes, TikTok views with premium quality and instant delivery. 100% satisfaction guaranteed.",
+    title: "Free Online Tools for Developers | SMM Services & Finance Tracker",
+    description: "200+ free developer tools, premium SMM services, and AI-powered finance tracker. All tools work instantly in your browser.",
     url: "https://insighthub.ink",
     type: "website",
   },
 };
 
 export default function Home() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", href: "/" },
+  ]);
+
   return (
     <>
+      <Script
+        id="homepage-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      {/* Breadcrumb Navigation */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbPage>Home</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
       {/* Hero Section with Animated Background */}
       <section className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-secondary overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
@@ -57,31 +97,31 @@ export default function Home() {
           <div className="text-center">
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 text-accent mb-6 sm:mb-8">
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
-              <span className="text-xs sm:text-sm font-medium">Professional SMM Services & World Knowledge</span>
+              <span className="text-xs sm:text-sm font-medium">Free Developer Tools, SMM Services & Finance Tracker</span>
             </div>
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight gradient-text mb-6 sm:mb-8 leading-[1.1] px-4">
-              Premium SMM Services &<br className="hidden sm:block" /> World Knowledge Hub
+              Free Online Tools for Developers<br className="hidden sm:block" />SMM Services & Finance Tracker
             </h1>
             <p className="mt-3 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-muted-foreground sm:mt-4 px-4">
-              Buy premium-quality social media services (views, subscribers, likes, comments, watch hours) with instant delivery and 100% satisfaction guarantee. Plus, explore our curated world knowledge content.
+              Access 200+ free developer tools, premium social media growth services, and AI-powered personal finance management. All tools work instantly in your browser.
             </p>
             <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
               <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-                <a href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="flex items-center">
-                  Buy SMM Services Now
+                <Link href="/tools" className="flex items-center">
+                  Explore Free Tools
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
               </Button>
               <Button size="lg" variant="outline" className="group" asChild>
-                <a href="/smm" rel="noopener noreferrer" className="flex items-center">
-                  Explore Services
-                </a>
+                <Link href="/smm" className="flex items-center">
+                  SMM Services
+                </Link>
               </Button>
               <Button size="lg" variant="outline" className="group" asChild>
-                <a href="/blog" rel="noopener noreferrer" className="flex items-center">
-                  Browse Knowledge Hub
+                <Link href="/fintrack" className="flex items-center">
+                  Finance Tracker
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
               </Button>
             </div>
           </div>
@@ -94,37 +134,68 @@ export default function Home() {
       {/* Stats Section */}
       <Stats />
 
-      {/* Features Section */}
-      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      {/* Tools Section - Primary Focus */}
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-b border-border/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Why Choose InsightHub</h2>
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 text-accent mb-4 sm:mb-6">
+              <Wrench className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
+              <span className="text-xs sm:text-sm font-medium">Free Developer Tools & Utilities</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">200+ Free Online Tools for Developers</h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              Professional SMM services to grow your brand and a knowledge hub to expand your world understanding.
+              Format JSON, resize images, merge PDFs, validate HTML, optimize SEO, and much more. All tools work instantly in your browser - no installation required.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-            <Card className="p-8 hover:shadow-lg transition-all duration-300 group">
-              <LightbulbIcon className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-semibold mb-3">Premium SMM Services</h3>
-              <p className="text-muted-foreground">
-                Buy high-quality views, subscribers, likes, comments, and watch hours with instant delivery and quality guarantees.
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group border-2 hover:border-accent/50">
+              <FileJson className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">JSON Tools</h3>
+              <p className="text-muted-foreground mb-4">
+                Format, validate, minify, and convert JSON data with our comprehensive JSON toolkit.
               </p>
+              <Button variant="outline" size="sm" asChild className="w-full">
+                <Link href="/tools?category=json">Explore JSON Tools</Link>
+              </Button>
             </Card>
-            <Card className="p-8 hover:shadow-lg transition-all duration-300 group">
-              <TrendingUpIcon className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-semibold mb-3">Instant Growth</h3>
-              <p className="text-muted-foreground">
-                Get instant results with premium-quality services. Secure payments, fast delivery, and 100% satisfaction guaranteed.
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group border-2 hover:border-accent/50">
+              <ImageIcon className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">Image Tools</h3>
+              <p className="text-muted-foreground mb-4">
+                Resize, compress, convert, and optimize images for web and social media.
               </p>
+              <Button variant="outline" size="sm" asChild className="w-full">
+                <Link href="/tools?category=image">Explore Image Tools</Link>
+              </Button>
             </Card>
-            <Card className="p-8 hover:shadow-lg transition-all duration-300 group">
-              <BookOpenIcon className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-semibold mb-3">World Knowledge Hub</h3>
-              <p className="text-muted-foreground">
-                Access curated content, insights, and knowledge to expand your understanding of the world.
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group border-2 hover:border-accent/50">
+              <Search className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">SEO Tools</h3>
+              <p className="text-muted-foreground mb-4">
+                Meta tag generator, sitemap creator, backlink checker, and more SEO utilities.
               </p>
+              <Button variant="outline" size="sm" asChild className="w-full">
+                <Link href="/tools?category=seo">Explore SEO Tools</Link>
+              </Button>
             </Card>
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group border-2 hover:border-accent/50">
+              <Code className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">HTML Tools</h3>
+              <p className="text-muted-foreground mb-4">
+                Format, minify, validate, and convert HTML with our developer-friendly tools.
+              </p>
+              <Button variant="outline" size="sm" asChild className="w-full">
+                <Link href="/tools?category=html">Explore HTML Tools</Link>
+              </Button>
+            </Card>
+          </div>
+          <div className="text-center">
+            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+              <Link href="/tools" className="flex items-center justify-center">
+                View All 200+ Free Tools
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -132,16 +203,142 @@ export default function Home() {
       {/* Ad after features */}
       <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
 
-      {/* Featured Posts with Enhanced Design */}
+      {/* SMM Services Section */}
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-secondary/50 border-b border-border/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 text-accent mb-4 sm:mb-6">
+              <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
+              <span className="text-xs sm:text-sm font-medium">Premium Social Media Growth Services</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Premium SMM Services for YouTube & Instagram</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+              Buy high-quality views, subscribers, likes, comments, and watch hours with instant delivery. Premium quality, 100% satisfaction guaranteed, trusted by 500+ clients.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6 mb-8 sm:mb-12">
+            <Card className="p-4 sm:p-6 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <Eye className="h-8 w-8 sm:h-12 sm:w-12 text-accent mx-auto mb-3 sm:mb-4" />
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Views</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
+                Boost video views across YouTube, TikTok, Instagram
+              </p>
+            </Card>
+            <Card className="p-4 sm:p-6 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <Users className="h-8 w-8 sm:h-12 sm:w-12 text-accent mx-auto mb-3 sm:mb-4" />
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Subscribers</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
+                Grow subscriber count with real, engaged followers
+              </p>
+            </Card>
+            <Card className="p-4 sm:p-6 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <ThumbsUp className="h-8 w-8 sm:h-12 sm:w-12 text-accent mx-auto mb-3 sm:mb-4" />
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Likes</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
+                Increase engagement with high-quality likes
+              </p>
+            </Card>
+            <Card className="p-4 sm:p-6 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <MessageSquare className="h-8 w-8 sm:h-12 sm:w-12 text-accent mx-auto mb-3 sm:mb-4" />
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Comments</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
+                Get authentic comments to boost engagement
+              </p>
+            </Card>
+            <Card className="p-4 sm:p-6 text-center hover:shadow-lg transition-shadow border-2 hover:border-accent">
+              <Clock className="h-8 w-8 sm:h-12 sm:w-12 text-accent mx-auto mb-3 sm:mb-4" />
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Watch Hours</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
+                Increase YouTube watch hours for monetization
+              </p>
+            </Card>
+          </div>
+          <div className="text-center">
+            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+              <Link href="/smm" className="flex items-center justify-center">
+                Explore SMM Services
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* FinTrack Section */}
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-b border-border/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 text-accent mb-4 sm:mb-6">
+              <Wallet className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
+              <span className="text-xs sm:text-sm font-medium">AI-Powered Personal Finance Manager</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">AI Finance Tracker & Expense Manager</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+              Track your spending, plan for financial goals (travel, marriage, house), and get AI-powered insights to optimize your finances. 100% free to start, no credit card required.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group border-2 hover:border-accent/50">
+              <Wallet className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">Easy Tracking</h3>
+              <p className="text-muted-foreground">
+                Record income and expenses in seconds with a simple, intuitive interface. Track every transaction individually.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group border-2 hover:border-accent/50">
+              <Target className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">Goal Planning</h3>
+              <p className="text-muted-foreground">
+                Set and track multiple financial goals with automatic progress monitoring. Plan for travel, marriage, house, or any goal.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group border-2 hover:border-accent/50">
+              <Brain className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">AI Insights</h3>
+              <p className="text-muted-foreground">
+                Get personalized recommendations based on your spending patterns. Predict savings and optimize your finances.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group border-2 hover:border-accent/50">
+              <FileSpreadsheet className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-semibold mb-3">Excel Integration</h3>
+              <p className="text-muted-foreground">
+                Import historical data and export reports in Excel format. Complete data portability and backup functionality.
+              </p>
+            </Card>
+          </div>
+          <div className="text-center">
+            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+              <Link href="/fintrack" className="flex items-center justify-center">
+                Learn More About FinTrack
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Ad after product sections */}
+      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
+
+      {/* Featured Blog Posts */}
       <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-secondary/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Featured Knowledge</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Latest Articles & Guides</h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              Explore our latest articles and insights covering world knowledge and global perspectives.
+              Explore our latest guides on developer tools, social media growth, and personal finance management.
             </p>
           </div>
           <FeaturedPosts />
+          <div className="text-center mt-8 sm:mt-12">
+            <Button variant="outline" size="lg" asChild>
+              <Link href="/blog">
+                View All Articles
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -150,127 +347,6 @@ export default function Home() {
 
       {/* Testimonials Section */}
       <Testimonials />
-
-      {/* Trending Topics with Enhanced Design */}
-      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Trending Topics</h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              Discover trending topics and insights from around the world.
-            </p>
-          </div>
-          <TrendingTopics />
-        </div>
-      </section>
-
-      {/* Ad after trending topics */}
-      <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
-
-      {/* CTA Section - SMM Services Focus */}
-      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-accent/10 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:40px_40px]" />
-        <div className="max-w-3xl mx-auto text-center relative">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 px-4">Ready to Boost Your Social Media?</h2>
-          <p className="text-base sm:text-lg text-muted-foreground mb-3 sm:mb-4 max-w-xl mx-auto px-4">
-            Visit our secure platform to buy premium-quality SMM services. Get views, subscribers, likes, comments, and watch hours with instant delivery.
-          </p>
-          <p className="text-xs sm:text-sm text-muted-foreground mb-6 sm:mb-8 max-w-xl mx-auto px-4">
-            🛡️ Secure payments • ⚡ Instant delivery • ✨ Premium quality • 💯 Satisfaction guaranteed • 🔒 Account safety
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-              <a href="https://smm.insighthub.ink" target="_blank" rel="noopener noreferrer" className="flex items-center">
-                Visit smm.insighthub.ink to Buy Services
-                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <a href="/smm" rel="noopener noreferrer">
-                Learn More
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* FinTrack Product Section */}
-      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 text-accent mb-4 sm:mb-6">
-              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
-              <span className="text-xs sm:text-sm font-medium">Personal Finance Management</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Meet FinTrack - Your Personal Finance Manager</h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              Track your spending, plan for financial goals, and get AI-powered insights to optimize your finances. Perfect for travel, marriage, house savings, and more.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
-            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group">
-              <Wallet className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-semibold mb-3">Easy Tracking</h3>
-              <p className="text-muted-foreground">
-                Record income and expenses in seconds with a simple, intuitive interface. Track every transaction individually.
-              </p>
-            </Card>
-            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group">
-              <Target className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-semibold mb-3">Goal Planning</h3>
-              <p className="text-muted-foreground">
-                Set and track multiple financial goals with automatic progress monitoring. Plan for travel, marriage, house, or any goal.
-              </p>
-            </Card>
-            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group">
-              <Brain className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-semibold mb-3">AI Insights</h3>
-              <p className="text-muted-foreground">
-                Get personalized recommendations based on your spending patterns. Predict savings and optimize your finances.
-              </p>
-            </Card>
-            <Card className="p-6 sm:p-8 hover:shadow-lg transition-all duration-300 group">
-              <FileSpreadsheet className="h-12 w-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-semibold mb-3">Excel Integration</h3>
-              <p className="text-muted-foreground">
-                Import historical data and export reports in Excel format. Complete data portability and backup functionality.
-              </p>
-            </Card>
-          </div>
-          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-              <a href="https://fintrack.insighthub.ink" target="_blank" rel="noopener noreferrer" className="flex items-center">
-                Start Free with Google
-                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" className="group" asChild>
-              <a href="/fintrack" rel="noopener noreferrer" className="flex items-center">
-                Learn More About FinTrack
-                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
-            </Button>
-          </div>
-          <div className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-4 text-xs sm:text-sm text-muted-foreground">
-            <span className="flex items-center gap-1">
-              <CheckCircle className="w-4 h-4 text-accent" />
-              100% Free to Start
-            </span>
-            <span className="flex items-center gap-1">
-              <CheckCircle className="w-4 h-4 text-accent" />
-              2 Min Setup
-            </span>
-            <span className="flex items-center gap-1">
-              <CheckCircle className="w-4 h-4 text-accent" />
-              No Credit Card Required
-            </span>
-            <span className="flex items-center gap-1">
-              <CheckCircle className="w-4 h-4 text-accent" />
-              Excel Export
-            </span>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

@@ -146,10 +146,10 @@ export default function FinTrackPage() {
             <span className="text-xs sm:text-sm font-medium">Personal Finance Management</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight gradient-text mb-4 sm:mb-6 px-4">
-            Track Your Finances • Achieve Any Goal
+            AI Finance Tracker & Expense Manager | Goal-Based Savings Tool
           </h1>
           <p className="mt-3 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-muted-foreground px-4">
-            Record monthly expenses, plan for travel, marriage, house, or any goal. Get AI-powered insights, predict savings, and export to Excel. Start free in 2 minutes.
+            Track your spending, plan for financial goals (travel, marriage, house), and get AI-powered insights to optimize your finances. 100% free to start, no credit card required.
           </p>
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
             <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
@@ -188,13 +188,13 @@ export default function FinTrackPage() {
       {/* Ad after hero */}
       <AdSenseDisplay format="horizontal" minHeight={100} className="py-4" />
 
-      {/* Core Features Section */}
+      {/* Personal Finance Tracker for IT Professionals Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Complete Personal Finance Management</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Personal Finance Tracker for IT Professionals</h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              Everything you need to track spending, plan goals, and optimize your finances with AI-powered insights.
+              Perfect for developers, engineers, and tech professionals. Track expenses, manage multiple accounts, and get AI-powered insights tailored to your spending patterns.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
@@ -242,13 +242,13 @@ export default function FinTrackPage() {
       {/* Ad after trust section */}
       <AdSenseDisplay format="auto" minHeight={250} className="py-4" />
 
-      {/* Use Cases Section */}
+      {/* Goal-Based Saving for Travel, Marriage, House Section */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Plan for Any Financial Goal</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Goal-Based Saving for Travel, Marriage, House</h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              Whether you're saving for travel, marriage, a house, or building an emergency fund, FinTrack helps you achieve it
+              Set and track multiple financial goals with automatic progress monitoring. Whether you're saving for travel, marriage, a house, or building an emergency fund, FinTrack helps you achieve it.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
@@ -328,6 +328,109 @@ export default function FinTrackPage() {
                 height={450}
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Best Expense Tracker Alternative Section */}
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-secondary/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Best Expense Tracker Alternative</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+              Looking for a better expense tracker? FinTrack offers AI-powered insights, goal planning, Excel integration, and more - all for free. No credit card required.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-shadow">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4">Why Choose FinTrack Over Other Expense Trackers?</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-muted-foreground">AI-powered insights and savings predictions</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-muted-foreground">Goal-based saving with automatic progress tracking</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-muted-foreground">Excel import/export for complete data portability</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-muted-foreground">100% free to start, no credit card required</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-muted-foreground">Mobile-first PWA that works offline</span>
+                </li>
+              </ul>
+            </Card>
+            <Card className="p-6 sm:p-8 hover:shadow-lg transition-shadow">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4">Perfect for IT Professionals</h3>
+              <p className="text-sm sm:text-base text-muted-foreground mb-4">
+                FinTrack is designed with tech professionals in mind. Track expenses quickly, manage multiple accounts, and get insights that help you optimize your finances.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-muted-foreground">Quick transaction entry for busy schedules</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-muted-foreground">Multiple account management (bank, credit cards, digital wallets)</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-muted-foreground">Excel integration for data analysis</span>
+                </li>
+              </ul>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Frequently Asked Questions</h2>
+            <p className="text-base sm:text-lg text-muted-foreground">
+              Common questions about FinTrack personal finance manager
+            </p>
+          </div>
+          <div className="space-y-4 sm:space-y-6">
+            <Card className="p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">Is FinTrack really free to start?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Yes, FinTrack is 100% free to start. No credit card required, no commitment. You get full access to core features including expense tracking, goal planning, and AI insights.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">How does the AI-powered insights work?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Our AI analyzes your spending patterns and provides personalized recommendations. You'll get savings predictions for 3, 6, and 12 months, plus contextual suggestions to optimize your finances.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">Can I import my existing financial data?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Yes, you can import historical data from Excel or CSV files. You can also export your data anytime for backup and analysis. Complete data portability.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">Is my financial data secure?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Absolutely. Your financial data is encrypted and secure. We use Google OAuth for authentication and MongoDB Atlas for secure data storage. Your privacy is our priority.
+              </p>
+            </Card>
+            <Card className="p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">Can I use FinTrack on mobile?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Yes, FinTrack is a Progressive Web App (PWA) that works like a native app on iOS and Android. You can install it on your home screen and use it offline.
+              </p>
+            </Card>
           </div>
         </div>
       </section>

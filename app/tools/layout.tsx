@@ -1,18 +1,22 @@
 import { Metadata } from "next";
 
+import { Metadata } from "next";
+import { env } from "@/lib/env";
+
+const siteUrl = env.getOptionalWithDefault("NEXT_PUBLIC_SITE_URL", "https://insighthub.ink");
+
 export const metadata: Metadata = {
-  title: "Free Online Tools - 100+ Developer & Productivity Tools | InsightHub.ink",
-  description: "Access 100+ free online tools: JSON formatter, text converter, image resizer, PDF tools, HTML validator, SEO tools, and more. All tools are free to use and work instantly in your browser.",
+  title: "200+ Free Online Tools for Developers | JSON, Image, PDF, SEO Tools | InsightHub.ink",
+  description: "Access 200+ free online tools: JSON formatter, image resizer, PDF merger, HTML validator, SEO tools, and more. All tools work instantly in your browser. No installation required.",
   keywords: [
-    "online tools",
-    "free tools",
-    "json formatter",
-    "text converter",
-    "image resizer",
-    "pdf tools",
-    "html validator",
-    "seo tools",
+    "free online tools",
     "developer tools",
+    "JSON formatter",
+    "image resizer",
+    "PDF tools",
+    "HTML validator",
+    "SEO tools",
+    "text converter",
     "productivity tools",
     "json tools",
     "text tools",
@@ -26,20 +30,23 @@ export const metadata: Metadata = {
     "qr code generator",
     "unit converter",
     "encoding tools",
+    "best developer tools",
+    "online JSON formatter",
+    "free image resizer"
   ],
   alternates: {
-    canonical: "https://insighthub.ink/tools",
+    canonical: `${siteUrl}/tools`,
   },
   openGraph: {
-    title: "Free Online Tools - 100+ Developer & Productivity Tools | InsightHub.ink",
-    description: "Access 100+ free online tools: JSON formatter, text converter, image resizer, PDF tools, HTML validator, SEO tools, and more.",
-    url: "https://insighthub.ink/tools",
+    title: "200+ Free Online Tools for Developers | InsightHub.ink",
+    description: "Access 200+ free online tools: JSON formatter, image resizer, PDF tools, SEO utilities, and more. All tools work instantly in your browser.",
+    url: `${siteUrl}/tools`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Online Tools - 100+ Developer & Productivity Tools",
-    description: "Access 100+ free online tools for developers and productivity. All tools work instantly in your browser.",
+    title: "200+ Free Online Tools for Developers",
+    description: "Access 200+ free online tools for developers. JSON, image, PDF, SEO tools and more. All work instantly in your browser.",
   },
 };
 
