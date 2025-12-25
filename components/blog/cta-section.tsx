@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface CTASectionProps {
   type: 'smm' | 'fintrack' | 'tools';
