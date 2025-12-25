@@ -208,6 +208,24 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
   };
 }
 
+/**
+ * Create breadcrumb schema with href (relative paths)
+ * Converts relative hrefs to full URLs
+ */
+export function createBreadcrumbSchema(items: Array<{ name: string; href: string }>) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://insighthub.ink';
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${siteUrl}${item.href}`,
+    })),
+  };
+}
+
 export function StructuredData({ data }: { data: object }) {
   return (
     <script

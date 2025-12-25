@@ -10,7 +10,6 @@ import {
   Breadcrumb,
   BreadcrumbList,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
 import Script from "next/script";
@@ -22,7 +21,6 @@ import {
   Target,
   Brain,
   FileSpreadsheet,
-  CheckCircle,
   Wrench,
   TrendingUp,
   Code,
