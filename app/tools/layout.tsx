@@ -1,6 +1,4 @@
 import { Metadata } from "next";
-
-import { Metadata } from "next";
 import { env } from "@/lib/env";
 
 const siteUrl = env.getOptionalWithDefault("NEXT_PUBLIC_SITE_URL", "https://insighthub.ink");
